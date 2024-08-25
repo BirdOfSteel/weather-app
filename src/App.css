@@ -46,9 +46,9 @@ body {
 }
 
   #current-weather-div {
-    width: 100%;
+    width: auto;
     margin-top: 5em;
-    margin-left: 2em;
+    margin-left: 20px;
   }
 
     #weather-summary-row-one {
@@ -93,6 +93,25 @@ body {
   
       #min-max-temp-text {
         color: lightgrey;
+      }
+
+    #weather-summary-row-five {
+      display: flex;
+      align-items: end;
+      margin-top: 7.5em;
+    }
+      
+      #sunrise-text {
+        margin-left: 0.25em;
+        margin-right: 1em;
+      }
+
+      #sunset-text {
+        margin-left: 0.25em;
+      }
+
+      .sunrise-sunset-icon {
+        width: 48px;
       }
 
     #hourly-temperatures-div {

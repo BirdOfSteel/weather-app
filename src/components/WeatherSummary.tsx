@@ -1,5 +1,8 @@
 import React from 'react';
+import { format, fromUnixTime } from 'date-fns';
 
+import sunriseIcon from '../assets/sunrise-icon.png';
+import sunsetIcon from '../assets/sunset-icon.png';
 import capitaliseFirstLetter from '../utils/capitaliseFirstLetter.tsx';
 
 export default function WeatherSummary({ weatherData }) {
@@ -16,14 +19,12 @@ export default function WeatherSummary({ weatherData }) {
     const maxTemp = Math.round(weatherData.main.temp_max);
     const minTemp = Math.round(weatherData.main.temp_min);
 
-    const sunriseDate = new Date(weatherData.sys.sunrise * 1000); // multiplied by 1000 as time is received as unix
+    const sunriseDate = fromUnixTime(weatherData.sys.sunrise);
+    const sunriseTime = format(sunriseDate, 'HH:mm');
+    const sunsetDate = fromUnixTime(weatherData.sys.sunset);
+    const sunsetTime = format(sunsetDate, 'HH:mm');
     
-    const sunsetDate = new Date(weatherData.sys.sunset * 1000);
-    console.log(sunriseDate)
-    console.log(sunriseDate.getHours())
-    console.log(sunriseDate.getMinutes())
-
-    // console.log(sunrise + " | " + sunset)
+    console.log(sunriseTime + " | " + sunsetTime)
 
     return (
         <div id="weather-summary-div">
@@ -48,7 +49,16 @@ export default function WeatherSummary({ weatherData }) {
                 </div>
 
                 <div id="weather-summary-row-five">
-                    <p></p>
+                    <img 
+                        className="sunrise-sunset-icon" 
+                        src={sunriseIcon} 
+                    />
+                    <p id="sunrise-text">{sunriseTime}</p>
+                    <img
+                        className="sunrise-sunset-icon" 
+                        src={sunsetIcon} 
+                    />
+                    <p id="sunset-text" >{sunsetTime}</p>
                 </div>
             </div>
         </div>
