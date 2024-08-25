@@ -28,6 +28,14 @@ function App() {
     )
   }
 
+  if (weatherData?.cod === 429) {
+    return (
+      <div className="App">
+        <h1>Requests exceeded for the day</h1>
+      </div>
+    )
+  }
+
   return (
     <div className="App">
       

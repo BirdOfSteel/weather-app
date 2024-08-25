@@ -1,6 +1,6 @@
 import React from 'react';
 
-import sunnyMostlyIcon from '../assets/sunny-mostly-icon.svg';
+import capitaliseFirstLetter from '../utils/capitaliseFirstLetter.tsx';
 
 export default function WeatherSummary({ weatherData }) {
     console.log(weatherData)
@@ -11,12 +11,19 @@ export default function WeatherSummary({ weatherData }) {
     const location = weatherData.name;
     const currentTemperature = Math.round(weatherData.main.temp);
     const weatherIconURL = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
-    const weatherDescription = weatherData.weather[0].description;
+    const weatherDescription = capitaliseFirstLetter(weatherData.weather[0].description);
     const feelsLikeTemp = Math.round(weatherData.main.feels_like);
     const maxTemp = Math.round(weatherData.main.temp_max);
     const minTemp = Math.round(weatherData.main.temp_min);
-    // implement switch statement for getting weather symbol from
-    // weatherData.weather[0].main.description. 
+
+    const sunriseDate = new Date(weatherData.sys.sunrise * 1000); // multiplied by 1000 as time is received as unix
+    
+    const sunsetDate = new Date(weatherData.sys.sunset * 1000);
+    console.log(sunriseDate)
+    console.log(sunriseDate.getHours())
+    console.log(sunriseDate.getMinutes())
+
+    // console.log(sunrise + " | " + sunset)
 
     return (
         <div id="weather-summary-div">
@@ -39,7 +46,11 @@ export default function WeatherSummary({ weatherData }) {
                     <p id="temp-feel-text">Feels like {feelsLikeTemp}{tempUnit}</p>
                     <p id="min-max-temp-text">Max: {maxTemp}{tempUnit} | Min: {minTemp}{tempUnit}</p>
                 </div>
-            </div> 
+
+                <div id="weather-summary-row-five">
+                    <p></p>
+                </div>
+            </div>
         </div>
     )
 }
