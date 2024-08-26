@@ -36,36 +36,21 @@ type OpenWeatherErrorResponse = {
     message: string;
 };
 
-export default function useTodayWeather() {
-    const [latitude, setLatitude] = React.useState<number | null>(null);
-    const [longitude, setLongitude] = React.useState<number | null>(null);
+type positionObjectType = {
+    latitude: number;
+    longitude: number;
+}
 
+export default function useFetchCurrentWeather(userPosition: positionObjectType | null) {
     const [weatherData, setWeatherData] = React.useState<OpenWeatherResponse | OpenWeatherErrorResponse | null>(null);
     // NOTE: research appropriate type for weatherData 
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
-    // This useEffect handles getting the user's co-ordinates on mount.
     React.useEffect(() => {
-        if (navigator.geolocation) {
-            function geolocationSuccessCallback(position: GeolocationPosition) {
-                setLatitude(position.coords.latitude);
-                setLongitude(position.coords.longitude);
-            }
-            
-            function geolocationErrorCallback(error: GeolocationPositionError) {
-                console.error(`Error: (${error.code}) ${error.message}`);
-            }
+        if (userPosition) {
+            const { latitude, longitude } = userPosition; 
 
-            // checks device co-ordinates
-            navigator.geolocation.getCurrentPosition(geolocationSuccessCallback, geolocationErrorCallback)
-        } else {
-            console.error("Geolocation is not supported by this browser.")
-        }
-    },[]) // Empty array means this only runs on mount. Add a dependency later to make it run if the person searches weather for a different location, for example.
-
-    React.useEffect(() => {
-        if (latitude != null && longitude != null) {
             async function fetchWeather() {
                 setLoading(true); // reset loading state
                 setError(null); // reset error state
@@ -87,7 +72,7 @@ export default function useTodayWeather() {
 
             fetchWeather()
         }
-    },[latitude, longitude])
+    },[userPosition])
 
 
     return {weatherData, loading, error};

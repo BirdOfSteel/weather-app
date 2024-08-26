@@ -7,10 +7,15 @@ import HourlyTemperatures from './components/HourlyTemperatures.tsx';
 import DailyWeather from './components/DailyWeather.tsx';
 import Footer from './components/Footer.tsx';
 
+import useGetCoordinates from './hooks/useGetCoordinates.tsx';
 import useFetchCurrentWeather from './hooks/useFetchCurrentWeather.tsx';
+import useFetchHourlyWeather from './hooks/useFetchHourlyWeather.tsx';
 
 function App() {
-  const { weatherData, loading, error } = useFetchCurrentWeather();
+  const { positionData } = useGetCoordinates();
+  const { weatherData, loading, error } = useFetchCurrentWeather(positionData); 
+  const hourlyWeatherData = useFetchHourlyWeather(positionData);
+
 
   if (loading) {
     return (
@@ -41,7 +46,7 @@ function App() {
       
       <Header />
       <WeatherSummary weatherData={weatherData} />
-      <HourlyTemperatures />
+      <HourlyTemperatures hourlyWeatherData={hourlyWeatherData}/>
       <DailyWeather />
       <Footer />
 

@@ -6,9 +6,6 @@ import sunsetIcon from '../assets/sunset-icon.png';
 import capitaliseFirstLetter from '../utils/capitaliseFirstLetter.tsx';
 
 export default function WeatherSummary({ weatherData }) {
-    console.log(weatherData)
-    console.log(weatherData.weather[0].main.description)
-
     let tempUnit = "°C";
 
     const location = weatherData.name;
@@ -22,9 +19,7 @@ export default function WeatherSummary({ weatherData }) {
     const sunriseDate = fromUnixTime(weatherData.sys.sunrise);
     const sunriseTime = format(sunriseDate, 'HH:mm');
     const sunsetDate = fromUnixTime(weatherData.sys.sunset);
-    const sunsetTime = format(sunsetDate, 'HH:mm');
-    
-    console.log(sunriseTime + " | " + sunsetTime)
+    const sunsetTime = format(sunsetDate, 'HH:mm'); 
 
     return (
         <div id="weather-summary-div">
