@@ -13,12 +13,17 @@ export default function useGetCoordinates() {
 
         if (navigator.geolocation) {
             function geolocationSuccessCallback(position: GeolocationPosition) {
-                const positionObject = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                if (latitude && longitude) {
+                    const positionObject = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    }
+
+                    setPositionData(positionObject);
                 }
-                
-                setPositionData(positionObject);
             }
             
             function geolocationErrorCallback(error: GeolocationPositionError) {

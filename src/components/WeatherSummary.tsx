@@ -1,25 +1,48 @@
 import React from 'react';
-import { format, fromUnixTime } from 'date-fns';
+import { format, fromUnixTime } from 'date-fns'; // REMOVE
 
 import sunriseIcon from '../assets/sunrise-icon.png';
 import sunsetIcon from '../assets/sunset-icon.png';
 import capitaliseFirstLetter from '../utils/capitaliseFirstLetter.tsx';
 
-export default function WeatherSummary({ weatherData }) {
+export default function WeatherSummary({ weatherObject }) {
+    console.log(weatherObject)
+    // example code URL https://www.weatherbit.io/static/img/icons/c01n.png
+    // pod says whether it's day or night
+
+
+    // returns loading text if isLoading is true
+    if (weatherObject.isLoading) {
+        return (
+            <div id="weather-summary-div">
+                <h1 style={{"width": "100%", "height": "100%"}}>LOADING...</h1>
+            </div>
+        )
+    }
+    
+    //returns error text if error data is available
+    if (weatherObject.error) {
+        return (
+            <div id="weather-summary-div">
+                <h1 style={{"width": "100%", "height": "100%"}}>Error: {weatherObject.error.message}</h1>
+            </div>
+        )
+    }
+
+    const weatherData = weatherObject.weatherData;
+
     let tempUnit = "°C";
+    
+    const location = weatherData.location;
+    const currentTemperature = Math.round(weatherData.current_temp);
+    const weatherIconURL = `https://www.weatherbit.io/static/img/icons/${weatherData.icon}.png`
+    const weatherDescription = weatherData.description;
+    const feelsLikeTemp = Math.round(weatherData.feels_like);
+    const minTemp = Math.round(weatherData.min_temp);
+    const maxTemp = Math.round(weatherData.max_temp);
 
-    const location = weatherData.name;
-    const currentTemperature = Math.round(weatherData.main.temp);
-    const weatherIconURL = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
-    const weatherDescription = capitaliseFirstLetter(weatherData.weather[0].description);
-    const feelsLikeTemp = Math.round(weatherData.main.feels_like);
-    const maxTemp = Math.round(weatherData.main.temp_max);
-    const minTemp = Math.round(weatherData.main.temp_min);
-
-    const sunriseDate = fromUnixTime(weatherData.sys.sunrise);
-    const sunriseTime = format(sunriseDate, 'HH:mm');
-    const sunsetDate = fromUnixTime(weatherData.sys.sunset);
-    const sunsetTime = format(sunsetDate, 'HH:mm'); 
+    const sunriseTime = weatherData.sunrise;
+    const sunsetTime = weatherData.sunset;
 
     return (
         <div id="weather-summary-div">

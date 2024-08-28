@@ -8,11 +8,13 @@ type positionObjectType = {
     longitude: number;
 }
 
+// THIS FILE IS UNDER CONSIDERATION FOR DELETION.
+
 // OKAY SO, I don't have pro so we'll need to find a new API to handle the hourly data.
 
 export default function useFetchHourlyWeather(userPosition: positionObjectType | null) {
     const [weatherData, setWeatherData] = React.useState(null);
-    const [loading, setLoading] = React.useState(true);
+    const [isLoading, setIsLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
     React.useEffect(() => {
@@ -20,24 +22,23 @@ export default function useFetchHourlyWeather(userPosition: positionObjectType |
             const { latitude, longitude } = userPosition;
 
             async function fetchHourlyWeather() {
-                setLoading(true); // reset loading state
+                setIsLoading(true); // reset loading state
                 setError(null); // reset error state
 
                 try {
                     const res = await fetch(`${BASEURL}lat=${latitude}&lon=${longitude}&appid=${APIKEY}`)
                     const data = await res.json();
                     setWeatherData(data)
-                    console.log(`TEST: ${BASEURL}lat=${latitude}&lon=${longitude}&appid=${APIKEY}`)
                 } catch (err) {
                     setError(err);
                 } finally {
-                    setLoading(false);
+                    setIsLoading(false);
                 }
             }
 
             fetchHourlyWeather();
         }
-    },[weatherData])
+    },[userPosition])
 
-    return { weatherData, loading, error};
+    return { weatherData, isLoading, error};
 }
