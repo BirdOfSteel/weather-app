@@ -6,10 +6,7 @@ import sunsetIcon from '../assets/sunset-icon.png';
 import capitaliseFirstLetter from '../utils/capitaliseFirstLetter.tsx';
 
 export default function WeatherSummary({ weatherObject }) {
-    console.log(weatherObject)
-    // example code URL https://www.weatherbit.io/static/img/icons/c01n.png
-    // pod says whether it's day or night
-
+    // pod value to control day or night?
 
     // returns loading text if isLoading is true
     if (weatherObject.isLoading) {

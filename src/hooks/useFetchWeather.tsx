@@ -3,12 +3,17 @@ import React from 'react';
 const APIKEY = '422be4fee4f14d83a668e941af0e8b16'; // Ideally this would be hidden behind a private backend server.
 const CURRENT_WEATHER_URL = `https://api.weatherbit.io/v2.0/current?key=${APIKEY}&`;
 const DAILY_WEATHER_URL = `https://api.weatherbit.io/v2.0/forecast/daily?key=${APIKEY}&`;
-    // !! make units toggleable later
+const HOURLY_WEATHER_URL = `https://api.weatherbit.io/v2.0/forecast/hourly?key=${APIKEY}&hours=24&`; // set to return 24 hours/instances of data (max 240)
+// !! make units toggleable later
 
 type weatherObjectType = {
-    location: string;
     current_temp: number;
+    description: string;
     feels_like: number;
+    icon: string;
+    location: string;
+    max_temp: number;
+    min_temp: number;
     sunrise: string;
     sunset: string;
 }
@@ -38,11 +43,14 @@ export default function useFetchCurrentWeather(userPosition: positionObjectType 
             try {
                 const currentWeatherURL = `${CURRENT_WEATHER_URL}lat=${latitude}&lon=${longitude}`;
                 const dailyWeatherURL = `${DAILY_WEATHER_URL}lat=${latitude}&lon=${longitude}`;
+                const hourlyWeatherURL = `${HOURLY_WEATHER_URL}lat=${latitude}&lon=${longitude}`
                 const currentWeatherResponse = await fetch(currentWeatherURL);
                 const dailyWeatherResponse = await fetch(dailyWeatherURL);
+                const hourlyWeatherResponse = await fetch(hourlyWeatherURL);
                 const currentWeatherData = await currentWeatherResponse.json();
                 const dailyWeatherData = await dailyWeatherResponse.json();
-                console.log(dailyWeatherData)
+                const hourlyWeatherData = await hourlyWeatherResponse.json();
+
                 // implement response code check here?
 
                 const weatherObject = {
@@ -54,7 +62,8 @@ export default function useFetchCurrentWeather(userPosition: positionObjectType 
                     sunrise: currentWeatherData.data[0].sunrise,
                     sunset: currentWeatherData.data[0].sunset,
                     description: currentWeatherData.data[0].weather.description,
-                    icon: currentWeatherData.data[0].weather.icon
+                    icon: currentWeatherData.data[0].weather.icon,
+                    hourlyForecastArray: hourlyWeatherData.data
                 }
 
                 setWeatherData(weatherObject);

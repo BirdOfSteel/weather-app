@@ -18,8 +18,7 @@ body {
 /* unsorted */
 
 #header-div, 
-#weather-summary-div, 
-#hourly-temperatures-div, 
+#weather-summary-div,
 #daily-weather-div, 
 #footer-div {
   box-sizing: border-box;
@@ -31,7 +30,7 @@ body {
   align-items: center;
   background: #6793d7;
   width: 100%;
-  height: 5%;
+  height: 30px;
 }
 
   #openedMenuIcon {
@@ -40,15 +39,14 @@ body {
 
 #weather-summary-div {
   width: 100%;
-  height: 70%;
+  height: auto;
   box-sizing: border-box;
   color: #FFFFFF;
 }
 
   #current-weather-div {
     width: auto;
-    margin-top: 5em;
-    margin-left: 20px;
+    padding: 3em 1em;
   }
 
     #weather-summary-row-one {
@@ -72,6 +70,7 @@ body {
 
       #weather-icon {
         width: 100px;
+        margin-left: 0.5em;
         margin-bottom: -12.5px;
       }
       
@@ -114,13 +113,40 @@ body {
         width: 48px;
       }
 
-    #hourly-temperatures-div {
-      /* background: blue; */
-      border: 2px solid lightgrey;
-      width: 80%;
-      border-radius: 4px;
-      height: 12.5%;
+#forecast-temperatures-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  box-sizing: border-box;
+  padding: 2em;
+}
+
+  #hourly-forecast-div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    gap: 1em;
+  }
+
+    .hourly-temperature-div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      flex: 0 0 auto;
+      align-items: center;
+      width: min-content;
+      padding: 0 0.5em;
+      border: 2px solid #FFFFFF;
+      color: #FFFFFF;
+      min-width: 50px;
+      border-radius: 16px;
     }
+    
+      .hourly-weather-icon {
+        width: 100%;
+      }
 
 
 #daily-weather-div {
