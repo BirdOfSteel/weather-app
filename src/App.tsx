@@ -31,8 +31,10 @@ function App() {
       
       <Header />
       <WeatherSummary weatherObject={weatherData} />
-      <HourlyTemperatures weatherObject={weatherData} />
-      <DailyWeather />
+      <div id="forecast-div">
+        <HourlyTemperatures weatherObject={weatherData} />
+        <DailyWeather weatherObject={weatherData} />
+      </div>
       <Footer />
 
     </div>

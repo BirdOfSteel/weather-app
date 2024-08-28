@@ -1,22 +1,12 @@
 import React from 'react';
 
+import { weatherDataObject, hourlyForecastArrayObject } from '../types/weatherTypes.ts'
+
 const APIKEY = '422be4fee4f14d83a668e941af0e8b16'; // Ideally this would be hidden behind a private backend server.
 const CURRENT_WEATHER_URL = `https://api.weatherbit.io/v2.0/current?key=${APIKEY}&`;
 const DAILY_WEATHER_URL = `https://api.weatherbit.io/v2.0/forecast/daily?key=${APIKEY}&`;
 const HOURLY_WEATHER_URL = `https://api.weatherbit.io/v2.0/forecast/hourly?key=${APIKEY}&hours=24&`; // set to return 24 hours/instances of data (max 240)
 // !! make units toggleable later
-
-type weatherObjectType = {
-    current_temp: number;
-    description: string;
-    feels_like: number;
-    icon: string;
-    location: string;
-    max_temp: number;
-    min_temp: number;
-    sunrise: string;
-    sunset: string;
-}
 
 type positionObjectType = {
     latitude: number;
@@ -24,7 +14,7 @@ type positionObjectType = {
 }
 
 export default function useFetchCurrentWeather(userPosition: positionObjectType | null) {
-    const [weatherData, setWeatherData] = React.useState<weatherObjectType | null>(null);
+    const [weatherData, setWeatherData] = React.useState<weatherDataObject | null>(null);
     // NOTE: research appropriate type for weatherData 
     const [isLoading, setIsLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
