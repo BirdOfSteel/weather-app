@@ -1,33 +1,12 @@
 import React from 'react';
 import { format, fromUnixTime } from 'date-fns'; // REMOVE
 
-import sunriseIcon from '../assets/sunrise-icon.png';
-import sunsetIcon from '../assets/sunset-icon.png';
-import capitaliseFirstLetter from '../utils/capitaliseFirstLetter.tsx';
+// import sunriseIcon from '../assets/sunrise-icon.png';
+// import sunsetIcon from '../assets/sunset-icon.png';
 
 export default function WeatherSummary({ weatherObject }) {
-    // pod value to control day or night?
-
-    // returns loading text if isLoading is true
-    if (weatherObject.isLoading) {
-        return (
-            <div id="weather-summary-div">
-                <h1 style={{"width": "100%", "height": "100%"}}>LOADING...</h1>
-            </div>
-        )
-    }
-    
-    //returns error text if error data is available
-    if (weatherObject.error) {
-        return (
-            <div id="weather-summary-div">
-                <h1 style={{"width": "100%", "height": "100%"}}>Error: {weatherObject.error.message}</h1>
-            </div>
-        )
-    }
-
     const weatherData = weatherObject.weatherData;
-
+    
     let tempUnit = "°C";
     
     const location = weatherData.location;
@@ -63,7 +42,7 @@ export default function WeatherSummary({ weatherObject }) {
                     <p id="min-max-temp-text">Max: {maxTemp}{tempUnit} | Min: {minTemp}{tempUnit}</p>
                 </div>
 
-                <div id="weather-summary-row-five">
+                {/* <div id="weather-summary-row-five">
                     <img 
                         className="sunrise-sunset-icon" 
                         src={sunriseIcon} 
@@ -74,7 +53,7 @@ export default function WeatherSummary({ weatherObject }) {
                         src={sunsetIcon} 
                     />
                     <p id="sunset-text" >{sunsetTime}</p>
-                </div>
+                </div> */}
             </div>
         </div>
     )

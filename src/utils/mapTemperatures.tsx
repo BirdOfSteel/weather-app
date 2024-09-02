@@ -1,27 +1,54 @@
 import React from 'react';
 
-import { weatherDataState, forecastObjectType } from '../types/weatherTypes.tsx';
+import humidityIcon from '../assets/droplets-icon.png';
+import { dailyForecastObjectType, hourlyForecastObjectType, weatherObjectType } from '../types/weatherTypes.tsx';
 
-export default function mapTemperatures(weatherObject: weatherDataState) {
-    if (weatherObject.weatherData) { 
+// CONVERT FUNCTION TO PRODUCE FORECAST FOR DAILY
+
+export default function mapTemperatures(weatherObject: weatherObjectType, interval: string) {
+    // runs if weatherData exists and interval prop is 'hourly'
+    if (interval === 'hourly' && weatherObject.weatherData) { 
         const hourlyForecastArray = weatherObject.weatherData.hourlyForecastArray;
-        console.log(weatherObject.weatherData.hourlyForecastArray)
 
-        // research type for forecastObject 
-        const hourlyForecastMapped = hourlyForecastArray.map((forecastObject: forecastObjectType, index: number) => {
-            console.log(forecastObject)
-            let timestamp = forecastObject.timestamp_utc.substring(11,16);
-            const iconURL = `https://www.weatherbit.io/static/img/icons/${forecastObject.weather.icon}.png`
+        const hourlyForecastMapped = hourlyForecastArray.map((hourlyForecastObject: hourlyForecastObjectType, index: number) => {
+            const iconURL = `https://www.weatherbit.io/static/img/icons/${hourlyForecastObject.icon}.png`
 
             return (
-                <div className="weather-entry-div">
-                    <p>{Math.round(forecastObject.temp)}°C</p>
+                <div className="weather-entry-div" key={index}>
+                    <p>{Math.round(hourlyForecastObject.temp)}°C</p>
                     <img className="weather-entry-icon" src={iconURL}/>
-                    <p>{timestamp}</p>
+                    <div className="humidity-entry-div">
+                        <img className="humidity-icon" src={humidityIcon} />
+                        <p>{hourlyForecastObject.pop}%</p>
+                    </div>
+                    <p>{hourlyForecastObject.hour}</p>
                 </div>
             )
         })
 
         return hourlyForecastMapped
+    }
+
+    // runs if weatherData exists and interval prop is 'daily'
+    if (interval === 'daily' && weatherObject.weatherData) { 
+        const dailyForecastArray = weatherObject.weatherData.dailyForecastArray;
+
+        const dailyForecastMapped = dailyForecastArray.map((dailyForecastObject: dailyForecastObjectType, index: number) => {
+            const iconURL = `https://www.weatherbit.io/static/img/icons/${dailyForecastObject.icon}.png`
+
+            return (
+                <div className="weather-entry-div" key={index}>
+                    <p>{Math.round(dailyForecastObject.temp)}°C</p>
+                    <img className="weather-entry-icon" src={iconURL}/>
+                    <div className="humidity-entry-div">
+                        <img className="humidity-icon" src={humidityIcon} />
+                        <p>{dailyForecastObject.pop}%</p>
+                    </div>
+                    <p>{dailyForecastObject.date}</p>
+                </div>
+            )
+        })
+
+        return dailyForecastMapped
     }
 }

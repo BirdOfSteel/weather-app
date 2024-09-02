@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { weatherDataObject, hourlyForecastArrayObject } from '../types/weatherTypes.ts'
+import { weatherDataObject, positionObject } from '../types/weatherTypes.ts'
+import parseDate from '../utils/parseDate.tsx';
 
 const APIKEY = '422be4fee4f14d83a668e941af0e8b16'; // Ideally this would be hidden behind a private backend server.
 const CURRENT_WEATHER_URL = `https://api.weatherbit.io/v2.0/current?key=${APIKEY}&`;
@@ -8,12 +9,8 @@ const DAILY_WEATHER_URL = `https://api.weatherbit.io/v2.0/forecast/daily?key=${A
 const HOURLY_WEATHER_URL = `https://api.weatherbit.io/v2.0/forecast/hourly?key=${APIKEY}&hours=24&`; // set to return 24 hours/instances of data (max 240)
 // !! make units toggleable later
 
-type positionObjectType = {
-    latitude: number;
-    longitude: number;
-}
 
-export default function useFetchCurrentWeather(userPosition: positionObjectType | null) {
+export default function useFetchCurrentWeather(userPosition: positionObject | null) {
     const [weatherData, setWeatherData] = React.useState<weatherDataObject | null>(null);
     // NOTE: research appropriate type for weatherData 
     const [isLoading, setIsLoading] = React.useState(true);
@@ -22,8 +19,8 @@ export default function useFetchCurrentWeather(userPosition: positionObjectType 
     React.useEffect(() => {
         if (!userPosition) {
             return;
-        }
-        
+        }   
+
         const { latitude, longitude } = userPosition; 
 
         async function fetchWeather() {
@@ -43,6 +40,28 @@ export default function useFetchCurrentWeather(userPosition: positionObjectType 
 
                 // implement response code check here?
 
+                // generates array of custom data objects off of daily forecast data
+                const dailyForecastMap = dailyWeatherData.data.map((weatherData: weatherDataObject, index: number) => {
+                    return {
+                        temp: Math.round(weatherData.temp),
+                        date: parseDate(weatherData.valid_date),
+                        pop: weatherData.pop,
+                        icon: weatherData.weather.icon,
+                        index: index
+                    }
+                }) 
+
+                // generates array of custom data objects off of hourly forecast data
+                const hourlyForecastMap = hourlyWeatherData.data.map((weatherData: weatherDataObject, index: number) => {
+                    return {
+                        temp: Math.round(weatherData.temp),
+                        hour: weatherData.timestamp_utc.substring(11,16),
+                        pop: weatherData.pop,
+                        icon: weatherData.weather.icon,
+                        index: index
+                    }
+                })
+
                 const weatherObject = {
                     location: currentWeatherData.data[0].city_name,
                     current_temp: currentWeatherData.data[0].temp,
@@ -53,7 +72,9 @@ export default function useFetchCurrentWeather(userPosition: positionObjectType 
                     sunset: currentWeatherData.data[0].sunset,
                     description: currentWeatherData.data[0].weather.description,
                     icon: currentWeatherData.data[0].weather.icon,
-                    hourlyForecastArray: hourlyWeatherData.data
+                    dailyForecastArray: dailyForecastMap,
+                    hourlyForecastArray: hourlyForecastMap
+                    //dailyWeatherData.data?
                 }
 
                 setWeatherData(weatherObject);

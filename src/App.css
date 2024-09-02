@@ -8,11 +8,12 @@ body {
   background-image: linear-gradient(to right top, #386ebe, #4d80ce, #6793d7, #80a7df, #9abbe7);
   background-repeat: no-repeat;
   background-size: 100%;
+  display: grid;
   height: 100vh;
-  display: flex;
+  width: 100vw;
+  grid-template-columns: 1fr;
   flex-direction: column;
   align-items: center;
-  animation: 1s ease infinite;
 }
 
 /* Typography */ 
@@ -33,6 +34,7 @@ h1, h2, h3, p {
 
 #header-div {
   display: flex;
+  align-self: start;
   align-items: center;
   background: #6793d7;
   width: 100%;
@@ -40,7 +42,7 @@ h1, h2, h3, p {
 }
 
   #openedMenuIcon {
-    width: 5%;
+    width: 25px;
   }
 
 #weather-summary-div {
@@ -48,53 +50,40 @@ h1, h2, h3, p {
   height: auto;
   box-sizing: border-box;
   color: #FFFFFF;
-  
-  text-shadow: 0px 0px 20px rgb(111, 129, 150);
 }
 
   #current-weather-div {
     width: auto;
-    margin: 2em 1em 0 1em;
+    margin: 1em 1em 0 1em;
   }
 
     #weather-summary-row-one {
       display: flex;
       align-items: end;
-      font-size: 1.5rem;
-      margin-bottom: -15px;
+      margin-bottom: -0.5em;
     }
 
     #weather-summary-row-two {
       display: flex;
       align-items: center;
-      font-size: 2rem;
     }
 
-      #current-temperature-unit {
-        font-size: 1.5rem;
-        margin-top: 15px;
-        font-size: 2.5rem;
-      }
-
       #weather-icon {
-        width: 100px;
-        margin-left: 0.5em;
+        width: 3.5em;
+        margin-left: 0.75em;
         margin-bottom: -12.5px;
       }
       
     #weather-summary-row-three {
       display: flex;
-      margin-top: -5px;
     }
     
       #weather-description-text {
-        font-size: 1rem;
       }
 
     #weather-summary-row-four {
       display: flex;
       flex-direction: column;
-      font-size: 1rem;
       margin-top: 0.75em;
     }
   
@@ -102,11 +91,11 @@ h1, h2, h3, p {
         color: lightgrey;
       }
 
-    #weather-summary-row-five {
-      display: flex;
+    /* #weather-summary-row-five {
+      display: none;
       align-items: end;
-      margin-top: 7.5em;
       width: 100%;
+      margin-top: 2em;
     }
       
       #sunrise-text {
@@ -120,7 +109,7 @@ h1, h2, h3, p {
 
       .sunrise-sunset-icon {
         width: 48px;
-      }
+      } */
 
 #forecast-div {
   display: flex;
@@ -130,12 +119,12 @@ h1, h2, h3, p {
   height: auto;
   box-sizing: border-box;
   padding: 0 2em;
+  overflow: hidden;
 }
   
   #daily-header, #hourly-header {
-    font-size: 1.5rem;
     color: #FFFFFF;
-    margin-top: 0.75em;
+    font-size: 1rem;
   }
 
   #daily-forecast-div, #hourly-forecast-div {
@@ -143,7 +132,6 @@ h1, h2, h3, p {
     margin-top: 0.75em;
     width: 100%;
     height: 100%;
-    overflow-y: hidden;
     overflow-x: auto;
     gap: 1em;
     color: #FFFFFF;
@@ -151,6 +139,7 @@ h1, h2, h3, p {
     padding-bottom: 10px;
     scrollbar-width: auto;
     scrollbar-color: rgb(218, 218, 218) rgba(0, 0, 0, 0.1);
+    margin-bottom: 1em;
   }
 
     .weather-entry-div {
@@ -160,24 +149,72 @@ h1, h2, h3, p {
       flex: 0 0 auto;
       align-items: center;
       width: min-content;
-      min-width: 50px;
+      min-width: 30px;
       border-radius: 16px;
       max-height: 150px;
       background: rgba(0, 0, 0, 0.1);
-      padding: 0.5em
+      padding: 0.35em 0.75em;
+
     }
     
       .weather-entry-icon {
-        width: 100%;
+        width: 2em;
       }
 
-/* 
-  #daily-forecast-div {
-    width: 100%;
-    height: 10%;
-  } */
+    .humidity-entry-div {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      color: rgb(240, 240, 240);
+    }
 
+      .humidity-icon {
+        width: 15px;
+      }
+
+    .weather-entry-expanded {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+    }
+      
 #footer-div {
   /* background: slategrey; */
   height: 5%;
+}
+
+
+@media (max-width: 320px) {
+  body {
+    font-size: clamp(0.75rem, 3vw, 1rem);
+  }
+}
+
+@media (min-width: 321px) {
+  body {
+    font-size: clamp(1rem, 5vw, 1.2rem);
+  }
+}
+
+@media (min-width: 720px) {
+  
+  #current-weather-div {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+    #weather-summary-row-four {
+      align-items: center;
+    }
+
+  #daily-forecast-div, #hourly-forecast-div {
+    margin-bottom: 2em;
+  }
+}
+
+@media (min-width: 1024px) {
+  #forecast-div {
+    margin-top: 5em;
+  }
 }

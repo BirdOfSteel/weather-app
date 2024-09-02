@@ -10,7 +10,6 @@ export default function useGetCoordinates() {
     }
 
     React.useEffect(() => {
-
         if (navigator.geolocation) {
             function geolocationSuccessCallback(position: GeolocationPosition) {
                 const latitude = position.coords.latitude;

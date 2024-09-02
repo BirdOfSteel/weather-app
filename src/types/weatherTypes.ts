@@ -1,17 +1,29 @@
-export type weatherDataState = {
+export type positionObject = {
+    latitude: number;
+    longitude: number;
+}
+
+export type weatherObjectType = {
     weatherData: weatherDataObject | null;
     isLoading: boolean;
     error: object | null;
 }
 
-export type hourlyForecastArrayObject = {
+export type dailyForecastObjectType = {
     temp: number;
-    timestamp_utc: string;
-    weather: {
-        icon: string;
-    }
+    date: string;
+    pop: number;
+    icon: string;
+    index: number;
 }
 
+export type hourlyForecastObjectType = {
+    temp: number;
+    hour: string;
+    pop: number;
+    icon: string;
+    index: number;
+}
 
 export type weatherDataObject = {
     current_temp: number;
@@ -23,13 +35,8 @@ export type weatherDataObject = {
     min_temp: number;
     sunrise: string;
     sunset: string;
-    hourlyForecastArray: hourlyForecastArrayObject[]
+    dailyForecastArray: dailyForecastObjectType[];
+    hourlyForecastArray: hourlyForecastObjectType[];
+    [key: string]: any;
 }
 
-export type forecastObjectType = {
-    timestamp_utc: string;
-    temp: number;
-    weather: {
-        icon: string;
-    };
-}
