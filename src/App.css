@@ -46,6 +46,9 @@ h1, h2, h3, p {
   }
 
 #weather-summary-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   height: auto;
   box-sizing: border-box;
@@ -78,8 +81,8 @@ h1, h2, h3, p {
       display: flex;
     }
     
-      #weather-description-text {
-      }
+      /* #weather-description-text {
+      } */
 
     #weather-summary-row-four {
       display: flex;
@@ -110,6 +113,118 @@ h1, h2, h3, p {
       .sunrise-sunset-icon {
         width: 48px;
       } */
+
+  #additional-weather-info-div {
+    display: none;
+    grid-template: 1fr 1fr 1fr;
+    grid-template-areas:
+      'A A A' 
+      'B C D'
+      'E F G';
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    border-collapse: collapse;
+    padding: 1em;
+  }
+
+    .additional-weather-info-element {
+      padding: 0 0.5em 0 0.5em;
+      text-align: center;
+      font-size: 0.9em;
+      font-weight: normal;
+    }
+
+    /* #wind-speed-heading, 
+    #gust-speed-heading, 
+    #wind-direction-heading,
+    #cloud-coverage-heading,
+    #relative-humidity-heading {
+    } */
+    
+    
+    #cloud-coverage,
+    #relative-humidity,
+    #wind-speed,
+    #gust-speed,
+    #wind-direction {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+      #cloud-coverage-icon,
+      #relative-humidity-icon,
+      #wind-speed-icon,
+      #gust-speed-icon,
+      #wind-direction-icon {
+        padding-right: 5px;
+        width: 30px;
+      }
+
+    #additional-weather-div-row-one {
+      grid-area: A;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 
+        'A B'
+        'C D';
+      flex-direction: row;
+      text-align: center;
+      margin: 0 auto 1em auto;
+    }
+    
+      #cloud-coverage-heading {
+        grid-area: A;
+      }
+      
+      #cloud-coverage {
+        grid-area: C;
+      }
+
+        #cloud-coverage-icon {
+          width: 2em;
+        }
+      
+      #relative-humidity-heading {
+        grid-area: B;
+      }
+      
+      #relative-humidity {
+        grid-area: D;
+      }
+      
+        #relative-humidity-icon {
+          width: 1.5em;
+        }
+
+      #wind-speed-heading {
+        grid-area: B;
+        
+      }
+
+      #gust-speed-heading {
+        grid-area: C;
+      }
+
+      #wind-direction-heading {
+        grid-area: D;
+      }
+
+      #wind-speed {
+        grid-area: E;
+      }
+
+      #gust-speed {
+        grid-area: F;
+      }
+
+        #gust-speed-icon {
+          width: 25px;
+        }
+
+      #wind-direction {
+        grid-area: G;
+      }
 
 #forecast-div {
   display: flex;
@@ -154,7 +269,8 @@ h1, h2, h3, p {
       max-height: 150px;
       background: rgba(0, 0, 0, 0.1);
       padding: 0.35em 0.75em;
-
+      cursor: pointer;
+      transition: 1s ease-in-out;
     }
     
       .weather-entry-icon {
@@ -170,6 +286,7 @@ h1, h2, h3, p {
 
       .humidity-icon {
         width: 15px;
+        padding-right: 2.5px;
       }
 
     .weather-entry-expanded {
@@ -199,13 +316,22 @@ h1, h2, h3, p {
 
 @media (min-width: 720px) {
   
-  #current-weather-div {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+  #weather-summary-div {
+    justify-content: space-evenly;
   }
-    #weather-summary-row-four {
+
+    #current-weather-div {
+      display: flex;
       align-items: center;
+      flex-direction: column;
+      margin: 0;
+    }
+      #weather-summary-row-four {
+        align-items: center;
+      }
+
+    #additional-weather-info-div {
+      display: grid;
     }
 
   #daily-forecast-div, #hourly-forecast-div {

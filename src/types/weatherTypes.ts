@@ -33,10 +33,15 @@ export type weatherDataObject = {
     location: string;
     max_temp: number;
     min_temp: number;
+    wind_speed: number;
+    wind_direction_short: string;
+    wind_direction_full: string;
+    gust_speed: number;
+    cloud_coverage: number;
+    relative_humidity: number;
     sunrise: string;
     sunset: string;
     dailyForecastArray: dailyForecastObjectType[];
     hourlyForecastArray: hourlyForecastObjectType[];
-    [key: string]: any;
 }
 

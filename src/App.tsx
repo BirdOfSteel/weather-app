@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import './App.css';
 
 import Header from './components/Header.tsx';
@@ -13,22 +13,6 @@ import useFetchWeather from './hooks/useFetchWeather.tsx';
 function App() {
   const { positionData } = useGetCoordinates();
   const weatherData = useFetchWeather(positionData);
-
-  document.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement
-    const weatherEntryElement = target.closest('.weather-entry-div');
-
-    // checks if an element containing the weather-entry-div class has been found, 
-    // and that it does not already contain the 'expanded' style class.
-    if (weatherEntryElement && !weatherEntryElement.classList.contains('weather-entry-expanded')) {
-      weatherEntryElement.classList.add('weather-entry-expanded');
-      console.log(weatherEntryElement.classList)
-    } 
-    // else if (weatherEntryElement) { // else, check that it's still a valid element.
-    //   weatherEntryElement.classList.remove('weather-entry-expanded');
-    //   console.log(weatherEntryElement.classList)
-    // }
-  })
 
   // RUNS REPEATEDLY
 

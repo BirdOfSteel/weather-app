@@ -7,14 +7,21 @@ import { dailyForecastObjectType, hourlyForecastObjectType, weatherObjectType } 
 
 export default function mapTemperatures(weatherObject: weatherObjectType, interval: string) {
     // runs if weatherData exists and interval prop is 'hourly'
+    
     if (interval === 'hourly' && weatherObject.weatherData) { 
         const hourlyForecastArray = weatherObject.weatherData.hourlyForecastArray;
-
+        
         const hourlyForecastMapped = hourlyForecastArray.map((hourlyForecastObject: hourlyForecastObjectType, index: number) => {
             const iconURL = `https://www.weatherbit.io/static/img/icons/${hourlyForecastObject.icon}.png`
+            const [expanded, setExpanded] = React.useState(false);
 
             return (
-                <div className="weather-entry-div" key={index}>
+                <div 
+                    className="weather-entry-div" 
+                    key={index} 
+                    onClick={() => setExpanded(!expanded)}
+                    style={{'width': `${expanded ? '200px' : '50px'}`}}
+                    >
                     <p>{Math.round(hourlyForecastObject.temp)}°C</p>
                     <img className="weather-entry-icon" src={iconURL}/>
                     <div className="humidity-entry-div">

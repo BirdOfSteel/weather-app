@@ -62,7 +62,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     }
                 })
 
-                const weatherObject = {
+                const weatherObject: weatherDataObject = {
                     location: currentWeatherData.data[0].city_name,
                     current_temp: currentWeatherData.data[0].temp,
                     feels_like: currentWeatherData.data[0].app_temp,
@@ -72,9 +72,14 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     sunset: currentWeatherData.data[0].sunset,
                     description: currentWeatherData.data[0].weather.description,
                     icon: currentWeatherData.data[0].weather.icon,
+                    wind_speed: currentWeatherData.data[0].wind_spd,
+                    wind_direction_short: currentWeatherData.data[0].wind_cdir,
+                    wind_direction_full: currentWeatherData.data[0].wind_cdir_full,
+                    gust_speed: currentWeatherData.data[0].gust,
+                    cloud_coverage: currentWeatherData.data[0].clouds,
+                    relative_humidity: currentWeatherData.data[0].rh,
                     dailyForecastArray: dailyForecastMap,
                     hourlyForecastArray: hourlyForecastMap
-                    //dailyWeatherData.data?
                 }
 
                 setWeatherData(weatherObject);
