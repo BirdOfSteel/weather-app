@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { weatherDataObject, positionObject } from '../types/weatherTypes.ts'
-import parseDate from '../utils/parseDate.tsx';
+
 
 const APIKEY = '422be4fee4f14d83a668e941af0e8b16'; // Ideally this would be hidden behind a private backend server.
 const CURRENT_WEATHER_URL = `https://api.weatherbit.io/v2.0/current?key=${APIKEY}&`;
@@ -40,28 +40,6 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
 
                 // implement response code check here?
 
-                // generates array of custom data objects off of daily forecast data
-                const dailyForecastMap = dailyWeatherData.data.map((weatherData: weatherDataObject, index: number) => {
-                    return {
-                        temp: Math.round(weatherData.temp),
-                        date: parseDate(weatherData.valid_date),
-                        pop: weatherData.pop,
-                        icon: weatherData.weather.icon,
-                        index: index
-                    }
-                }) 
-
-                // generates array of custom data objects off of hourly forecast data
-                const hourlyForecastMap = hourlyWeatherData.data.map((weatherData: weatherDataObject, index: number) => {
-                    return {
-                        temp: Math.round(weatherData.temp),
-                        hour: weatherData.timestamp_utc.substring(11,16),
-                        pop: weatherData.pop,
-                        icon: weatherData.weather.icon,
-                        index: index
-                    }
-                })
-
                 const weatherObject: weatherDataObject = {
                     location: currentWeatherData.data[0].city_name,
                     current_temp: currentWeatherData.data[0].temp,
@@ -78,8 +56,8 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     gust_speed: currentWeatherData.data[0].gust,
                     cloud_coverage: currentWeatherData.data[0].clouds,
                     relative_humidity: currentWeatherData.data[0].rh,
-                    dailyForecastArray: dailyForecastMap,
-                    hourlyForecastArray: hourlyForecastMap
+                    dailyForecastArray: dailyWeatherData.data,
+                    hourlyForecastArray: hourlyWeatherData.data
                 }
 
                 setWeatherData(weatherObject);

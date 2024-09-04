@@ -14,6 +14,9 @@ function App() {
   const { positionData } = useGetCoordinates();
   const weatherData = useFetchWeather(positionData);
 
+  const [extraHourlyInfo, setExtraHourlyInfo] = React.useState(null);
+  const [extraDailyInfo, setExtraDailyInfo] = React.useState(null);
+
   // RUNS REPEATEDLY
 
 
@@ -27,6 +30,14 @@ function App() {
   // }
 
   // returns loading text if isLoading is true
+  React.useEffect(() => {
+    console.log("1: " + extraHourlyInfo)
+  },[extraHourlyInfo])
+
+  React.useEffect(() => {
+    console.log("2: " + extraDailyInfo)
+  },[extraDailyInfo])
+
   if (weatherData.isLoading) {
     return (
       <div className="App">
@@ -44,15 +55,41 @@ function App() {
     )
   }
 
-
   return (
     <div className="App">
       
       <Header />
       <WeatherSummary weatherObject={weatherData} />
       <div id="forecast-div">
-        <HourlyTemperatures weatherObject={weatherData} interval='hourly' />
-        <DailyWeather weatherObject={weatherData} interval='daily' />
+        <HourlyTemperatures 
+          weatherObject={weatherData} 
+          interval='hourly' 
+          setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)}
+        />
+        
+        {extraHourlyInfo &&
+          <div id="hourly-extra-info-div">
+            <div id="hourly-precipitation-div">
+              <h1>Precipitation</h1>
+              <p>Total liquid:</p>
+              <p>snowfall:</p>
+              <p>snow depth:</p>
+            </div>
+
+          </div>
+        }
+        
+        <DailyWeather 
+          weatherObject={weatherData} 
+          interval='daily'
+          setExtraDailyInfo={(data) => setExtraDailyInfo(data)} 
+        />
+
+        {extraDailyInfo && 
+          <div>
+            <p>{extraDailyInfo}</p>
+          </div>
+        }
       </div>
       <Footer />
 
@@ -61,3 +98,33 @@ function App() {
 }
 
 export default App;
+
+/* HOURLY
+Precipitation:
+  -probablity of precipitation
+  -precipitation
+  -snowfall
+  -snow depth
+
+Clouds:
+  -cloudiness
+  -clouds 0-3km AGL
+  -clouds 3-5km AGL
+  -clouds >5km AGL
+
+Wind:
+  -Wind speed
+  -Wind gust speed
+  -Wind direction
+
+Air:
+  -humidity
+  -dew point
+  -pressure (mb)
+  -sea level pressure (mb)
+  
+Atmospheric
+  -ozone
+  -UV index
+  -visibility
+*/
