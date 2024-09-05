@@ -24,7 +24,8 @@ export default function useMapTemperatures(weatherObject: weatherObjectType, int
                     key={index} 
                     onClick={() => {
                         setExtraInfo((prevInfo) => {
-                            return !prevInfo ? hourlyForecastObject : null;
+                            return prevInfo === hourlyForecastObject ?
+                                null : hourlyForecastObject;
                         })
 
                         setSelectedHourlyElement(!isHourlyElementSelected ? index : null)
