@@ -9,13 +9,15 @@ import Footer from './components/Footer.tsx';
 
 import useGetCoordinates from './hooks/useGetCoordinates.tsx';
 import useFetchWeather from './hooks/useFetchWeather.tsx';
+import HourlyWeatherInfo from './components/HourlyWeatherInfo.tsx';
 
 function App() {
   const { positionData } = useGetCoordinates();
   const weatherData = useFetchWeather(positionData);
 
   const [extraHourlyInfo, setExtraHourlyInfo] = React.useState(null);
-  const [extraDailyInfo, setExtraDailyInfo] = React.useState(null);
+  //CHANGE TO NULL AFTER FINISHING IMPLEMENTATION
+  const [extraDailyInfo, setExtraDailyInfo] = React.useState("123");
 
   // RUNS REPEATEDLY
 
@@ -61,35 +63,34 @@ function App() {
       <Header />
       <WeatherSummary weatherObject={weatherData} />
       <div id="forecast-div">
+
         <HourlyTemperatures 
           weatherObject={weatherData} 
           interval='hourly' 
-          setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)}
+          extraHourlyInfo={extraHourlyInfo}
+          setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)} // passes up data
         />
         
-        {extraHourlyInfo &&
-          <div id="hourly-extra-info-div">
-            <div id="hourly-precipitation-div">
-              <h1>Precipitation</h1>
-              <p>Total liquid:</p>
-              <p>snowfall:</p>
-              <p>snow depth:</p>
-            </div>
-
-          </div>
+        {/* runs if extraHourlyInfo state is changed */}
+        {
+          extraHourlyInfo &&
+          <HourlyWeatherInfo extraHourlyInfo={extraHourlyInfo} setExtraHourlyInfo={setExtraHourlyInfo} />
         }
         
         <DailyWeather 
           weatherObject={weatherData} 
           interval='daily'
-          setExtraDailyInfo={(data) => setExtraDailyInfo(data)} 
+          extraDailyInfo={extraDailyInfo}
+          setExtraDailyInfo={(data) => setExtraDailyInfo(data)} // passes up data
         />
 
+        {/* runs if extraDailyInfo state is changed */}
         {extraDailyInfo && 
           <div>
             <p>{extraDailyInfo}</p>
           </div>
         }
+
       </div>
       <Footer />
 

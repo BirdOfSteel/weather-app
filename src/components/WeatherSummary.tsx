@@ -21,10 +21,7 @@ export default function WeatherSummary({ weatherObject }) {
     const feelsLikeTemp = Math.round(weatherData.feels_like);
     const minTemp = Math.round(weatherData.min_temp);
     const maxTemp = Math.round(weatherData.max_temp);
-
-    const sunriseTime = weatherData.sunrise;
-    const sunsetTime = weatherData.sunset;
-
+    
     return (
         <div id="weather-summary-div">
             <div id="current-weather-div">
@@ -46,19 +43,6 @@ export default function WeatherSummary({ weatherObject }) {
                     <p id="temp-feel-text">Feels like {feelsLikeTemp}{tempUnit}</p>
                     <p id="min-max-temp-text">Max: {maxTemp}{tempUnit} | Min: {minTemp}{tempUnit}</p>
                 </div>
-
-                {/* <div id="weather-summary-row-five">
-                    <img 
-                        className="sunrise-sunset-icon" 
-                        src={sunriseIcon} 
-                    />
-                    <p id="sunrise-text">{sunriseTime}</p>
-                    <img
-                        className="sunrise-sunset-icon" 
-                        src={sunsetIcon} 
-                    />
-                    <p id="sunset-text" >{sunsetTime}</p>
-                </div> */}
             </div>
 
             <div id="additional-weather-info-div">
