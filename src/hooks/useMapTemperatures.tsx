@@ -15,9 +15,8 @@ export default function useMapTemperatures(weatherObject: weatherObjectType, int
         
         const hourlyForecastMapped = hourlyForecastArray.map((hourlyForecastObject, index: number) => {
             const iconURL = `https://www.weatherbit.io/static/img/icons/${hourlyForecastObject.weather.icon}.png`;
-
             const isHourlyElementSelected = selectedHourlyElement === index;
-            console.log(isHourlyElementSelected)
+
             return (
                 <div 
                     className="weather-entry-div" 
@@ -59,8 +58,12 @@ export default function useMapTemperatures(weatherObject: weatherObjectType, int
                 <div className="weather-entry-div" 
                     key={index} 
                     onClick={() => {
-                        setExtraInfo(dailyForecastObject)
-                        setSelectedDailyElement(index)
+                        setExtraInfo((prevInfo) => {
+                            return prevInfo === dailyForecastObject ?
+                                null : dailyForecastObject;
+                        })
+
+                        setSelectedDailyElement(!isDailyElementSelected ? index : null)
                     }}
                     style={isDailyElementSelected ? {'background': 'rgba(0,0,0,0.3)'} : {}}
                 >

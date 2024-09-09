@@ -8,8 +8,8 @@ body {
   background-image: linear-gradient(to right top, #386ebe, #4d80ce, #6793d7, #80a7df, #9abbe7);
   background-repeat: no-repeat;
   background-size: 100%;
-  display: grid;
-  height: 100vh;
+  display: flex;
+  min-height: 100vh;
   width: 100vw;
   grid-template-columns: 1fr;
   flex-direction: column;
@@ -33,7 +33,7 @@ h1, h2, h3, p {
 }
 
 #header-div {
-  display: flex;
+  display: fiex;
   align-self: start;
   align-items: center;
   background: #6793d7;
@@ -223,7 +223,6 @@ h1, h2, h3, p {
   height: auto;
   box-sizing: border-box;
   padding: 0 2em;
-  overflow: hidden;
 }
   
   #daily-header, #hourly-header {
@@ -239,8 +238,9 @@ h1, h2, h3, p {
     overflow-x: auto;
     gap: 1em;
     color: #FFFFFF;
-    max-height: 150px;
+    
     padding-bottom: 10px;
+
     scrollbar-width: auto;
     scrollbar-color: rgb(218, 218, 218) rgba(0, 0, 0, 0.1);
     margin-bottom: 1em;
@@ -252,11 +252,13 @@ h1, h2, h3, p {
     flex-direction: column;
     flex: 0 0 auto;
     align-items: center;
-    min-width: 30px;
+    width: 10%;
+    height: 50%;
     border-radius: 16px;
     background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    padding: 0.35em 0.75em;
+    padding: 0.6em 0.75em;
+    user-select: none;
   }
 
     .weather-entry-info-div {
@@ -285,7 +287,7 @@ h1, h2, h3, p {
         }
 
 
-  #hourly-info-div {
+  #forecast-info-div {
     display: flex;
     flex-wrap: wrap;
     background: rgba(0, 0, 0, 0.1);
@@ -294,37 +296,36 @@ h1, h2, h3, p {
     width: 100%;
     margin-bottom: 1em;
     color: #FFFFFF;
-    padding: 0.5em;
-    position: relative;
+    padding: 1em;
   }
 
-    #close-hourly-info-div {
-      position: absolute;
-      top: 5px;
-      right: 12.5px;
-    }
-
-    .hourly-info-inner-div {
+    .forecast-info-inner-div {
       width: 100%;
       flex-basis: 50%;
     }
 
-      .hourly-info-inner-div:not(:nth-child(-n+2)) {
+      .forecast-info-inner-div:not(:nth-child(-n+2)) {
         margin-top: 10px;
       }
       
-      .hourly-info-inner-div > h1 {
+      .forecast-info-inner-div > h1 {
         font-size: 0.8em;
         padding: 0 5px 7.5px 5px;
       }
 
-      .hourly-info-inner-div > p {
+      .forecast-info-inner-div > p {
         font-size: 0.8em;
-        padding: 2.5px 5px;
+        padding: 0.25em 0.5em;
         min-width: max-content;
+        display: flex;
+        justify-content: space-between;
       }
 
-      .hourly-info-inner-div > p:nth-child(even) {
+        .forecast-info-inner-div > p > span {
+          margin-right: 1em;
+        }
+
+      .forecast-info-inner-div > p:nth-child(even) {
         background: rgba(0, 0, 0, 0.15);
       }
 
@@ -344,6 +345,16 @@ h1, h2, h3, p {
 @media (min-width: 321px) {
   body {
     font-size: clamp(1rem, 5vw, 1.2rem);
+  }
+}
+
+@media (max-width: 620px) {
+  .forecast-info-inner-div {
+    flex-basis: 100%;
+  }
+
+  .forecast-info-inner-div:not(:nth-child(-n+1)) {
+    margin-top: 10px;
   }
 }
 
@@ -377,21 +388,12 @@ h1, h2, h3, p {
     margin-top: 5em;
   }
 
-    #hourly-info-div {
+    .forecast-info-div {
       display: flex;
       flex-wrap: nowrap;
     }
 
-      .hourly-info-inner-div:not(:nth-child(-n+2)) {
+      .forecast-info-inner-div:not(:nth-child(-n+2)) {
         margin-top: 0;
-      }
-
-    .hourly-info-inner-div > p {
-      display: flex;
-      justify-content: space-between;
-    }
-    
-      .hourly-info-inner-div > p > span {
-        margin-right: 1em;
       }
 }

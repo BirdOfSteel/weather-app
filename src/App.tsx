@@ -10,6 +10,7 @@ import Footer from './components/Footer.tsx';
 import useGetCoordinates from './hooks/useGetCoordinates.tsx';
 import useFetchWeather from './hooks/useFetchWeather.tsx';
 import HourlyWeatherInfo from './components/HourlyWeatherInfo.tsx';
+import DailyWeatherInfo from './components/DailyWeatherInfo.tsx';
 
 function App() {
   const { positionData } = useGetCoordinates();
@@ -17,7 +18,7 @@ function App() {
 
   const [extraHourlyInfo, setExtraHourlyInfo] = React.useState(null);
   //CHANGE TO NULL AFTER FINISHING IMPLEMENTATION
-  const [extraDailyInfo, setExtraDailyInfo] = React.useState("123");
+  const [extraDailyInfo, setExtraDailyInfo] = React.useState(null);
 
   // RUNS REPEATEDLY
 
@@ -71,11 +72,10 @@ function App() {
           setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)} // passes up data
         />
         
-        {/* runs if extraHourlyInfo state is changed */}
-        {
+        { /* runs if extraHourlyInfo state is changed */
           extraHourlyInfo &&
-          <HourlyWeatherInfo extraHourlyInfo={extraHourlyInfo} setExtraHourlyInfo={setExtraHourlyInfo} />
-        }
+          <HourlyWeatherInfo extraHourlyInfo={extraHourlyInfo} />
+        } {/* TRY KEYFRAMES */}
         
         <DailyWeather 
           weatherObject={weatherData} 
@@ -86,9 +86,7 @@ function App() {
 
         {/* runs if extraDailyInfo state is changed */}
         {extraDailyInfo && 
-          <div>
-            <p>{extraDailyInfo}</p>
-          </div>
+          <DailyWeatherInfo extraDailyInfo={extraDailyInfo}/>
         }
 
       </div>
@@ -128,4 +126,31 @@ Atmospheric
   -ozone
   -UV index
   -visibility
+*/
+
+/* 
+Clouds:
+  -cloud coverage
+  -clouds 0-3km AGL
+  -clouds 3-5km AGL
+  -clouds >5km AGL
+
+Temperatures:
+  -Max temp
+  -Min temp
+  -Apparent max temp
+  -Apparent min temp
+
+Precipitation:
+  -probablity of precipitation
+  -precipitation
+  -snowfall
+  -snow depth
+
+Air:
+  -humidity
+  -dew point
+  -pressure (mb)
+  -sea level pressure (mb)
+
 */

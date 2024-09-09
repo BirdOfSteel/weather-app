@@ -1,30 +1,30 @@
 import React from 'react';
 
-export default function HourlyWeatherInfo({ extraHourlyInfo }) {
-    const data = extraHourlyInfo;
+export default function DailyWeatherInfo({ extraDailyInfo }) {
+    const data = extraDailyInfo;
 
-    return (
+    return (    
         <div id="forecast-info-div">
             <div className="forecast-info-inner-div">
-                <h1>General</h1>
-                <p>Temperature: &nbsp;
-                    <span>
-                        {Math.round(data.temp)}°C
+                <h1>Temperature</h1>
+                <p>Minimum temperature: &nbsp;
+                    <span> {/* Remember to check temperature values are rounded */}
+                    {Math.round((data.min_temp * 100) / 100)}°C
                     </span>
                 </p>
-                <p>Feels like: &nbsp;
+                <p>Maximum temperature: &nbsp;
                     <span>
-                        {Math.round(data.app_temp)}°C
+                        {Math.round((data.max_temp * 100) / 100)}°C
                     </span>
                 </p>
-                <p>UV index: &nbsp;
+                <p> Minimum temperature (feels like):&nbsp;
                     <span>
-                        {data.uv}
+                        {Math.round((data.app_min_temp * 100) / 100)}°C
                     </span>
                 </p>
-                <p>Visbility: &nbsp;
+                <p> Maximum temperature (feels like):&nbsp;
                     <span>
-                        {data.vis}km
+                        {Math.round((data.app_max_temp * 100) / 100)}°C
                     </span>
                 </p>
             </div>
@@ -57,12 +57,12 @@ export default function HourlyWeatherInfo({ extraHourlyInfo }) {
                 <h1>Clouds</h1>
                 <p>Total coverage: &nbsp;
                     <span>
-                     {data.clouds}%
+                        {data.clouds}%
                     </span>
                 </p>
                 <p>0-3km AGL: &nbsp;
                     <span>
-                     {data.clouds_low}%
+                        {data.clouds_low}%
                     </span>
                 </p>
                 <p>3-5km AGL: &nbsp;
