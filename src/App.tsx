@@ -9,12 +9,16 @@ import Footer from './components/Footer.tsx';
 
 import useGetCoordinates from './hooks/useGetCoordinates.tsx';
 import useFetchWeather from './hooks/useFetchWeather.tsx';
+
 import HourlyWeatherInfo from './components/HourlyWeatherInfo.tsx';
 import DailyWeatherInfo from './components/DailyWeatherInfo.tsx';
+import Menu from './components/Menu.tsx';
 
 function App() {
   const { positionData } = useGetCoordinates();
   const weatherData = useFetchWeather(positionData);
+
+  const [isMenuOpen, setIsMenuOpen] = React.useState();
 
   const [extraHourlyInfo, setExtraHourlyInfo] = React.useState(null);
   //CHANGE TO NULL AFTER FINISHING IMPLEMENTATION
@@ -61,7 +65,9 @@ function App() {
   return (
     <div className="App">
       
-      <Header />
+      <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+
       <WeatherSummary weatherObject={weatherData} />
       <div id="forecast-div">
 
