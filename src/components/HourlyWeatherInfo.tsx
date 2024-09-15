@@ -1,6 +1,10 @@
 import React from 'react';
+import convertFromCelsius from '../utils/convertFromCelsius.tsx';
+import convertFromLongMetric from '../utils/convertFromLongMetric.tsx';
+import convertFromShortMetric from '../utils/convertFromShortMetric.tsx';
+import convertFromMillibar from '../utils/convertFromMillibar.tsx';
 
-export default function HourlyWeatherInfo({ extraHourlyInfo }) {
+export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
     const data = extraHourlyInfo;
 
     return (
@@ -9,12 +13,12 @@ export default function HourlyWeatherInfo({ extraHourlyInfo }) {
                 <h1>General</h1>
                 <p>Temperature: &nbsp;
                     <span>
-                        {Math.round(data.temp)}°C
+                        {convertFromCelsius(data.temp, units)}
                     </span>
                 </p>
                 <p>Feels like: &nbsp;
                     <span>
-                        {Math.round(data.app_temp)}°C
+                        {convertFromCelsius(data.app_temp, units)}
                     </span>
                 </p>
                 <p>UV index: &nbsp;
@@ -24,7 +28,7 @@ export default function HourlyWeatherInfo({ extraHourlyInfo }) {
                 </p>
                 <p>Visbility: &nbsp;
                     <span>
-                        {data.vis}km
+                        {convertFromLongMetric(data.vis, units)}
                     </span>
                 </p>
             </div>
@@ -38,17 +42,17 @@ export default function HourlyWeatherInfo({ extraHourlyInfo }) {
                 </p>
                 <p>Total liquid: &nbsp;
                     <span>
-                        {Math.round(data.precip * 10) / 10}mm
+                        {convertFromShortMetric(data.precip, units)}
                     </span>
                 </p>
                 <p>Total snowfall: &nbsp;
                     <span>
-                        {Math.round(data.snow * 10) / 10}mm
+                        {convertFromShortMetric(data.snow, units)}
                     </span>
                 </p>
                 <p>Snow depth: &nbsp;
                     <span>
-                        {Math.round(data.snow * 10) / 10}mm
+                        {convertFromShortMetric(data.snow, units)}
                     </span>
                 </p>
             </div>
@@ -85,17 +89,17 @@ export default function HourlyWeatherInfo({ extraHourlyInfo }) {
                 </p>
                 <p>Dew point: &nbsp;
                     <span>
-                        {data.dewpt}°C
+                        {convertFromCelsius(data.dewpt, units)}
                     </span>
                 </p>
                 <p>Pressure: &nbsp;
                      <span>
-                        {data.pres}mb
+                        {convertFromMillibar(data.pres, units)}
                     </span>
                 </p>
                 <p>Sea-level pressure: &nbsp;
                     <span>
-                        {data.slp}mb
+                        {convertFromMillibar(data.slp, units)}
                     </span>
                 </p>
             </div>

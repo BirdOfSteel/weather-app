@@ -14,21 +14,38 @@ import HourlyWeatherInfo from './components/HourlyWeatherInfo.tsx';
 import DailyWeatherInfo from './components/DailyWeatherInfo.tsx';
 import Menu from './components/Menu.tsx';
 
+
+// TO DO:
+// Design converter function for temp, distance, and pressure
+// Apply converter function to units being displayed.
+
 function App() {
   const { positionData } = useGetCoordinates();
-  const weatherData = useFetchWeather(positionData);
 
-  const [isMenuOpen, setIsMenuOpen] = React.useState();
-
+  const weatherData = useFetchWeather(positionData); 
+  
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);  
   const [extraHourlyInfo, setExtraHourlyInfo] = React.useState(null);
   //CHANGE TO NULL AFTER FINISHING IMPLEMENTATION
   const [extraDailyInfo, setExtraDailyInfo] = React.useState(null);
+  
+  const [units, setUnits] = React.useState({ 
+    temperature: '°C', // C, F, K
+    longDistance: 'km', // km, metres, miles
+    shortDistance: 'mm', // mm, inch
+    windSpeed: 'm/s', // m/s, km/h, mph, knots
+    pressure: 'mmHg' // mb, pascal, hectopascal, mm mercury, inches mercury
+  }); 
+
+  console.log(weatherData)
+
+
 
   // RUNS REPEATEDLY
 
 
   // FIND NEW WAY TO CHECK IF RESPONSE FAILED DUE TO EXCESS REQUESTS
-  // if (currentWeatherData.weatherData?.cod === 429) {
+  // if (currentweatherData.weatherData?.cod === 429) {
   //   return (
   //     <div className="App">
   //       <h1>Requests exceeded for the day</h1>
@@ -68,7 +85,7 @@ function App() {
       <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
-      <WeatherSummary weatherObject={weatherData} />
+      <WeatherSummary weatherObject={weatherData} units={units} />
       <div id="forecast-div">
 
         <HourlyTemperatures 
@@ -76,11 +93,15 @@ function App() {
           interval='hourly' 
           extraHourlyInfo={extraHourlyInfo}
           setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)} // passes up data
-        />
+          units={units}
+       />
         
         { /* runs if extraHourlyInfo state is changed */
           extraHourlyInfo &&
-          <HourlyWeatherInfo extraHourlyInfo={extraHourlyInfo} />
+          <HourlyWeatherInfo 
+            extraHourlyInfo={extraHourlyInfo}
+            units={units}
+          />
         } {/* TRY KEYFRAMES */}
         
         <DailyWeather 
@@ -88,11 +109,15 @@ function App() {
           interval='daily'
           extraDailyInfo={extraDailyInfo}
           setExtraDailyInfo={(data) => setExtraDailyInfo(data)} // passes up data
-        />
+          units={units}
+       />
 
         {/* runs if extraDailyInfo state is changed */}
         {extraDailyInfo && 
-          <DailyWeatherInfo extraDailyInfo={extraDailyInfo}/>
+          <DailyWeatherInfo 
+            extraDailyInfo={extraDailyInfo}
+            units={units}
+          />
         }
 
       </div>
@@ -103,60 +128,3 @@ function App() {
 }
 
 export default App;
-
-/* HOURLY
-Precipitation:
-  -probablity of precipitation
-  -precipitation
-  -snowfall
-  -snow depth
-
-Clouds:
-  -cloudiness
-  -clouds 0-3km AGL
-  -clouds 3-5km AGL
-  -clouds >5km AGL
-
-Wind:
-  -Wind speed
-  -Wind gust speed
-  -Wind direction
-
-Air:
-  -humidity
-  -dew point
-  -pressure (mb)
-  -sea level pressure (mb)
-  
-Atmospheric
-  -ozone
-  -UV index
-  -visibility
-*/
-
-/* 
-Clouds:
-  -cloud coverage
-  -clouds 0-3km AGL
-  -clouds 3-5km AGL
-  -clouds >5km AGL
-
-Temperatures:
-  -Max temp
-  -Min temp
-  -Apparent max temp
-  -Apparent min temp
-
-Precipitation:
-  -probablity of precipitation
-  -precipitation
-  -snowfall
-  -snow depth
-
-Air:
-  -humidity
-  -dew point
-  -pressure (mb)
-  -sea level pressure (mb)
-
-*/

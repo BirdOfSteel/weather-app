@@ -1,26 +1,25 @@
 import React from 'react';
-import { format, fromUnixTime } from 'date-fns'; // REMOVE
 import cloudyIcon from '../assets/cloudy-icon.png';
 import humidityIcon from '../assets/humidity-icon.png';
 import gustIcon from '../assets/gust-icon.png';
 import windIcon from '../assets/wind-icon.png';
 import compassIcon from '../assets/compass-icon.png';
+import convertFromCelsius from '../utils/convertFromCelsius.tsx';
+import convertFromMetresPerSecond from '../utils/convertFromMetresPerSecond.tsx';
 
 // import sunriseIcon from '../assets/sunrise-icon.png';
 // import sunsetIcon from '../assets/sunset-icon.png';
 
-export default function WeatherSummary({ weatherObject }) {
+export default function WeatherSummary({ weatherObject, units }) {
     const weatherData = weatherObject.weatherData;
-
-    let tempUnit = "°C";
     
     const location = weatherData.location;
-    const currentTemperature = Math.round(weatherData.current_temp);
+    const currentTemperature = convertFromCelsius(weatherData.current_temp, units);
     const weatherIconURL = `https://www.weatherbit.io/static/img/icons/${weatherData.icon}.png`
     const weatherDescription = weatherData.description;
-    const feelsLikeTemp = Math.round(weatherData.feels_like);
-    const minTemp = Math.round(weatherData.min_temp);
-    const maxTemp = Math.round(weatherData.max_temp);
+    const feelsLikeTemp = convertFromCelsius(weatherData.feels_like, units);
+    const minTemp = convertFromCelsius(weatherData.min_temp, units);
+    const maxTemp = convertFromCelsius(weatherData.max_temp, units);
     
     return (
         <div id="weather-summary-div">
@@ -31,7 +30,7 @@ export default function WeatherSummary({ weatherObject }) {
 
                 <div id="weather-summary-row-two">
                     <h1>{currentTemperature}</h1>
-                    <h1 id="current-temperature-unit">{tempUnit}</h1>
+                    <h1 id="current-temperature-unit"></h1>
                     <img id="weather-icon" src={weatherIconURL}/>
                 </div>
 
@@ -40,16 +39,16 @@ export default function WeatherSummary({ weatherObject }) {
                 </div>
                 
                 <div id="weather-summary-row-four">
-                    <p id="temp-feel-text">Feels like {feelsLikeTemp}{tempUnit}</p>
-                    <p id="min-max-temp-text">Max: {maxTemp}{tempUnit} | Min: {minTemp}{tempUnit}</p>
+                    <p id="temp-feel-text">Feels like {feelsLikeTemp}</p>
+                    <p id="min-max-temp-text">Max: {maxTemp} | Min: {minTemp}</p>
                 </div>
             </div>
 
             <div id="additional-weather-info-div">
                 <h1 id="wind-speed-heading" className="additional-weather-info-element">Wind speed</h1>
-                <p id="wind-speed" className="additional-weather-info-element"><img id="wind-speed-icon" src={windIcon}/>{Math.round(weatherData.wind_speed)} m/s</p>
+                <p id="wind-speed" className="additional-weather-info-element"><img id="wind-speed-icon" src={windIcon}/>{convertFromMetresPerSecond(weatherData.wind_speed, units)}</p>
                 <h1 id="gust-speed-heading" className="additional-weather-info-element">Gust speed</h1>
-                <p id="gust-speed" className="additional-weather-info-element"><img id="gust-speed-icon" src={gustIcon} />{Math.round(weatherData.gust_speed)} m/s</p>
+                <p id="gust-speed" className="additional-weather-info-element"><img id="gust-speed-icon" src={gustIcon} />{convertFromMetresPerSecond(weatherData.gust_speed, units)}</p>
                 <h1 id="wind-direction-heading" className="additional-weather-info-element">Wind direction</h1>
                 <p id="wind-direction" className="additional-weather-info-element"><img id="wind-direction-icon" src={compassIcon}/>{weatherData.wind_direction_short}</p>
                 

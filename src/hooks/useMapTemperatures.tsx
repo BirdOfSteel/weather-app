@@ -3,10 +3,11 @@ import React from 'react';
 import humidityIcon from '../assets/droplets-icon.png';
 import { dailyForecastObjectType, hourlyForecastObjectType, weatherObjectType } from '../types/weatherTypes.ts';
 import parseDate from '../utils/parseDate.tsx';
+import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 
 // CONVERT FUNCTION TO PRODUCE FORECAST FOR DAILY
 
-export default function useMapTemperatures(weatherObject: weatherObjectType, interval: string, extraInfo, setExtraInfo) {
+export default function useMapTemperatures(weatherObject: weatherObjectType, interval: string, extraInfo, setExtraInfo, units) {
     const [selectedHourlyElement, setSelectedHourlyElement] = React.useState<number | null>(null);
     const [selectedDailyElement, setSelectedDailyElement] = React.useState<number | null>(null);
 
@@ -31,7 +32,7 @@ export default function useMapTemperatures(weatherObject: weatherObjectType, int
                     }}
                     style={isHourlyElementSelected ? {'background': 'rgba(0,0,0,0.3)'} : {}}
                 >
-                    <p>{Math.round(hourlyForecastObject.temp)}°C</p>
+                    <p>{convertFromCelsius(hourlyForecastObject.temp, units)}</p>
                     <img className="weather-entry-icon" src={iconURL}/>
                     <div className="humidity-entry-div">
                         <img className="humidity-icon" src={humidityIcon} />
@@ -67,7 +68,7 @@ export default function useMapTemperatures(weatherObject: weatherObjectType, int
                     }}
                     style={isDailyElementSelected ? {'background': 'rgba(0,0,0,0.3)'} : {}}
                 >
-                    <p>{Math.round(dailyForecastObject.temp)}°C</p>
+                    <p>{convertFromCelsius(dailyForecastObject.temp, units)}</p>
                     <img className="weather-entry-icon" src={iconURL}/>
                     <div className="humidity-entry-div">
                         <img className="humidity-icon" src={humidityIcon} />

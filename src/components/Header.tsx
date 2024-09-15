@@ -5,14 +5,6 @@ export default function Header({ isMenuOpen, setIsMenuOpen }) {
 
     return (
         <div id="header-div">
-            <img 
-                src={menuIcon} 
-                alt={isMenuOpen ? "Button: Menu is open" : "Button: Menu is closed"} 
-                id="openedMenuIcon" 
-                onClick={() => setIsMenuOpen((prevState: boolean) => {
-                    return !prevState
-                })}
-            />
         </div>
     )
 }

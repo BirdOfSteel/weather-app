@@ -1,21 +1,21 @@
 import React from 'react';
-import closeMenuIcon from '../assets/cross-icon.png';
+import menuArrowIcon from '../assets/down-arrow.png';
 
 export default function Menu({ isMenuOpen, setIsMenuOpen }) {
 
     return (
         <div 
             id="menu-div"
-            style={isMenuOpen ? {'width': '40%'} : {'width': '0'}}
+            style={isMenuOpen ? {'width': '10%'} : {'width': '5%'}}
         >
             <img 
-                id='close-menu-icon' 
-                src={closeMenuIcon} 
+                id='menu-icon' 
+                src={menuArrowIcon} 
+                style={isMenuOpen ? {'transform': 'rotate3d(0,0,-1,45deg)'} : {'transform': 'rotate3d(0,0,1,-225deg)'} }
                 onClick={() => setIsMenuOpen((prevState: boolean) => {
                     return !prevState
                 })}
             />
-            <p>123</p>
         </div>
     )
 }

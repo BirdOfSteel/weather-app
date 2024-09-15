@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default function useGetCoordinates() {
     const [positionData, setPositionData] = React.useState<positionObjectType | null>(null)
 

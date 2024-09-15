@@ -1,6 +1,9 @@
 import React from 'react';
+import convertFromCelsius from '../utils/convertFromCelsius.tsx';
+import convertFromShortMetric from '../utils/convertFromShortMetric.tsx';
+import convertFromMillibar from '../utils/convertFromMillibar.tsx';
 
-export default function DailyWeatherInfo({ extraDailyInfo }) {
+export default function DailyWeatherInfo({ extraDailyInfo, units }) {
     const data = extraDailyInfo;
 
     return (    
@@ -9,22 +12,22 @@ export default function DailyWeatherInfo({ extraDailyInfo }) {
                 <h1>Temperature</h1>
                 <p>Minimum temperature: &nbsp;
                     <span> {/* Remember to check temperature values are rounded */}
-                    {Math.round((data.min_temp * 100) / 100)}°C
+                        {convertFromCelsius(data.min_temp, units)}
                     </span>
                 </p>
                 <p>Maximum temperature: &nbsp;
                     <span>
-                        {Math.round((data.max_temp * 100) / 100)}°C
+                        {convertFromCelsius(data.max_temp, units)}
                     </span>
                 </p>
                 <p> Minimum temperature (feels like):&nbsp;
                     <span>
-                        {Math.round((data.app_min_temp * 100) / 100)}°C
+                        {convertFromCelsius(data.app_min_temp, units)}
                     </span>
                 </p>
                 <p> Maximum temperature (feels like):&nbsp;
                     <span>
-                        {Math.round((data.app_max_temp * 100) / 100)}°C
+                        {convertFromCelsius(data.app_max_temp, units)}
                     </span>
                 </p>
             </div>
@@ -38,17 +41,17 @@ export default function DailyWeatherInfo({ extraDailyInfo }) {
                 </p>
                 <p>Total liquid: &nbsp;
                     <span>
-                        {Math.round(data.precip * 10) / 10}mm
+                        {convertFromShortMetric(data.precip, units)}
                     </span>
                 </p>
                 <p>Total snowfall: &nbsp;
                     <span>
-                        {Math.round(data.snow * 10) / 10}mm
+                        {convertFromShortMetric(data.snow, units)}
                     </span>
                 </p>
                 <p>Snow depth: &nbsp;
                     <span>
-                        {Math.round(data.snow * 10) / 10}mm
+                        {convertFromShortMetric(data.snow, units)}
                     </span>
                 </p>
             </div>
@@ -90,12 +93,12 @@ export default function DailyWeatherInfo({ extraDailyInfo }) {
                 </p>
                 <p>Pressure: &nbsp;
                      <span>
-                        {data.pres}mb
+                        {convertFromMillibar(data.pres, units)}
                     </span>
                 </p>
                 <p>Sea-level pressure: &nbsp;
                     <span>
-                        {data.slp}mb
+                        {convertFromMillibar(data.slp, units)}
                     </span>
                 </p>
             </div>

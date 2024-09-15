@@ -59,7 +59,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     dailyForecastArray: dailyWeatherData.data,
                     hourlyForecastArray: hourlyWeatherData.data
                 }
-
+                console.log(weatherObject)
                 setWeatherData(weatherObject);
             } catch (err) {
                 setError(err);
@@ -70,9 +70,23 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
 
         fetchWeather()
     },[userPosition])
-
+    
     return {weatherData, isLoading, error};
 }
 
+/* 
+    Temperature:
+        Celsius
+        Fahrenheit
+        Kelvin
 
+    Distance:
+        Metric
+        Imperial
 
+    Pressure:
+        mb millibars
+        hPa hectopascal
+        inHg inches of mercury
+        mmHg millimeters of mercury
+*/
