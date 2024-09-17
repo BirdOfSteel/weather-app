@@ -88,7 +88,7 @@ export default function DailyWeatherInfo({ extraDailyInfo, units }) {
                 </p>
                 <p>Dew point: &nbsp;
                     <span>
-                        {data.dewpt}°C
+                        {convertFromCelsius(data.dewpt, units)}
                     </span>
                 </p>
                 <p>Pressure: &nbsp;

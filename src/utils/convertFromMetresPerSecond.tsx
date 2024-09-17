@@ -1,5 +1,5 @@
 export default function convertFromMetresPerSecond(metresPerSecond, units) {
-    const scale = units.windSpeed;
+    const scale = units.velocity;
 
     if (scale === 'm/s') {
         return metresPerSecond + ' m/s';

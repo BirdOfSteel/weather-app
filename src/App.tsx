@@ -33,11 +33,10 @@ function App() {
     temperature: '°C', // C, F, K
     longDistance: 'km', // km, metres, miles
     shortDistance: 'mm', // mm, inch
-    windSpeed: 'm/s', // m/s, km/h, mph, knots
-    pressure: 'mmHg' // mb, pascal, hectopascal, mm mercury, inches mercury
+    velocity: 'm/s', // m/s, km/h, mph, knots
+    pressure: 'mb' // mb, pascal, hectopascal, mm mercury, inches mercury
   }); 
 
-  console.log(weatherData)
 
 
 
@@ -83,7 +82,12 @@ function App() {
     <div className="App">
       
       <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Menu 
+        isMenuOpen={isMenuOpen} 
+        setIsMenuOpen={setIsMenuOpen} 
+        units={units} 
+        setUnits={setUnits}
+      />
 
       <WeatherSummary weatherObject={weatherData} units={units} />
       <div id="forecast-div">

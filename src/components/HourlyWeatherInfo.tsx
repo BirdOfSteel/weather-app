@@ -6,7 +6,7 @@ import convertFromMillibar from '../utils/convertFromMillibar.tsx';
 
 export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
     const data = extraHourlyInfo;
-
+    console.log(data)
     return (
         <div id="forecast-info-div">
             <div className="forecast-info-inner-div">

@@ -1,18 +1,18 @@
 export default function convertFromMillibar(millibar, units) {
     const scale = units.pressure;
 
-    if (scale === 'millibar') {
+    if (scale === 'mb') {
         return millibar.toLocaleString() + ' mb';
         
-    } else if (scale === 'hectopascal') {
+    } else if (scale === 'hPa') {
         return millibar.toLocaleString() + ' hPa';
 
-    } else if (scale === 'pascal') {
+    } else if (scale === 'pa') {
         return (millibar * 100).toLocaleString() + ' Pa';
 
     } else if (scale === 'mmHg') {
         const mmHg = millibar * 0.75006;
-        return Math.round(mmHg * 100) / 100 + ' mmHg';
+        return Math.round(mmHg * 10) / 10 + ' mmHg';
 
     } else if (scale === 'inHg') {
         let inchesOfMercury = millibar / 33.864;
