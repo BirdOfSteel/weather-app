@@ -41,20 +41,21 @@ h1, h2, h3, p {
 }
 
 #menu-div {
-  background: #435075;
+  background: rgba(240, 240, 240, 0.2);
+  backdrop-filter: blur(50px);
   position: absolute;
   overflow: hidden;
   left: 0%;
   height: 5%;
   transition: all 0.5s ease;
-  box-shadow: -50px 0px 150px black;
   display: flex;
   justify-content: center;
   padding: 1em;
   color: #FFFFFF;
   box-sizing: border-box;
-  border-bottom-right-radius: 4px;
   transition: all 0.5s ease;
+  border-bottom-right-radius: 8px;
+  
 }
 
   #menu-icon {
@@ -71,6 +72,8 @@ h1, h2, h3, p {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 1em;
+    white-space: pre;
   }
 
     #menu-list-div > p {
@@ -93,6 +96,17 @@ h1, h2, h3, p {
         margin: 0 10px;
         cursor: pointer;
       }
+
+  #menu-toggle-button {
+    border: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+  }
 
 #weather-summary-div {
   display: flex;
@@ -407,7 +421,7 @@ h1, h2, h3, p {
 }
 
 @media (min-width: 720px) {
-  
+
   #weather-summary-div {
     justify-content: space-evenly;
   }
