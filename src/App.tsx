@@ -71,13 +71,13 @@ function App() {
   
   //returns error text if error data is available
   if (weatherData.error) {
+    console.log(weatherData.error)
     return (
       <div className="App">
         <h1 style={{"width": "100%", "height": "100%"}}>Error: {weatherData.error}</h1>
       </div>
     )
   }
-
   return (
     <div className="App">
       
@@ -92,7 +92,7 @@ function App() {
       <WeatherSummary weatherObject={weatherData} units={units} />
       <div id="forecast-div">
 
-        <HourlyTemperatures 
+      <HourlyTemperatures 
           weatherObject={weatherData} 
           interval='hourly' 
           extraHourlyInfo={extraHourlyInfo}

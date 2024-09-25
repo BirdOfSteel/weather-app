@@ -8,12 +8,12 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
     const data = extraHourlyInfo;
     console.log(data)
     return (
-        <div id="forecast-info-div">
+        <div id="hourly-forecast-info-div" className='forecast-info-div'>
             <div className="forecast-info-inner-div">
                 <h1>General</h1>
                 <p>Temperature: &nbsp;
                     <span>
-                        {convertFromCelsius(data.temp, units)}
+                        {convertFromCelsius(data.temperature, units)}
                     </span>
                 </p>
                 <p>Feels like: &nbsp;
@@ -23,12 +23,12 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
                 </p>
                 <p>UV index: &nbsp;
                     <span>
-                        {data.uv}
+                        {data.uv_index}
                     </span>
                 </p>
                 <p>Visbility: &nbsp;
                     <span>
-                        {convertFromLongMetric(data.vis, units)}
+                        {convertFromLongMetric(data.visibility, units)}
                     </span>
                 </p>
             </div>
@@ -40,19 +40,19 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
                         {data.pop}%
                     </span>
                 </p>
-                <p>Total liquid: &nbsp;
+                <p>Total rain: &nbsp;
                     <span>
-                        {convertFromShortMetric(data.precip, units)}
+                        {convertFromShortMetric(data.total_rain, units)}
                     </span>
                 </p>
                 <p>Total snowfall: &nbsp;
                     <span>
-                        {convertFromShortMetric(data.snow, units)}
+                        {convertFromShortMetric(data.total_snowfall, units)}
                     </span>
                 </p>
                 <p>Snow depth: &nbsp;
                     <span>
-                        {convertFromShortMetric(data.snow, units)}
+                        {convertFromShortMetric(data.snow_depth, units)}
                     </span>
                 </p>
             </div>
@@ -64,19 +64,19 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
                      {data.clouds}%
                     </span>
                 </p>
-                <p>0-3km AGL: &nbsp;
+                <p>0-3km altitude: &nbsp;
                     <span>
                      {data.clouds_low}%
                     </span>
                 </p>
-                <p>3-5km AGL: &nbsp;
+                <p>3-8km altitude: &nbsp;
                     <span>
                         {data.clouds_mid}%
                     </span>
                 </p>
-                <p>5+km AGL: &nbsp;
+                <p>8+km altitude: &nbsp;
                     <span>
-                        {data.clouds_hi}%
+                        {data.clouds_high}%
                     </span>
                 </p>
             </div>
@@ -84,22 +84,22 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
                 <h1>Air</h1>
                 <p>Humidity: &nbsp;
                     <span>
-                        {data.rh}%
+                        {data.relative_humidity}%
                     </span>
                 </p>
                 <p>Dew point: &nbsp;
                     <span>
-                        {convertFromCelsius(data.dewpt, units)}
+                        {convertFromCelsius(data.dew_point, units)}
                     </span>
                 </p>
                 <p>Pressure: &nbsp;
                      <span>
-                        {convertFromMillibar(data.pres, units)}
+                        {convertFromMillibar(data.surface_pressure, units)}
                     </span>
                 </p>
                 <p>Sea-level pressure: &nbsp;
                     <span>
-                        {convertFromMillibar(data.slp, units)}
+                        {convertFromMillibar(data.msl_pressure, units)}
                     </span>
                 </p>
             </div>

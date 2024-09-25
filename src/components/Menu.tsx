@@ -28,6 +28,7 @@ export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
         <div 
             id="menu-div"
             style={toggleMenuStyle}>
+                
             <div id="menu-list-div" style={fadeStyle}>
                 <MenuButtons units={units} setUnits={setUnits} />
             </div>

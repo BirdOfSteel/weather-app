@@ -10,7 +10,6 @@ export default function MenuButtons({ units, setUnits }) {
     function changeScale(e) { // handles scale-changing for the arrows in the menu.
         const arrow = e.target.className;
         const parentId = e.target.parentElement.parentElement.id;
-        console.log(e)
 
         let currentScale: string = ''; // will be set to current selected scale
         let scaleArray: string[] = []; // will be set to the array of scales that is related to the arrow clicked

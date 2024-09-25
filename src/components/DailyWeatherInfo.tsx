@@ -2,12 +2,13 @@ import React from 'react';
 import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 import convertFromShortMetric from '../utils/convertFromShortMetric.tsx';
 import convertFromMillibar from '../utils/convertFromMillibar.tsx';
+import convertFromMetresPerSecond from '../utils/convertFromMetresPerSecond.tsx';
 
 export default function DailyWeatherInfo({ extraDailyInfo, units }) {
     const data = extraDailyInfo;
 
     return (    
-        <div id="forecast-info-div">
+        <div id="daily-forecast-info-div" className='forecast-info-div'>
             <div className="forecast-info-inner-div">
                 <h1>Temperature</h1>
                 <p>Minimum temperature: &nbsp;
@@ -33,72 +34,49 @@ export default function DailyWeatherInfo({ extraDailyInfo, units }) {
             </div>
 
             <div className="forecast-info-inner-div">
-                <h1>Precipitation</h1>
+                <h1>Precipitation & Wind</h1>
                 <p>Probability: &nbsp;
                     <span>
                         {data.pop}%
                     </span>
                 </p>
-                <p>Total liquid: &nbsp;
+                <p>Total precipitation: &nbsp;
                     <span>
-                        {convertFromShortMetric(data.precip, units)}
+                        {convertFromShortMetric(data.pop, units)}
                     </span>
                 </p>
-                <p>Total snowfall: &nbsp;
+                <p>Maximum wind speed: &nbsp;
                     <span>
-                        {convertFromShortMetric(data.snow, units)}
+                        {convertFromMetresPerSecond(data.wind_speed, units)}
                     </span>
                 </p>
-                <p>Snow depth: &nbsp;
+                <p>Maximum gust speed: &nbsp;
                     <span>
-                        {convertFromShortMetric(data.snow, units)}
+                        {convertFromMetresPerSecond(data.gust_speed, units)}
                     </span>
                 </p>
             </div>
 
             <div className="forecast-info-inner-div">
-                <h1>Clouds</h1>
-                <p>Total coverage: &nbsp;
+                <h1>Sunlight</h1>
+                <p>Sunrise: &nbsp;
                     <span>
-                        {data.clouds}%
+                        {data.sunrise}
                     </span>
                 </p>
-                <p>0-3km AGL: &nbsp;
+                <p>Sunset: &nbsp;
                     <span>
-                        {data.clouds_low}%
+                        {data.sunset}
                     </span>
                 </p>
-                <p>3-5km AGL: &nbsp;
+                <p>Daylight duration: &nbsp;
                     <span>
-                        {data.clouds_mid}%
+                        {data.daylight_duration}
                     </span>
                 </p>
-                <p>5+km AGL: &nbsp;
+                <p>Maximum UV Index: &nbsp;
                     <span>
-                        {data.clouds_hi}%
-                    </span>
-                </p>
-            </div>
-            <div className="forecast-info-inner-div">
-                <h1>Air</h1>
-                <p>Humidity: &nbsp;
-                    <span>
-                        {data.rh}%
-                    </span>
-                </p>
-                <p>Dew point: &nbsp;
-                    <span>
-                        {convertFromCelsius(data.dewpt, units)}
-                    </span>
-                </p>
-                <p>Pressure: &nbsp;
-                     <span>
-                        {convertFromMillibar(data.pres, units)}
-                    </span>
-                </p>
-                <p>Sea-level pressure: &nbsp;
-                    <span>
-                        {convertFromMillibar(data.slp, units)}
+                        {data.uv_index}
                     </span>
                 </p>
             </div>
