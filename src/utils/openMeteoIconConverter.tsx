@@ -1,5 +1,4 @@
-export default function openMeteoIconConverter(meteoIconCode, isDay = true) {
-    console.log(meteoIconCode)
+export default function openMeteoIconConverter(meteoIconCode: number, isDay = true) {
     let newIconCode: string = '';
 
     switch (meteoIconCode) {
@@ -48,7 +47,35 @@ export default function openMeteoIconConverter(meteoIconCode, isDay = true) {
         case 67: // freezing heavy rain
             newIconCode = '13d';
             break;
-            
+        case 71: // light snowfall
+        case 73: // moderate snowfall
+        case 75: // heavy snowfall
+            newIconCode = '13d';
+            break;
+        case 77: // snow grains
+            newIconCode = '13d';
+            break;
+        case 80: // light rain shower
+        case 81: // moderate rain shower
+            newIconCode =
+                isDay ?
+                    '10d' :
+                    '10n';
+                break;
+        case 82: // violent rain shower
+            newIconCode = '11d';
+            break;
+        case 85: // light snow shower
+        case 86: // heavy snow shower
+            newIconCode = '13d';
+            break;
+        case 95: // light to moderate thunderstorm
+            newIconCode = '11d';
+            break;
+        case 96: // thunderstorm with light hail
+        case 99: // thunderstorm with heavy hail
+            newIconCode = '11d';
+            break;
     }
 
     return newIconCode;

@@ -51,7 +51,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
         const dailyForecastArray = weatherObject.weatherData.daily_forecast_array;
         console.log(dailyForecastArray)
         const dailyForecastMapped = dailyForecastArray.map((dailyForecastObject, index: number) => {
-            // const iconURL = `https://openweathermap.org/img/wn/${dailyForecastObject.icon}@2x.png`
+            const iconURL = `https://openweathermap.org/img/wn/${dailyForecastObject.icon}@2x.png`;
 
             const isDailyElementSelected = selectedDailyElement === index;
 
@@ -69,7 +69,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
                     style={isDailyElementSelected ? {'background': 'rgba(0,0,0,0.3)'} : {}}
                 >
                     <p>{convertFromCelsius(dailyForecastObject.max_temp, units)}</p>
-                    {/* <img className="weather-entry-icon" src={iconURL}/> */}
+                    <img className="weather-entry-icon" src={iconURL}/>
                     <div className="humidity-entry-div">
                         <img className="humidity-icon" src={humidityIcon} />
                         <p>{dailyForecastObject.pop}%</p>

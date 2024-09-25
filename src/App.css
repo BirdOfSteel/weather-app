@@ -315,6 +315,7 @@ h1, h2, h3, p {
     flex-direction: column;
     flex: 0 0 auto;
     align-items: center;
+    min-width: min-content;
     width: 10%;
     height: 50%;
     border-radius: 16px;
@@ -333,7 +334,7 @@ h1, h2, h3, p {
     }
     
       .weather-entry-icon {
-        width: 2em;
+        width: 3em;
         margin: auto 0;
       }
       
@@ -421,6 +422,7 @@ h1, h2, h3, p {
 
   #weather-summary-div {
     justify-content: space-evenly;
+    margin: 5em 0 2em 0;
   }
 
     #current-weather-div {
@@ -460,8 +462,8 @@ h1, h2, h3, p {
 }
 
 @media (min-width: 1024px) {
-  #forecast-div {
-    margin-top: 5em;
+  #weather-summary-div {
+    margin: 5em 0 3em 0;
   }
 
   #daily-forecast-info-div {
