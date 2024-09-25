@@ -7,6 +7,7 @@ import parseDate from '../utils/parseDate.tsx';
 
 import presentWeatherDataTest from '../presentWeatherDataTest.js';
 import forecastWeatherDataTest from '../forecastWeatherDataTest.js';
+import openMeteoIconConverter from '../utils/openMeteoIconConverter.tsx';
 
 const APIKEY = '3408dd4727846c89ae71a899bfd3ac35'; // Ideally this would be hidden behind a private backend server.
 
@@ -42,7 +43,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 const forecastDays = 14;
                 
                 const FORECAST_WEATHER_URL = 
-                    `https://api.open-meteo.com/v1/forecast?latitude=51.5085&longitude=-0.1257&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,rain,snowfall,snow_depth,pressure_msl,surface_pressure,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index&wind_speed_unit=ms&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max&forecast_days=${forecastDays}&timezone=Europe%2FLondon`;
+                    `https://api.open-meteo.com/v1/forecast?latitude=51.5085&longitude=-0.1257&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,rain,snowfall,snow_depth,pressure_msl,surface_pressure,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index,weather_code,is_day&wind_speed_unit=ms&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max,weather_code&forecast_days=${forecastDays}&timezone=Europe%2FLondon`;
 
                 const presentWeatherResponse = await fetch(PRESENT_WEATHER_URL);
                 const forecastWeatherResponse = await fetch(FORECAST_WEATHER_URL);
@@ -71,6 +72,8 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 let dailyForecastArray = [];
 
                 for (let i = 0; i != forecastDays * 24; i++) {
+                    const isDay = forecastWeatherData.hourly.is_day[0] ? true : false;
+
                     const hourlyForecastObject = {
                         temperature: forecastWeatherData.hourly.temperature_2m[i],
                         app_temp: forecastWeatherData.hourly.apparent_temperature[i],
@@ -89,7 +92,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                         surface_pressure: forecastWeatherData.hourly.surface_pressure[i],
                         msl_pressure: forecastWeatherData.hourly.pressure_msl[i],
                         timestamp: parseDate(forecastWeatherData.hourly.time[i], 'hourly'),
-                        icon: presentWeatherData.weather[0].id
+                        icon: openMeteoIconConverter(forecastWeatherData.hourly.weather_code[i], isDay)
                     };
 
                     hourlyForecastArray.push(hourlyForecastObject);
@@ -109,7 +112,8 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                         sunset: parseDate(forecastWeatherData.daily.sunset[i], 'hourly'),
                         daylight_duration: forecastWeatherData.daily.daylight_duration[i],
                         uv_index: Math.round(forecastWeatherData.daily.uv_index_max[i] * 10) / 10,
-                        timestamp: parseDate(forecastWeatherData.daily.time[i], 'daily')
+                        timestamp: parseDate(forecastWeatherData.daily.time[i], 'daily'),
+                        icon: openMeteoIconConverter(forecastWeatherData.daily.weather_code[i])
                     }
 
                     dailyForecastArray.push(dailyForecastObject);
@@ -124,7 +128,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     min_temp: presentWeatherData.main.temp_min,
                     max_temp: presentWeatherData.main.temp_max,
                     description: presentWeatherData.weather[0].description,
-                    icon: presentWeatherData.weather[0].id,
+                    icon: presentWeatherData.weather[0].icon,
                     wind_speed: presentWeatherData.wind.speed,
                     wind_direction_degrees: presentWeatherData.wind.deg,
                     wind_direction_full: convertBearingToDirection(presentWeatherData.wind.deg),
@@ -134,7 +138,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     daily_forecast_array: dailyForecastArray,
                     hourly_forecast_array: hourlyForecastArray
                 }
-
+                console.log(weatherObject)
                 setWeatherData(weatherObject);
             } catch (err) {
                 setError(err.message);

@@ -15,7 +15,7 @@ export default function WeatherSummary({ weatherObject, units }) {
     
     const location = weatherData.location;
     const currentTemperature = convertFromCelsius(weatherData.current_temp, units);
-    const weatherIconURL = `https://www.weatherbit.io/static/img/icons/${weatherData.icon}.png`
+    const weatherIconURL = ` https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`
     const weatherDescription = weatherData.description;
     const feelsLikeTemp = convertFromCelsius(weatherData.feels_like, units);
     const minTemp = convertFromCelsius(weatherData.min_temp, units);
