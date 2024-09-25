@@ -127,7 +127,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     icon: presentWeatherData.weather[0].id,
                     wind_speed: presentWeatherData.wind.speed,
                     wind_direction_degrees: presentWeatherData.wind.deg,
-                    // wind_direction_full: currentWeatherData.data[0].wind_cdir_full,
+                    wind_direction_full: convertBearingToDirection(presentWeatherData.wind.deg),
                     gust_speed: forecastWeatherData.hourly.wind_gusts_10m[0],
                     cloud_coverage: forecastWeatherData.hourly.cloud_cover[0],
                     relative_humidity: forecastWeatherData.hourly.relative_humidity_2m[0],

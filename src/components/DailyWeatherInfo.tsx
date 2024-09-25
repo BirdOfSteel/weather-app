@@ -3,6 +3,7 @@ import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 import convertFromShortMetric from '../utils/convertFromShortMetric.tsx';
 import convertFromMillibar from '../utils/convertFromMillibar.tsx';
 import convertFromMetresPerSecond from '../utils/convertFromMetresPerSecond.tsx';
+import secondsToHoursAndMinutes from '../utils/secondsToHoursAndMinutes.tsx';
 
 export default function DailyWeatherInfo({ extraDailyInfo, units }) {
     const data = extraDailyInfo;
@@ -69,9 +70,9 @@ export default function DailyWeatherInfo({ extraDailyInfo, units }) {
                         {data.sunset}
                     </span>
                 </p>
-                <p>Daylight duration: &nbsp;
+                <p>Sunshine duration: &nbsp;
                     <span>
-                        {data.daylight_duration}
+                        {secondsToHoursAndMinutes(data.daylight_duration)}
                     </span>
                 </p>
                 <p>Maximum UV Index: &nbsp;

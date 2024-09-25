@@ -467,4 +467,8 @@ h1, h2, h3, p {
   #daily-forecast-info-div {
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+    #daily-forecast-info-div > .forecast-info-inner-div:not(:nth-child(-n+1)) {
+      margin-top: 0px;
+    }
 }

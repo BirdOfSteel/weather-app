@@ -1,9 +1,28 @@
 export default function convertBearingToDirection(bearing) {
-    const cardinalDirectionsArray = ['N', 'E', 'S', 'W', 'N']
-    let direction: string = '';
-    
-    const cardinalDirection = cardinalDirectionsArray[Math.trunc(bearing / 90)];
-    console.log(cardinalDirection)
+    const cardinalDirectionsArray = [
+        'N',
+        'N/NE', 
+        'NE', 
+        'E/NE',
+        'E',
+        'E/SE', 
+        'SE', 
+        'S/SE',
+        'S', 
+        'S/SW',
+        'SW', 
+        'W/SW',
+        'W', 
+        'W/NW',
+        'NW',
+        'N/NW',
+    ];
 
-    return direction 
+    let direction = cardinalDirectionsArray[Math.trunc(bearing / 22.5)];
+
+    if (bearing === 360) {
+        direction = 'N';
+    }
+
+    return direction;
 }

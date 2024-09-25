@@ -50,7 +50,7 @@ export default function WeatherSummary({ weatherObject, units }) {
                 <h1 id="gust-speed-heading" className="additional-weather-info-element">Gust speed</h1>
                 <p id="gust-speed" className="additional-weather-info-element"><img id="gust-speed-icon" src={gustIcon} />{convertFromMetresPerSecond(weatherData.gust_speed, units)}</p>
                 <h1 id="wind-direction-heading" className="additional-weather-info-element">Wind direction</h1>
-                <p id="wind-direction" className="additional-weather-info-element"><img id="wind-direction-icon" src={compassIcon}/>{weatherData.wind_direction_degrees}°</p>
+                <p id="wind-direction" className="additional-weather-info-element"><img id="wind-direction-icon" src={compassIcon}/>{weatherData.wind_direction_degrees}° ({weatherData.wind_direction_full})</p>
                 
                 <div id="additional-weather-div-row-one">
                     <h1 id="cloud-coverage-heading" className="additional-weather-info-element">Cloud coverage</h1>
