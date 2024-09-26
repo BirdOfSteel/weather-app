@@ -10,7 +10,19 @@ import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 export default function useMapTemperatures(weatherObject, interval, extraInfo, setExtraInfo, units) {
     const [selectedHourlyElement, setSelectedHourlyElement] = React.useState<number | null>(null);
     const [selectedDailyElement, setSelectedDailyElement] = React.useState<number | null>(null);
-    console.log(weatherObject)
+   
+    React.useEffect(() => {
+        if (!extraInfo && interval === 'hourly') {
+            const firstElement = weatherObject.weatherData.hourly_forecast_array[0];
+            setSelectedHourlyElement(0);
+            setExtraInfo(firstElement);
+        } else if (!extraInfo && interval === 'daily') {
+            const firstElement = weatherObject.weatherData.daily_forecast_array[0];
+            setSelectedDailyElement(0);
+            setExtraInfo(firstElement);
+        }
+    },[])
+
     if (interval === 'hourly' && weatherObject.weatherData) { 
         const hourly_forecast_array = weatherObject.weatherData.hourly_forecast_array;
         

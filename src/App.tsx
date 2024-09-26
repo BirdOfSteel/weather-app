@@ -28,7 +28,7 @@ function App() {
   const [extraHourlyInfo, setExtraHourlyInfo] = React.useState(null);
   //CHANGE TO NULL AFTER FINISHING IMPLEMENTATION
   const [extraDailyInfo, setExtraDailyInfo] = React.useState(null);
-  
+
   const [units, setUnits] = React.useState({ 
     temperature: '°C', // C, F, K
     longDistance: 'km', // km, metres, miles
@@ -53,6 +53,8 @@ function App() {
   // }
 
   // returns loading text if isLoading is true
+
+  
   React.useEffect(() => {
     console.log("1: " + extraHourlyInfo)
   },[extraHourlyInfo])
@@ -78,16 +80,19 @@ function App() {
       </div>
     )
   }
+
   return (
     <div className="App">
       
       <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      
+
       <Menu 
         isMenuOpen={isMenuOpen} 
         setIsMenuOpen={setIsMenuOpen} 
         units={units} 
         setUnits={setUnits}
-      />
+        />
 
       <WeatherSummary weatherObject={weatherData} units={units} />
       <div id="forecast-div">
@@ -98,13 +103,13 @@ function App() {
           extraHourlyInfo={extraHourlyInfo}
           setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)} // passes up data
           units={units}
-       />
+          />
         
         { /* runs if extraHourlyInfo state is changed */
           extraHourlyInfo &&
           <HourlyWeatherInfo 
-            extraHourlyInfo={extraHourlyInfo}
-            units={units}
+          extraHourlyInfo={extraHourlyInfo}
+          units={units}
           />
         } {/* TRY KEYFRAMES */}
         
@@ -114,16 +119,16 @@ function App() {
           extraDailyInfo={extraDailyInfo}
           setExtraDailyInfo={(data) => setExtraDailyInfo(data)} // passes up data
           units={units}
-       />
+          />
 
         {/* runs if extraDailyInfo state is changed */}
         {extraDailyInfo && 
           <DailyWeatherInfo 
-            extraDailyInfo={extraDailyInfo}
-            units={units}
+          extraDailyInfo={extraDailyInfo}
+          units={units}
           />
         }
-
+        
       </div>
       <Footer />
 

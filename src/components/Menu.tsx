@@ -9,7 +9,7 @@ export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
         height: isMenuOpen ? '210px' : '10px',
         background: 'rgba(240, 240, 240, 0)',
         boxShadow: isMenuOpen ? 
-            'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px' : 
+            '-40px -40px 80px black' : 
             ''
     }
     

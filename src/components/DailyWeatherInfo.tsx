@@ -22,12 +22,12 @@ export default function DailyWeatherInfo({ extraDailyInfo, units }) {
                         {convertFromCelsius(data.max_temp, units)}
                     </span>
                 </p>
-                <p> Minimum temperature (feels like):&nbsp;
+                <p> Minimum 'feels like':&nbsp;
                     <span>
                         {convertFromCelsius(data.app_min_temp, units)}
                     </span>
                 </p>
-                <p> Maximum temperature (feels like):&nbsp;
+                <p> Maximum 'feels like':&nbsp;
                     <span>
                         {convertFromCelsius(data.app_max_temp, units)}
                     </span>
@@ -70,7 +70,7 @@ export default function DailyWeatherInfo({ extraDailyInfo, units }) {
                         {data.sunset}
                     </span>
                 </p>
-                <p>Sunshine duration: &nbsp;
+                <p>Sun duration: &nbsp;
                     <span>
                         {secondsToHoursAndMinutes(data.daylight_duration)}
                     </span>

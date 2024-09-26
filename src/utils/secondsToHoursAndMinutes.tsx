@@ -4,5 +4,5 @@ export default function secondsToHoursAndMinutes(seconds) {
     const minuteDecimal = secondsAsHours - hours;
     const minutes = Math.round(minuteDecimal * 60);
 
-    return `${hours}hr ${minutes}min`;
+    return `${hours}h ${minutes}m`;
 }
