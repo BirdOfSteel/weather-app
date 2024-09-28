@@ -14,6 +14,8 @@ import HourlyWeatherInfo from './components/HourlyWeatherInfo.tsx';
 import DailyWeatherInfo from './components/DailyWeatherInfo.tsx';
 import Menu from './components/Menu.tsx';
 
+import backgroundGradientSelector from './utils/backgroundGradientSelector.tsx';
+
 
 // TO DO:
 // Design converter function for temp, distance, and pressure
@@ -28,19 +30,40 @@ function App() {
   const [extraHourlyInfo, setExtraHourlyInfo] = React.useState(null);
   //CHANGE TO NULL AFTER FINISHING IMPLEMENTATION
   const [extraDailyInfo, setExtraDailyInfo] = React.useState(null);
+  
+  const [backgroundGradientObject, setBackgroundGradientObject] = React.useState(backgroundGradientSelector(null));
 
   const [units, setUnits] = React.useState({ 
     temperature: '°C', // C, F, K
     longDistance: 'km', // km, metres, miles
     shortDistance: 'mm', // mm, inch
+    cloudDistance: 'km', // km, metres, ft
     velocity: 'm/s', // m/s, km/h, mph, knots
-    pressure: 'mb' // mb, pascal, hectopascal, mm mercury, inches mercury
+    pressure: 'mb', // mb, pascal, hectopascal, mm mercury, inches mercury
   }); 
 
 
+  // NOTE: CUT OUT SPENT HOURS FROM HOURLY WEATHER ARRAY.
+  // FUNCTION CAN TAKE CURRENT HOUR, SUBRACT 1, AND USE
+  // RESULTING VALUE AS INDEX TO REMOVE SPECIFIED AMOUNT
+  // OF ITEMS.
 
+  // fetches background gradient when weatherData is updated
+  React.useEffect(() => {
+    if(weatherData.weatherData) {
+      const appDiv = document.querySelector('.App');
+      const currentTimestamp = weatherData.weatherData.hourly_forecast_array[0].timestamp;
+      const newGradientObject = backgroundGradientSelector(currentTimestamp);
+      
+      appDiv?.style.setProperty('--myColor1', newGradientObject.A);
+      appDiv?.style.setProperty('--myColor2', newGradientObject.B);
+      appDiv?.style.setProperty('--myColor3', newGradientObject.C);
+      appDiv?.style.setProperty('--myColor4', newGradientObject.D);
+      appDiv?.style.setProperty('--myColor5', newGradientObject.E);
 
-  // RUNS REPEATEDLY
+      setBackgroundGradientObject(newGradientObject);
+    }
+  },[weatherData.weatherData])
 
 
   // FIND NEW WAY TO CHECK IF RESPONSE FAILED DUE TO EXCESS REQUESTS
@@ -52,7 +75,6 @@ function App() {
   //   )
   // }
 
-  // returns loading text if isLoading is true
 
   
   React.useEffect(() => {
@@ -81,11 +103,16 @@ function App() {
     )
   }
 
+  const gradients = [
+    "linear-gradient(red, purple)", // Warm tones
+    "linear-gradient(green, blue)" // Cool to warm transition
+  ];
+  
   return (
-    <div className="App">
-      
+    <div 
+      className="App"
+    >
       <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      
 
       <Menu 
         isMenuOpen={isMenuOpen} 
@@ -129,9 +156,8 @@ function App() {
           />
         }
         
+        <Footer />
       </div>
-      <Footer />
-
     </div>
   );
 }

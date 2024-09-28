@@ -10,5 +10,4 @@ export default function parseDate(date: string, interval: string) {
         const month = date.substring(5,7);
         return `${day}/${month}`
     }
-    
 }

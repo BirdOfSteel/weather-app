@@ -10,7 +10,11 @@ import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 export default function useMapTemperatures(weatherObject, interval, extraInfo, setExtraInfo, units) {
     const [selectedHourlyElement, setSelectedHourlyElement] = React.useState<number | null>(null);
     const [selectedDailyElement, setSelectedDailyElement] = React.useState<number | null>(null);
-   
+    
+    const dateObject = new Date();
+    const currentDate = `${dateObject.getDay()}/${dateObject.getMonth()+1}`
+    console.log(currentDate)
+
     React.useEffect(() => {
         if (!extraInfo && interval === 'hourly') {
             const firstElement = weatherObject.weatherData.hourly_forecast_array[0];
@@ -25,11 +29,10 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
 
     if (interval === 'hourly' && weatherObject.weatherData) { 
         const hourly_forecast_array = weatherObject.weatherData.hourly_forecast_array;
-        
         const hourlyForecastMapped = hourly_forecast_array.map((hourlyForecastObject, index: number) => {
             const iconURL = `https://openweathermap.org/img/wn/${hourlyForecastObject.icon}@2x.png`;
             const isHourlyElementSelected = selectedHourlyElement === index;
-
+            console.log(hourlyForecastObject.date)
             return (
                 <div 
                     className="weather-entry-div" 

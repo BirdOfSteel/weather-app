@@ -4,18 +4,57 @@ body {
 
 /* App div */
 
+@property --myColor1 {
+  syntax: '<color>';
+  initial-value: rgb(56, 110, 190);
+  inherits: false;
+}
+
+@property --myColor2 {
+  syntax: '<color>';
+  initial-value: rgb(77, 128, 206);
+  inherits: false;
+}
+@property --myColor3 {
+  syntax: '<color>';
+  initial-value: rgb(103, 147, 215);
+  inherits: false;
+}
+@property --myColor4 {
+  syntax: '<color>';
+  initial-value: rgb(128, 167, 223);
+  inherits: false;
+}
+@property --myColor5 {
+  syntax: '<color>';
+  initial-value: rgb(154, 187, 231);
+  inherits: false;
+}
+
 .App {
-  background-image: linear-gradient(to right top, #386ebe, #4d80ce, #6793d7, #80a7df, #9abbe7);
-  background-repeat: no-repeat;
-  background-size: 100%;
   display: flex;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   grid-template-columns: 1fr;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   padding: 0 10%;
+
+  background: linear-gradient(to left bottom,
+    var(--myColor1), 
+    var(--myColor2),
+    var(--myColor3),
+    var(--myColor4),
+    var(--myColor5)
+  );
+
+  transition: 
+    --myColor1 3s ease, 
+    --myColor2 3s ease,
+    --myColor3 3s ease,
+    --myColor4 3s ease,
+    --myColor5 3s ease;
 }
 
 /* Typography */ 
@@ -48,20 +87,18 @@ h1, h2, h3, p {
   position: absolute;
   overflow: hidden;
   left: 0%;
-  height: 5%;
   transition: all 0.5s ease;
   display: flex;
-  justify-content: center;
-  padding: 1em;
+  justify-content: start;
+  padding: 1.25em 0.5em 0 1.25em;
   color: #FFFFFF;
   box-sizing: border-box;
   transition: all 0.5s ease;
   border-bottom-right-radius: 8px;
-  
 }
 
   #menu-icon {
-    transition: transform 0.5s ease;
+    transition: transform 0.25s ease;
     position: absolute;
     right: 7.5px;
     bottom: 10px;
@@ -72,11 +109,15 @@ h1, h2, h3, p {
 
   #menu-list-div {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-direction: column;
-    padding: 1em;
     white-space: pre;
+    width: 100%;
   }
+
+    #menu-list-div-heading {
+      font-size: 1.1rem;
+    }
 
     #menu-list-div > p {
       display: flex;
@@ -86,7 +127,10 @@ h1, h2, h3, p {
     }
 
       .unit-selector-span {
-        min-width: max-content;
+        align-self: end;
+        width: 50px;
+        display: flex;
+        justify-content: end;
       }
 
       #menu-list-div > p:not(:first-child) {
@@ -137,7 +181,7 @@ h1, h2, h3, p {
     }
 
       #weather-icon {
-        width: 3cap;
+        width: 3em;
         margin-left: 0.75em;
         margin-bottom: -12.5px;
       }
@@ -363,7 +407,7 @@ h1, h2, h3, p {
     border-radius: 16px;
     box-sizing: border-box;
     width: 100%;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     color: #FFFFFF;
     padding: 1em;
   }
@@ -437,11 +481,12 @@ h1, h2, h3, p {
 
     
   #daily-forecast-div, #hourly-forecast-div {
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
   }
 
     #hourly-forecast-info-div {
       grid-template-columns: 1fr 1fr;
+      margin-bottom: 2.5em;
     }
 
       .forecast-info-inner-div:not(:nth-child(-n+1)) {

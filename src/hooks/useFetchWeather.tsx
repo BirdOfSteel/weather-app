@@ -49,14 +49,6 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 const forecastWeatherResponse = await fetch(FORECAST_WEATHER_URL);
                 const presentWeatherData = await presentWeatherResponse.json();
                 const forecastWeatherData = await forecastWeatherResponse.json();
-                console.log(presentWeatherData)
-                console.log(FORECAST_WEATHER_URL)
-                console.log(forecastWeatherData)
-                console.log(forecastWeatherData.hourly.temperature_2m)
-                console.log(forecastWeatherData.hourly.apparent_temperature[0])
-
-
-                console.log(convertBearingToDirection(360));
 
                 // implement response code check here?
               
@@ -66,12 +58,16 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
 
                 //forecastWeatherDataTest.timelines.hourly[0].values.temperatureApparent
 
-                console.log(forecastWeatherDataTest.timelines.daily[0].values.temperatureMin)
-               
                 let hourlyForecastArray = [];
                 let dailyForecastArray = [];
 
+                const currentHour = new Date().getHours();
+
                 for (let i = 0; i != forecastDays * 24; i++) {
+                    if (currentHour > i) { // this will prevent an object from being made if current iterant's hour has already passed.
+                        continue
+                    }
+
                     const isDay = forecastWeatherData.hourly.is_day[0] ? true : false;
 
                     const hourlyForecastObject = {
@@ -91,6 +87,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                         dew_point: forecastWeatherData.hourly.dew_point_2m[i],
                         surface_pressure: forecastWeatherData.hourly.surface_pressure[i],
                         msl_pressure: forecastWeatherData.hourly.pressure_msl[i],
+                        date: parseDate(forecastWeatherData.hourly.time[i], 'daily'),
                         timestamp: parseDate(forecastWeatherData.hourly.time[i], 'hourly'),
                         icon: openMeteoIconConverter(forecastWeatherData.hourly.weather_code[i], isDay)
                     };
@@ -138,7 +135,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     daily_forecast_array: dailyForecastArray,
                     hourly_forecast_array: hourlyForecastArray
                 }
-                console.log(weatherObject)
+                
                 setWeatherData(weatherObject);
             } catch (err) {
                 setError(err.message);

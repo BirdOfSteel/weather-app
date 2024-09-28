@@ -5,8 +5,10 @@ import MenuButtons from './MenuButtons.tsx';
 
 export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
     const toggleMenuStyle = {
-        width: isMenuOpen ? '290px' : '0px',
-        height: isMenuOpen ? '210px' : '10px',
+        width: isMenuOpen ? '25%' : '0%',
+        height: isMenuOpen ? '30%' : '0%',
+        minWidth: isMenuOpen ? '250px' : '0px',
+        minHeight: isMenuOpen ? '270px' : '30px',
         background: 'rgba(240, 240, 240, 0)',
         boxShadow: isMenuOpen ? 
             '-40px -40px 80px black' : 
@@ -30,6 +32,7 @@ export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
             style={toggleMenuStyle}>
                 
             <div id="menu-list-div" style={fadeStyle}>
+                <h1 id="menu-list-div-heading">Units</h1>
                 <MenuButtons units={units} setUnits={setUnits} />
             </div>
 

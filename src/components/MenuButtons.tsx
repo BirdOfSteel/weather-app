@@ -23,17 +23,22 @@ export default function MenuButtons({ units, setUnits }) {
                 break;
             case 'long-distance-scale-selector': 
                 currentScale = units.longDistance;
-                scaleArray = ['km', 'metres', 'miles'];
+                scaleArray = ['km', 'm', 'mi'];
                 unitsKey = 'longDistance';
                 break;
             case 'short-distance-scale-selector': 
                 currentScale = units.shortDistance;
-                scaleArray = ['mm', 'inches'];
+                scaleArray = ['mm', 'in'];
                 unitsKey = 'shortDistance';
+                break;
+            case 'cloud-distance-scale-selector': 
+                currentScale = units.cloudDistance;
+                scaleArray = ['km', 'm', 'ft'];
+                unitsKey = 'cloudDistance';
                 break;
             case 'velocity-scale-selector': 
                 currentScale = units.velocity;
-                scaleArray = ['m/s', 'km/h', 'mph', 'knots'];
+                scaleArray = ['m/s', 'km/h', 'mph', 'kn'];
                 unitsKey = 'velocity';
                 break;
             case 'pressure-scale-selector': 
@@ -81,7 +86,7 @@ export default function MenuButtons({ units, setUnits }) {
             </span>
         </p>
         <p id="long-distance-scale-selector">
-            Long distance units: 
+            Long distance: 
             <span className={'unit-selector-span'}>
                 <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                     {units.longDistance}
@@ -89,15 +94,23 @@ export default function MenuButtons({ units, setUnits }) {
             </span>
         </p>
         <p id="short-distance-scale-selector">
-            Short distance units: 
+            Short distance: 
             <span className={'unit-selector-span'}>
                 <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                     {units.shortDistance}
                 <img src={rightArrow} className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
             </span>
         </p>
+        <p id="cloud-distance-scale-selector">
+            Cloud distance: 
+            <span className={'unit-selector-span'}>
+                <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
+                    {units.cloudDistance}
+                <img src={rightArrow} className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
+            </span>
+        </p>
         <p id="velocity-scale-selector">
-            Velocity units: 
+            Velocity: 
             <span className={'unit-selector-span'}>
                 <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                     {units.velocity}
@@ -105,7 +118,7 @@ export default function MenuButtons({ units, setUnits }) {
             </span>
         </p>
         <p id="pressure-scale-selector">
-            Pressure units:
+            Pressure:
             <span className={'unit-selector-span'}>
                 <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                 
