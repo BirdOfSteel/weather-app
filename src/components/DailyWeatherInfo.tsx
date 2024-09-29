@@ -1,7 +1,6 @@
 import React from 'react';
 import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 import convertFromShortMetric from '../utils/convertFromShortMetric.tsx';
-import convertFromMillibar from '../utils/convertFromMillibar.tsx';
 import convertFromMetresPerSecond from '../utils/convertFromMetresPerSecond.tsx';
 import secondsToHoursAndMinutes from '../utils/secondsToHoursAndMinutes.tsx';
 

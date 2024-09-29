@@ -1,9 +1,6 @@
 import React from 'react';
 import leftArrow from '../assets/left-arrow.svg';
 import rightArrow from '../assets/right-arrow.svg';
-import { isTemplateLiteralToken } from 'typescript';
-
-// Fix span width changing when changing units
 
 export default function MenuButtons({ units, setUnits }) {
 

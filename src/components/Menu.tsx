@@ -1,5 +1,4 @@
 import React from 'react';
-import menuArrowIcon from '../assets/down-arrow.png';
 import arrowUpLeft from '../assets/arrow-up-left.svg';
 import MenuButtons from './MenuButtons.tsx';
 

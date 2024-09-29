@@ -166,7 +166,7 @@ h1, h2, h3, p {
 
   #current-weather-div {
     width: auto;
-    margin: 1em 1em 0 1em;
+    margin: 1em 0 1em 0;
   }
 
     #weather-summary-row-one {
@@ -188,6 +188,7 @@ h1, h2, h3, p {
       
     #weather-summary-row-three {
       display: flex;
+      text-transform: capitalize;
     }
     
       /* #weather-description-text {
@@ -468,7 +469,7 @@ h1, h2, h3, p {
 
   #weather-summary-div {
     justify-content: space-between;
-    margin: 5em 0 2em 0;
+    margin: 3em 0 2em 0;
   }
 
     #current-weather-div {

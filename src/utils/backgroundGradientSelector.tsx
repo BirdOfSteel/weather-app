@@ -243,6 +243,5 @@ export default function backgroundGradientSelector(timestamp: string|null) {
             }
     }
 
-    console.log(gradientObject)
     return gradientObject
 }

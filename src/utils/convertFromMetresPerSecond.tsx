@@ -10,7 +10,7 @@ export default function convertFromMetresPerSecond(metresPerSecond, units) {
     } else if (scale === 'mph') {
         const milesPerHour = metresPerSecond * 2.236936;
         return Math.round(milesPerHour) + ' mph';
-    } else if (scale === 'knots') {
+    } else if (scale === 'kn') {
         const knots = metresPerSecond * 1.94384;
         return Math.round(knots * 10) / 10 + ' knots';
     }

@@ -1,19 +1,11 @@
 import React from 'react';
 
 import humidityIcon from '../assets/droplets-icon.png';
-import { dailyForecastObjectType, hourlyForecastObjectType, weatherObjectType } from '../types/weatherTypes.ts';
-import parseDate from '../utils/parseDate.tsx';
 import convertFromCelsius from '../utils/convertFromCelsius.tsx';
-
-// CONVERT FUNCTION TO PRODUCE FORECAST FOR DAILY
 
 export default function useMapTemperatures(weatherObject, interval, extraInfo, setExtraInfo, units) {
     const [selectedHourlyElement, setSelectedHourlyElement] = React.useState<number | null>(null);
     const [selectedDailyElement, setSelectedDailyElement] = React.useState<number | null>(null);
-    
-    const dateObject = new Date();
-    const currentDate = `${dateObject.getDay()}/${dateObject.getMonth()+1}`
-    console.log(currentDate)
 
     React.useEffect(() => {
         if (!extraInfo && interval === 'hourly') {
@@ -32,7 +24,9 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
         const hourlyForecastMapped = hourly_forecast_array.map((hourlyForecastObject, index: number) => {
             const iconURL = `https://openweathermap.org/img/wn/${hourlyForecastObject.icon}@2x.png`;
             const isHourlyElementSelected = selectedHourlyElement === index;
-            console.log(hourlyForecastObject.date)
+
+            const objectHour = hourlyForecastObject.timestamp.substring(0,2);
+
             return (
                 <div 
                     className="weather-entry-div" 
@@ -64,10 +58,9 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
     // runs if weatherData exists and interval prop is 'daily'
     if (interval === 'daily' && weatherObject.weatherData) { 
         const dailyForecastArray = weatherObject.weatherData.daily_forecast_array;
-        console.log(dailyForecastArray)
+        
         const dailyForecastMapped = dailyForecastArray.map((dailyForecastObject, index: number) => {
             const iconURL = `https://openweathermap.org/img/wn/${dailyForecastObject.icon}@2x.png`;
-
             const isDailyElementSelected = selectedDailyElement === index;
 
             return (

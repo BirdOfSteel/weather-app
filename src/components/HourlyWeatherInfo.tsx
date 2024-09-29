@@ -3,32 +3,32 @@ import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 import convertFromLongMetric from '../utils/convertFromLongMetric.tsx';
 import convertFromShortMetric from '../utils/convertFromShortMetric.tsx';
 import convertFromMillibar from '../utils/convertFromMillibar.tsx';
+import changeCloudDistance from '../utils/changeCloudDistance.tsx';
 
 export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
     const data = extraHourlyInfo;
-    console.log(data)
-
+    const cloudDistanceObject = changeCloudDistance(units.cloudDistance);
 
     return (
         <div id="hourly-forecast-info-div" className='forecast-info-div'>
             <div className="forecast-info-inner-div">
                 <h1>General</h1>
-                <p>Temperature: &nbsp;
+                <p>Temperature:
                     <span>
                         {convertFromCelsius(data.temperature, units)}
                     </span>
                 </p>
-                <p>Feels like: &nbsp;
+                <p>Feels like:
                     <span>
                         {convertFromCelsius(data.app_temp, units)}
                     </span>
                 </p>
-                <p>UV index: &nbsp;
+                <p>UV index:
                     <span>
                         {data.uv_index}
                     </span>
                 </p>
-                <p>Visbility: &nbsp;
+                <p>Visbility:
                     <span>
                         {convertFromLongMetric(data.visibility, units)}
                     </span>
@@ -37,22 +37,22 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
 
             <div className="forecast-info-inner-div">
                 <h1>Precipitation</h1>
-                <p>Probability: &nbsp;
+                <p>Probability:
                     <span>
                         {data.pop}%
                     </span>
                 </p>
-                <p>Total rain: &nbsp;
+                <p>Total rain:
                     <span>
                         {convertFromShortMetric(data.total_rain, units)}
                     </span>
                 </p>
-                <p>Total snowfall: &nbsp;
+                <p>Total snowfall:
                     <span>
                         {convertFromShortMetric(data.total_snowfall, units)}
                     </span>
                 </p>
-                <p>Snow depth: &nbsp;
+                <p>Snow depth:
                     <span>
                         {convertFromShortMetric(data.snow_depth, units)}
                     </span>
@@ -60,23 +60,23 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
             </div>
 
             <div className="forecast-info-inner-div">
-                <h1>Clouds</h1>
-                <p>Total coverage: &nbsp;
+                <h1>Cloud coverage</h1>
+                <p>Total:
                     <span>
                      {data.clouds}%
                     </span>
                 </p>
-                <p>0-3km altitude: &nbsp;
+                <p>{cloudDistanceObject.low} altitude:
                     <span>
                      {data.clouds_low}%
                     </span>
                 </p>
-                <p>3-8km altitude: &nbsp;
+                <p>{cloudDistanceObject.mid} altitude:
                     <span>
                         {data.clouds_mid}%
                     </span>
                 </p>
-                <p>8+km altitude: &nbsp;
+                <p>{cloudDistanceObject.high} altitude:
                     <span>
                         {data.clouds_high}%
                     </span>

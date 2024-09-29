@@ -5,11 +5,9 @@ import { weatherDataObject, positionObject } from '../types/weatherTypes.ts'
 import convertBearingToDirection from '../utils/convertBearingToDirection.tsx';
 import parseDate from '../utils/parseDate.tsx';
 
-import presentWeatherDataTest from '../presentWeatherDataTest.js';
-import forecastWeatherDataTest from '../forecastWeatherDataTest.js';
 import openMeteoIconConverter from '../utils/openMeteoIconConverter.tsx';
 
-const APIKEY = '3408dd4727846c89ae71a899bfd3ac35'; // Ideally this would be hidden behind a private backend server.
+const APIKEY = process.env.REACT_APP_API_KEY; // Ideally this would be hidden behind a private backend server.
 
 export default function useFetchCurrentWeather(userPosition: positionObject | null) {
     const [weatherData, setWeatherData] = React.useState<weatherDataObject | null>(null);
@@ -29,14 +27,6 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
             setError(null); // reset error state
 
             try {
-                // const presentWeatherURL = `${PRESENT_WEATHER_URL}location=${latitude},${longitude}`;
-                // console.log(presentWeatherURL)
-                // const forecastWeatherURL = `${FORECAST_WEATHER_URL}location=${latitude},${longitude}`;
-                // console.log(forecastWeatherURL)
-                // const presentWeatherResponse = await fetch(presentWeatherURL);
-                // const forecastWeatherResponse = await fetch(forecastWeatherURL);
-                // const presentWeatherData = await presentWeatherResponse.json();
-                // const forecastWeatherData = await forecastWeatherResponse.json();
                 const PRESENT_WEATHER_URL = 
                     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${APIKEY}`;
                 
@@ -50,20 +40,18 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 const presentWeatherData = await presentWeatherResponse.json();
                 const forecastWeatherData = await forecastWeatherResponse.json();
 
-                // implement response code check here?
+                // implement response code check here
               
                 // if (presentWeatherData.error) {
                 //     throw new Error("ERROR!")
                 // }
-
-                //forecastWeatherDataTest.timelines.hourly[0].values.temperatureApparent
 
                 let hourlyForecastArray = [];
                 let dailyForecastArray = [];
 
                 const currentHour = new Date().getHours();
 
-                for (let i = 0; i != forecastDays * 24; i++) {
+                for (let i = 0; i != currentHour + 25; i++) {
                     if (currentHour > i) { // this will prevent an object from being made if current iterant's hour has already passed.
                         continue
                     }
@@ -116,8 +104,6 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     dailyForecastArray.push(dailyForecastObject);
                 }
 
-                console.log(hourlyForecastArray)
-
                 const weatherObject = {
                     location: presentWeatherData.name,
                     current_temp: presentWeatherData.main.temp,
@@ -146,6 +132,6 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
 
         fetchWeather()
     },[userPosition])
-    console.log("TEST:")
+    
     return {weatherData, isLoading, error};
 }
