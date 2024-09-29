@@ -15,6 +15,7 @@ export default function backgroundGradientSelector(timestamp: string|null) {
     }
 
     const hour = parseInt(timestamp.substring(0,2));
+    const appDiv = document.querySelector('.App') as HTMLElement;
 
     switch (hour) {
         case 0:
@@ -242,6 +243,12 @@ export default function backgroundGradientSelector(timestamp: string|null) {
                 E: '#9abbe7'
             }
     }
+
+    appDiv?.style.setProperty('--myColor1', gradientObject.A);
+    appDiv?.style.setProperty('--myColor2', gradientObject.B);
+    appDiv?.style.setProperty('--myColor3', gradientObject.C);
+    appDiv?.style.setProperty('--myColor4', gradientObject.D);
+    appDiv?.style.setProperty('--myColor5', gradientObject.E);
 
     return gradientObject
 }

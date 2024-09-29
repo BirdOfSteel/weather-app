@@ -7,6 +7,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
     const [selectedHourlyElement, setSelectedHourlyElement] = React.useState<number | null>(null);
     const [selectedDailyElement, setSelectedDailyElement] = React.useState<number | null>(null);
 
+    // runs on first render. sets selectedHourlyElement and selectedDailyElement to first hourly/daily array items..
     React.useEffect(() => {
         if (!extraInfo && interval === 'hourly') {
             const firstElement = weatherObject.weatherData.hourly_forecast_array[0];
@@ -19,6 +20,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
         }
     },[])
 
+    // runs if given interval is 'hourly'. Handles creating hourly forecast elements.
     if (interval === 'hourly' && weatherObject.weatherData) { 
         const hourly_forecast_array = weatherObject.weatherData.hourly_forecast_array;
         const hourlyForecastMapped = hourly_forecast_array.map((hourlyForecastObject, index: number) => {
@@ -27,7 +29,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
 
             const objectHour = hourlyForecastObject.timestamp.substring(0,2);
 
-            return (
+            return ( // hourly element:
                 <div 
                     className="weather-entry-div" 
                     key={index} 
@@ -55,7 +57,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
         return hourlyForecastMapped
     }
 
-    // runs if weatherData exists and interval prop is 'daily'
+    // runs if weatherData exists and interval prop is 'daily'. Handles creating daily forecast elements.
     if (interval === 'daily' && weatherObject.weatherData) { 
         const dailyForecastArray = weatherObject.weatherData.daily_forecast_array;
         
@@ -63,7 +65,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
             const iconURL = `https://openweathermap.org/img/wn/${dailyForecastObject.icon}@2x.png`;
             const isDailyElementSelected = selectedDailyElement === index;
 
-            return (
+            return ( // daily element:
                 <div className="weather-entry-div" 
                     key={index} 
                     onClick={() => {

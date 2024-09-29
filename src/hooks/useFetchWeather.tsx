@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { weatherDataObject, positionObject } from '../types/weatherTypes.ts'
-
 import convertBearingToDirection from '../utils/convertBearingToDirection.tsx';
 import parseDate from '../utils/parseDate.tsx';
 
@@ -10,13 +8,12 @@ import openMeteoIconConverter from '../utils/openMeteoIconConverter.tsx';
 const APIKEY = process.env.REACT_APP_API_KEY; // Ideally this would be hidden behind a private backend server.
 
 export default function useFetchCurrentWeather(userPosition: positionObject | null) {
-    const [weatherData, setWeatherData] = React.useState<weatherDataObject | null>(null);
-    // NOTE: research appropriate type for weatherData 
+    const [weatherData, setWeatherData] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
     React.useEffect(() => {
-        if (!userPosition) {
+        if (!userPosition) { // does not run if there is no latitude/longitude.
             return;
         }   
 
@@ -40,25 +37,38 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 const presentWeatherData = await presentWeatherResponse.json();
                 const forecastWeatherData = await forecastWeatherResponse.json();
 
-                // implement response code check here
-              
-                // if (presentWeatherData.error) {
-                //     throw new Error("ERROR!")
-                // }
+                // checks if open weather API call returns a bad status code.
+                if (presentWeatherData.cod !== 200) {
+                    const errorObject = new Error('Unsuccessful response from OpenWeather API.');
+                    errorObject.error = presentWeatherData.cod;
+                    errorObject.description = presentWeatherData.message;
 
+                    throw errorObject
+                };
+
+                // checks if open-meteo API call returns an error.
+                if (forecastWeatherData.error) {
+                    const errorObject = new Error('Unsuccessful response from Open-Meteo API.');
+                    errorObject.error = forecastWeatherData.error;
+                    errorObject.description = forecastWeatherData.message;
+                    
+                    throw errorObject
+                };
+            
+                
                 let hourlyForecastArray = [];
                 let dailyForecastArray = [];
 
                 const currentHour = new Date().getHours();
 
-                for (let i = 0; i != currentHour + 25; i++) {
+                for (let i = 0; i != currentHour + 25; i++) { // only iterates from the current hour, for 24 instances.
                     if (currentHour > i) { // this will prevent an object from being made if current iterant's hour has already passed.
                         continue
                     }
 
                     const isDay = forecastWeatherData.hourly.is_day[0] ? true : false;
 
-                    const hourlyForecastObject = {
+                    const hourlyForecastObject = { // structure of data object for each hour
                         temperature: forecastWeatherData.hourly.temperature_2m[i],
                         app_temp: forecastWeatherData.hourly.apparent_temperature[i],
                         uv_index: Math.round((forecastWeatherData.hourly.uv_index[i] * 10) / 10),
@@ -84,7 +94,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 }
 
                 for (let i = 0; i != forecastDays-1; i++) {
-                    const dailyForecastObject = {
+                    const dailyForecastObject = { // structure of data object for each day
                         min_temp: forecastWeatherData.daily.temperature_2m_min[i],
                         max_temp: forecastWeatherData.daily.temperature_2m_max[i],
                         app_min_temp: forecastWeatherData.daily.apparent_temperature_min[i],
@@ -104,7 +114,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     dailyForecastArray.push(dailyForecastObject);
                 }
 
-                const weatherObject = {
+                const weatherObject = { // contains all the data we use.
                     location: presentWeatherData.name,
                     current_temp: presentWeatherData.main.temp,
                     feels_like: presentWeatherData.main.feels_like,
@@ -124,7 +134,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 
                 setWeatherData(weatherObject);
             } catch (err) {
-                setError(err.message);
+                setError(err);
             } finally {
                 setIsLoading(false);
             }

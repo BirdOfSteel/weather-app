@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import WeatherSummary from './components/WeatherSummary.tsx';
+import Menu from './components/Menu.tsx';
 import HourlyWeather from './components/HourlyWeather.tsx';
 import HourlyWeatherInfo from './components/HourlyWeatherInfo.tsx';
 import DailyWeather from './components/DailyWeather.tsx';
@@ -10,20 +11,10 @@ import DailyWeatherInfo from './components/DailyWeatherInfo.tsx';
 import useGetCoordinates from './hooks/useGetCoordinates.tsx';
 import useFetchWeather from './hooks/useFetchWeather.tsx';
 
-import Menu from './components/Menu.tsx';
-
 import backgroundGradientSelector from './utils/backgroundGradientSelector.tsx';
 
-
-// TO DO:
-// Design converter function for temp, distance, and pressure
-// Apply converter function to units being displayed.
-
 // NOTES:
-// change menu icon colour depending on if day/night? maybe just use white
 // fix typescript
-// fix cloud altitude symbols
-// implement error checking (throw error if either API fails)
 
 function App() {
   const { positionData } = useGetCoordinates();
@@ -44,19 +35,11 @@ function App() {
     pressure: 'mb', // mb, pascal, hectopascal, mm mercury, inches mercury
   }); 
 
-  // fetches then sets background gradient when weatherData is updated
+  // calls backgroundGradientSelector utility. 
   React.useEffect(() => {
-    if(weatherData.weatherData) {
-      const appDiv = document.querySelector('.App') as HTMLElement;
+    if (weatherData.weatherData) {
       const currentTimestamp = weatherData.weatherData.hourly_forecast_array[0].timestamp;
-      
-      const newGradientObject = backgroundGradientSelector(currentTimestamp);
-      
-      appDiv?.style.setProperty('--myColor1', newGradientObject.A);
-      appDiv?.style.setProperty('--myColor2', newGradientObject.B);
-      appDiv?.style.setProperty('--myColor3', newGradientObject.C);
-      appDiv?.style.setProperty('--myColor4', newGradientObject.D);
-      appDiv?.style.setProperty('--myColor5', newGradientObject.E);
+      backgroundGradientSelector(currentTimestamp);
     }
   },[weatherData.weatherData])
 
@@ -72,16 +55,19 @@ function App() {
   // returns error text if error data is available
   if (weatherData.error) {
     return (
-      <div className="App">
-        <h1 style={{"width": "100%", "height": "100%"}}>Error: {weatherData.error}</h1>
+      <div 
+        className="App"
+        style={{'display': 'flex', 'alignItems': 'start', 'paddingTop': '5em'}}
+      >
+        <h1 className='error-text'>{weatherData.error.message}</h1>
+        <h2 className='error-text'>Error: {weatherData.error.error}</h2>
+        <p className='error-text'>Description: {weatherData.error.description}</p>
       </div>
     )
   }
   
   return (
-    <div 
-      className="App"
-    >
+    <div className="App">
 
       <Menu 
         isMenuOpen={isMenuOpen} 
@@ -97,7 +83,7 @@ function App() {
           weatherObject={weatherData} 
           interval='hourly' 
           extraHourlyInfo={extraHourlyInfo}
-          setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)} // passes up data
+          setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)} // passes up data for HourlyWeatherInfo to display
           units={units}
         />
         
@@ -113,7 +99,7 @@ function App() {
           weatherObject={weatherData} 
           interval='daily'
           extraDailyInfo={extraDailyInfo}
-          setExtraDailyInfo={(data) => setExtraDailyInfo(data)} // passes up data
+          setExtraDailyInfo={(data) => setExtraDailyInfo(data)} // passes up data for DailyWeatherData to display
           units={units}
         />
 
@@ -124,9 +110,10 @@ function App() {
             units={units}
           />
         }
+
       </div>
     </div>
-  );
+  )
 }
 
 export default App;

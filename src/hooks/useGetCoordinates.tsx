@@ -8,7 +8,8 @@ export default function useGetCoordinates() {
         longitude: number;
     }
 
-    React.useEffect(() => {
+
+    React.useEffect(() => { // this useEffect gets approximate device co-ordinates through JavaScript's Geolocation API. Runs on first render.
         if (navigator.geolocation) {
             function geolocationSuccessCallback(position: GeolocationPosition) {
                 const latitude = position.coords.latitude;
@@ -31,7 +32,7 @@ export default function useGetCoordinates() {
             // checks device co-ordinates
             navigator.geolocation.getCurrentPosition(geolocationSuccessCallback, geolocationErrorCallback)
         } else {
-            console.error("Geolocation is not supported by this browser.")
+            console.error("Geolocation is not supported by this browser or was denied access.");
         }
     },[])
 

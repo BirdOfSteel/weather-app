@@ -66,17 +66,17 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
                      {data.clouds}%
                     </span>
                 </p>
-                <p>{cloudDistanceObject.low} altitude:
+                <p>{cloudDistanceObject?.low} altitude:
                     <span>
                      {data.clouds_low}%
                     </span>
                 </p>
-                <p>{cloudDistanceObject.mid} altitude:
+                <p>{cloudDistanceObject?.mid} altitude:
                     <span>
                         {data.clouds_mid}%
                     </span>
                 </p>
-                <p>{cloudDistanceObject.high} altitude:
+                <p>{cloudDistanceObject?.high} altitude:
                     <span>
                         {data.clouds_high}%
                     </span>

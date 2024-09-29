@@ -55,6 +55,16 @@ body {
     --myColor3 3s ease,
     --myColor4 3s ease,
     --myColor5 3s ease;
+  
+  position: relative;
+}
+
+/* Error elements */ 
+
+.error-text {
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 0px 0px 100px black;
 }
 
 /* Typography */ 
@@ -86,7 +96,8 @@ h1, h2, h3, p {
   backdrop-filter: blur(50px);
   position: absolute;
   overflow: hidden;
-  left: 0%;
+  left: 0px;
+  top: 0px;
   transition: all 0.5s ease;
   display: flex;
   justify-content: start;
@@ -97,11 +108,8 @@ h1, h2, h3, p {
   border-bottom-right-radius: 8px;
 }
 
-  #menu-icon {
-    transition: transform 0.25s ease;
+  #menu-toggle-button {
     position: absolute;
-    right: 7.5px;
-    bottom: 10px;
     width: 1.5em;
     z-index: 1;
   }
@@ -124,6 +132,7 @@ h1, h2, h3, p {
       justify-content: space-between;
       align-items: baseline;
       user-select: none;
+      padding-top: 0.25em;
     }
 
       .unit-selector-span {
