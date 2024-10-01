@@ -11,7 +11,9 @@ export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
         background: 'rgba(240, 240, 240, 0)',
         boxShadow: isMenuOpen ? 
             '-40px -40px 80px black' : 
-            ''
+            '',
+        transition: 
+            'min-width 1s ease-out, width 1s ease-in-out, min-height 0.7s ease-in-out, height 0.7s ease-in-out' 
     }
     
     // handles 
@@ -27,7 +29,7 @@ export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
 
     const fadeStyle = { // handles text-fade on menu toggle
         opacity: isMenuOpen ? 1 : 0,
-        transition: 'opacity 0.25s ease-in-out',
+        transition: 'opacity 0.5s ease-in-out',
     };
 
     return (

@@ -1,13 +1,9 @@
 import React from 'react';
 
+import { positionObject } from '../types/positionData.ts';
+
 export default function useGetCoordinates() {
-    const [positionData, setPositionData] = React.useState<positionObjectType | null>(null)
-
-    type positionObjectType = {
-        latitude: number;
-        longitude: number;
-    }
-
+    const [positionData, setPositionData] = React.useState<positionObject | null>(null)
 
     React.useEffect(() => { // this useEffect gets approximate device co-ordinates through JavaScript's Geolocation API. Runs on first render.
         if (navigator.geolocation) {

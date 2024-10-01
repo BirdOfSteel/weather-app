@@ -1,16 +1,20 @@
 import React from 'react';
 
 import convertBearingToDirection from '../utils/convertBearingToDirection.tsx';
+import openMeteoIconConverter from '../utils/openMeteoIconConverter.tsx';
 import parseDate from '../utils/parseDate.tsx';
 
-import openMeteoIconConverter from '../utils/openMeteoIconConverter.tsx';
+import { OpenMeteoResponse, CustomOpenMeteoError } from '../types/openMeteoAPI.ts';
+import { OpenWeatherResponse, CustomOpenWeatherError } from '../types/openWeatherAPI.ts';
+import { CustomHourlyWeatherData, CustomDailyWeatherData, CustomWeatherObject } from '../types/customDataObjects.ts';
+import { positionObject } from '../types/positionData.ts';
 
-const APIKEY = process.env.REACT_APP_API_KEY; // Ideally this would be hidden behind a private backend server.
+const APIKEY = process.env.REACT_APP_API_KEY;
 
 export default function useFetchCurrentWeather(userPosition: positionObject | null) {
-    const [weatherData, setWeatherData] = React.useState(null);
-    const [isLoading, setIsLoading] = React.useState(true);
-    const [error, setError] = React.useState(null);
+    const [weatherData, setWeatherData] = React.useState<CustomWeatherObject | null>(null);
+    const [isLoading, setIsLoading] = React.useState<boolean>(true);
+    const [error, setError] = React.useState<CustomOpenMeteoError | CustomOpenWeatherError | null>(null);
 
     React.useEffect(() => {
         if (!userPosition) { // does not run if there is no latitude/longitude.
@@ -27,48 +31,51 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 const PRESENT_WEATHER_URL = 
                     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${APIKEY}`;
                 
-                const forecastDays = 14;
+                const forecastDays = 14; // used in open-meteo call to specify number of data points.
                 
                 const FORECAST_WEATHER_URL = 
-                    `https://api.open-meteo.com/v1/forecast?latitude=51.5085&longitude=-0.1257&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,rain,snowfall,snow_depth,pressure_msl,surface_pressure,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index,weather_code,is_day&wind_speed_unit=ms&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max,weather_code&forecast_days=${forecastDays}&timezone=Europe%2FLondon`;
+                    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,rain,snowfall,snow_depth,pressure_msl,surface_pressure,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index,weather_code,is_day&wind_speed_unit=ms&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,uv_index_max,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max,weather_code&forecast_days=${forecastDays}&timezone=Europe%2FLondon`;
 
                 const presentWeatherResponse = await fetch(PRESENT_WEATHER_URL);
                 const forecastWeatherResponse = await fetch(FORECAST_WEATHER_URL);
-                const presentWeatherData = await presentWeatherResponse.json();
-                const forecastWeatherData = await forecastWeatherResponse.json();
+                const presentWeatherData: OpenWeatherResponse = await presentWeatherResponse.json();
+                const forecastWeatherData: OpenMeteoResponse = await forecastWeatherResponse.json();
 
                 // checks if open weather API call returns a bad status code.
-                if (presentWeatherData.cod !== 200) {
-                    const errorObject = new Error('Unsuccessful response from OpenWeather API.');
-                    errorObject.error = presentWeatherData.cod;
-                    errorObject.description = presentWeatherData.message;
-
+                if ('message' in presentWeatherData) {
+                    const errorObject: CustomOpenWeatherError = {
+                        api: 'Unsuccessful response from OpenWeather API.',
+                        error: presentWeatherData.cod,
+                        description: presentWeatherData.message
+                    } 
+                
                     throw errorObject
                 };
 
                 // checks if open-meteo API call returns an error.
-                if (forecastWeatherData.error) {
-                    const errorObject = new Error('Unsuccessful response from Open-Meteo API.');
-                    errorObject.error = forecastWeatherData.error;
-                    errorObject.description = forecastWeatherData.message;
-                    
+                if ('error' in forecastWeatherData) {
+                    const errorObject: CustomOpenMeteoError = {
+                        api: 'Unsuccessful response from Open-Meteo API.',
+                        error: forecastWeatherData.error,
+                        description: forecastWeatherData.reason
+                    }
+
                     throw errorObject
-                };
-            
+                }
                 
-                let hourlyForecastArray = [];
-                let dailyForecastArray = [];
+                let hourlyForecastArray: CustomHourlyWeatherData[] = []; // empty array will store custom hourly data objects
+                let dailyForecastArray: CustomDailyWeatherData[] = []; // empty array will store custom daily data objects
 
                 const currentHour = new Date().getHours();
 
-                for (let i = 0; i != currentHour + 25; i++) { // only iterates from the current hour, for 24 instances.
+                for (let i = 0; i !== currentHour + 25; i++) { // only iterates from the current hour, for 24 instances.
                     if (currentHour > i) { // this will prevent an object from being made if current iterant's hour has already passed.
                         continue
                     }
 
                     const isDay = forecastWeatherData.hourly.is_day[0] ? true : false;
 
-                    const hourlyForecastObject = { // structure of data object for each hour
+                    const hourlyForecastObject: CustomHourlyWeatherData = { // structure of data object for each hour
                         temperature: forecastWeatherData.hourly.temperature_2m[i],
                         app_temp: forecastWeatherData.hourly.apparent_temperature[i],
                         uv_index: Math.round((forecastWeatherData.hourly.uv_index[i] * 10) / 10),
@@ -93,8 +100,8 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     hourlyForecastArray.push(hourlyForecastObject);
                 }
 
-                for (let i = 0; i != forecastDays-1; i++) {
-                    const dailyForecastObject = { // structure of data object for each day
+                for (let i = 0; i !== forecastDays-1; i++) {
+                    const dailyForecastObject: CustomDailyWeatherData = { // structure of data object for each day
                         min_temp: forecastWeatherData.daily.temperature_2m_min[i],
                         max_temp: forecastWeatherData.daily.temperature_2m_max[i],
                         app_min_temp: forecastWeatherData.daily.apparent_temperature_min[i],
@@ -114,7 +121,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     dailyForecastArray.push(dailyForecastObject);
                 }
 
-                const weatherObject = { // contains all the data we use.
+                const weatherObject: CustomWeatherObject = { // contains all the data we use.
                     location: presentWeatherData.name,
                     current_temp: presentWeatherData.main.temp,
                     feels_like: presentWeatherData.main.feels_like,
@@ -131,7 +138,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                     daily_forecast_array: dailyForecastArray,
                     hourly_forecast_array: hourlyForecastArray
                 }
-                
+
                 setWeatherData(weatherObject);
             } catch (err) {
                 setError(err);
