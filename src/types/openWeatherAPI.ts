@@ -5,6 +5,7 @@ export type CustomOpenWeatherError = {
     description: string;
 }
 
+
 // openweather success object
 export interface OpenWeatherData {
     base: string;

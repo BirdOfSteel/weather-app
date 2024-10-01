@@ -39,20 +39,32 @@ export interface CustomDailyWeatherData {
     wind_speed: number;            // Wind speed
 }
 
+// custom object that stores all our useful data, including the daily and hourly data above. 
 export interface CustomWeatherObject {
-    cloud_coverage: number;          // Cloud coverage percentage
-    current_temp: number;             // Current temperature
-    daily_forecast_array: CustomDailyWeatherData[]; // Array of daily forecasts
+    cloud_coverage: number;            // Cloud coverage percentage
+    current_temp: number;              // Current temperature
+    daily_forecast_array: 
+        CustomDailyWeatherData[];      // Array of daily forecasts
     description: string;               // Weather description
     feels_like: number;                // Feels like temperature
     gust_speed: number;                // Wind gust speed
-    hourly_forecast_array: CustomHourlyWeatherData[]; // Array of hourly forecasts
+    hourly_forecast_array: 
+        CustomHourlyWeatherData[];     // Array of hourly forecasts
     icon: string;                      // Weather icon code
     location: string;                  // Location name
     max_temp: number;                  // Maximum temperature
     min_temp: number;                  // Minimum temperature
     relative_humidity: number;         // Relative humidity percentage
     wind_direction_degrees: number;    // Wind direction in degrees
-    wind_direction_full: string;        // Full wind direction (e.g., NW)
-    wind_speed: number;                 // Wind speed
+    wind_direction_full: string;       // Full wind direction (e.g., NW)
+    wind_speed: number;                // Wind speed
+}
+
+// stores colours for background gradient
+export type gradientObject = {
+    A: string;
+    B: string;
+    C: string;
+    D: string;
+    E: string;
 }

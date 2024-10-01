@@ -1,18 +1,13 @@
-export default function backgroundGradientSelector(timestamp: string|null) {
-    let gradientObject: object;
+import { gradientObject } from "../types/customDataObjects.ts";
 
-    // this is triggered at first render when backgroundGradient state uses this function
-    if (timestamp === null) {  
-        gradientObject = {
-            A: '#386ebe', 
-            B: '#4d80ce', 
-            C: '#6793d7', 
-            D: '#80a7df', 
-            E: '#9abbe7'
-        }
-
-        return gradientObject
-    }
+export default function backgroundGradientSelector(timestamp: string) {
+    let gradientObject: gradientObject = {
+        A: '#386ebe', 
+        B: '#4d80ce', 
+        C: '#6793d7', 
+        D: '#80a7df', 
+        E: '#9abbe7'
+    };
 
     const hour = parseInt(timestamp.substring(0,2));
     const appDiv = document.querySelector('.App') as HTMLElement;
@@ -234,14 +229,6 @@ export default function backgroundGradientSelector(timestamp: string|null) {
                 E: '#005261'  // Dark blue
             };
             break;
-        default: // default will probably never be triggered, but it returns the blue gradient.
-            gradientObject = {
-                A: '#386ebe', 
-                B: '#4d80ce', 
-                C: '#6793d7', 
-                D: '#80a7df', 
-                E: '#9abbe7'
-            }
     }
 
     appDiv?.style.setProperty('--myColor1', gradientObject.A);

@@ -13,8 +13,6 @@ import useFetchWeather from './hooks/useFetchWeather.tsx';
 
 import backgroundGradientSelector from './utils/backgroundGradientSelector.tsx';
 
-// NOTES:
-// fix typescript
 
 function App() {
   const { positionData } = useGetCoordinates();
@@ -43,11 +41,11 @@ function App() {
     }
   },[weatherData.weatherData])
 
-  // returns loading text/image
+  // returns loading spinner
   if (weatherData.isLoading) {
     return (
       <div className="App">
-        <h1 style={{"width": "100%", "height": "100%"}}>LOADING...</h1>
+        <span className='loader'></span>
       </div>
     )
   }
@@ -59,7 +57,7 @@ function App() {
         className="App"
         style={{'display': 'flex', 'alignItems': 'start', 'paddingTop': '5em'}}
       >
-        <h1 className='error-text'>{weatherData.error.message}</h1>
+        <h1 className='error-text'>{weatherData.error.api}</h1>
         <h2 className='error-text'>Error: {weatherData.error.error}</h2>
         <p className='error-text'>Description: {weatherData.error.description}</p>
       </div>

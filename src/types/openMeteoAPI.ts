@@ -1,3 +1,11 @@
+// type for custom error object
+export type CustomOpenMeteoError = {
+    api: string;
+    error: boolean;
+    description: string;
+}
+
+
 // daily weather data within open-meteo response
 interface DailyWeatherData {
     time: string[];
@@ -107,12 +115,6 @@ export interface OpenMeteoData {
     hourly_units: HourlyUnits;
 }
 
-// type for custom error object
-export type CustomOpenMeteoError = {
-    api: string;
-    error: boolean;
-    description: string;
-}
 
 export type OpenMeteoResponse = OpenMeteoData | OpenMeteoError;
 
