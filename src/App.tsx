@@ -30,7 +30,7 @@ function App() {
     shortDistance: 'mm', // mm, inch
     cloudDistance: 'km', // km, m, ft
     velocity: 'm/s', // m/s, km/h, mph, knots
-    pressure: 'mb', // mb, pascal, hectopascal, mm mercury, inches mercury
+    pressure: 'mb', // mb, pascal, hecopascal, mm mercury, inches mercury
   }); 
 
   // calls backgroundGradientSelector utility. 

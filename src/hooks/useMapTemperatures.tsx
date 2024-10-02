@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import humidityIcon from '../assets/droplets-icon.png';
 import convertFromCelsius from '../utils/convertFromCelsius.tsx';
@@ -8,7 +8,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
     const [selectedDailyElement, setSelectedDailyElement] = React.useState<number | null>(null);
 
     // runs on first render. sets selectedHourlyElement and selectedDailyElement to first hourly/daily array items..
-    React.useEffect(() => {
+    useEffect(() => {
         if (!extraInfo && interval === 'hourly') {
             const firstElement = weatherObject.weatherData.hourly_forecast_array[0];
             setSelectedHourlyElement(0);
@@ -44,9 +44,9 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
                     style={isHourlyElementSelected ? {'background': 'rgba(0,0,0,0.3)'} : {}}
                 >
                     <p>{convertFromCelsius(hourlyForecastObject.temperature, units)}</p>
-                    <img className="weather-entry-icon" src={iconURL}/>
+                    <img className="weather-entry-icon" alt='Weather icon' src={iconURL}/>
                     <div className="humidity-entry-div">
-                        <img className="humidity-icon" src={humidityIcon} />
+                        <img className="humidity-icon" alt='Precipitation icon' src={humidityIcon} />
                         <p>{hourlyForecastObject.pop}%</p>
                     </div>
                     <p>{hourlyForecastObject.timestamp}</p>
@@ -79,9 +79,9 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
                     style={isDailyElementSelected ? {'background': 'rgba(0,0,0,0.3)'} : {}}
                 >
                     <p>{convertFromCelsius(dailyForecastObject.max_temp, units)}</p>
-                    <img className="weather-entry-icon" src={iconURL}/>
+                    <img className="weather-entry-icon" alt='Weather icon' src={iconURL}/>
                     <div className="humidity-entry-div">
-                        <img className="humidity-icon" src={humidityIcon} />
+                        <img className="humidity-icon" alt='Precipitation icon' src={humidityIcon} />
                         <p>{dailyForecastObject.pop}%</p>
                     </div>
                     <p>{dailyForecastObject.timestamp}</p>

@@ -71,56 +71,55 @@ export default function MenuButtons({ units, setUnits }) {
     
     }
 
-    
     return (
         <>
         <p id="temperature-scale-selector">
             Temperature: 
             <span className={'unit-selector-span'}>
-                <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={leftArrow} alt='Previous unit' className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                     {units.temperature}
-                <img src={rightArrow} className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={rightArrow} alt='Next unit' className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
             </span>
         </p>
         <p id="long-distance-scale-selector">
             Long distance: 
             <span className={'unit-selector-span'}>
-                <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={leftArrow} alt='Previous unit' className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                     {units.longDistance}
-                <img src={rightArrow} className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={rightArrow} alt='Next unit' className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
             </span>
         </p>
         <p id="short-distance-scale-selector">
             Short distance: 
             <span className={'unit-selector-span'}>
-                <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={leftArrow} alt='Previous unit' className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                     {units.shortDistance}
-                <img src={rightArrow} className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={rightArrow} alt='Next unit' className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
             </span>
         </p>
         <p id="cloud-distance-scale-selector">
             Cloud distance: 
             <span className={'unit-selector-span'}>
-                <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={leftArrow} alt='Previous unit' className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                     {units.cloudDistance}
-                <img src={rightArrow} className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={rightArrow} alt='Next unit' className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
             </span>
         </p>
         <p id="velocity-scale-selector">
             Velocity: 
             <span className={'unit-selector-span'}>
-                <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={leftArrow} alt='Previous unit' className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                     {units.velocity}
-                <img src={rightArrow} className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={rightArrow} alt='Next unit' className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
             </span>
         </p>
         <p id="pressure-scale-selector">
             Pressure:
             <span className={'unit-selector-span'}>
-                <img src={leftArrow} className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={leftArrow} alt='Previous unit' className={'left-scale-arrow'} onClick={(e) => changeScale(e)} />
                 
                     {units.pressure}
-                <img src={rightArrow} className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
+                <img src={rightArrow} alt='Next unit' className={'right-scale-arrow'} onClick={(e) => changeScale(e)} />
             </span>
         </p>
         </>

@@ -45,6 +45,7 @@ export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
             <img
                 src={arrowUpLeft}
                 style={menuIconStyle}
+                alt={isMenuOpen ? 'Menu opened icon' : 'Menu closed icon'}
                 id="menu-toggle-button"
                 onClick={() => setIsMenuOpen((prevState: boolean) => {
                     return !prevState;
