@@ -1,4 +1,6 @@
-export default function convertFromShortMetric(metricValue, units) {
+import { unitsObject } from "../types/customDataObjects";
+
+export default function convertFromShortMetric(metricValue: number, units: unitsObject) {
     const scale = units.shortDistance;
 
     if (scale === 'mm') {

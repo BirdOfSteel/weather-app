@@ -1,4 +1,6 @@
-export default function convertFromMetresPerSecond(metresPerSecond, units) {
+import { unitsObject } from "../types/customDataObjects";
+
+export default function convertFromMetresPerSecond(metresPerSecond: number, units: unitsObject) {
     const scale = units.velocity;
     
     if (scale === 'm/s') {

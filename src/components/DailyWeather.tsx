@@ -1,7 +1,8 @@
 import React from 'react';
-import mapTemperatures from '../hooks/useMapTemperatures.tsx';
+import mapTemperatures from '../utils/mapTemperatures.tsx';
+import { DailyWeatherProps } from '../types/componentTypes.ts';
 
-export default function DailyWeather({ weatherObject, interval, extraDailyInfo, setExtraDailyInfo, units }) {
+const DailyWeather: React.FC<DailyWeatherProps> = ({ weatherObject, interval, extraDailyInfo, setExtraDailyInfo, units }) => {
     
     return (
         <>
@@ -12,3 +13,5 @@ export default function DailyWeather({ weatherObject, interval, extraDailyInfo, 
         </>
     )
 }
+
+export default DailyWeather

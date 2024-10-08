@@ -1,4 +1,6 @@
-export default function convertFromMillibar(millibar, units) {
+import { unitsObject } from "../types/customDataObjects";
+
+export default function convertFromMillibar(millibar: number, units: unitsObject) {
     const scale = units.pressure;
 
     if (scale === 'mb') {

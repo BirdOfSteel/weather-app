@@ -1,4 +1,4 @@
-export default function convertBearingToDirection(bearing) {
+export default function convertBearingToDirection(bearing: number) {
     const cardinalDirectionsArray = [
         'N',
         'N/NE', 

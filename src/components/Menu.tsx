@@ -1,8 +1,8 @@
-import React from 'react';
 import arrowUpLeft from '../assets/arrow-up-left.svg';
 import MenuButtons from './MenuButtons.tsx';
+import { MenuProps } from '../types/componentTypes.ts';
 
-export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
+const Menu: React.FC<MenuProps> = ({ isMenuOpen, setIsMenuOpen, units, setUnits}) => {
     const toggleMenuStyle = { // handles menu size based on isMenuOpen
         width: isMenuOpen ? '25%' : '0%',
         height: '0%',
@@ -23,8 +23,8 @@ export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
             'rotate3d(0,0,-1,180deg)',
 
         margin: isMenuOpen ?
-            '0 5px 5px 0' :
-            '0 -2.5px -2px 0'
+            '0 2.5px 2.5px 0' :
+            '0 -2.5px -1.5px 0'
     }
 
     const fadeStyle = { // handles text-fade on menu toggle
@@ -47,10 +47,10 @@ export default function Menu({ isMenuOpen, setIsMenuOpen, units, setUnits}) {
                 style={menuIconStyle}
                 alt={isMenuOpen ? 'Menu opened icon' : 'Menu closed icon'}
                 id="menu-toggle-button"
-                onClick={() => setIsMenuOpen((prevState: boolean) => {
-                    return !prevState;
-                })}
+                onClick={() => setIsMenuOpen(prevState => !prevState)}
             />
         </div>
     )
 }
+
+export default Menu

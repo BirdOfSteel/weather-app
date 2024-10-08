@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+#root {
+  width: 100%;
+}
+
 /* App div */
 
 @property --myColor1 {
@@ -141,6 +145,7 @@ h1, h2, h3, p {
   box-sizing: border-box;
   border-bottom-right-radius: 8px;
   user-select: none;
+  z-index: 2;
 }
 
   #menu-toggle-button {
@@ -167,7 +172,7 @@ h1, h2, h3, p {
       justify-content: space-between;
       align-items: baseline;
       user-select: none;
-      padding-top: 0.25em;
+      padding-bottom: 0.25em;
     }
 
       .unit-selector-span {
@@ -222,12 +227,18 @@ h1, h2, h3, p {
     #weather-summary-row-two {
       display: flex;
       align-items: center;
+      font-size: 0.6rem;
+      margin: 0.75em 0;
+      position: relative;
+      z-index: 0;
     }
 
       #weather-icon {
-        width: 3em;
-        margin-left: 0.75em;
-        margin-bottom: -12.5px;
+        width: 6em;
+        margin-left: 0.25em;
+        margin-bottom: -5.5px;
+        position: absolute;
+        right: 7.5px;
       }
       
     #weather-summary-row-three {
@@ -497,6 +508,10 @@ h1, h2, h3, p {
   body {
     font-size: clamp(0.75rem, 3vw, 1rem);
   }
+
+  #weather-summary-row-two {
+    font-size: 0.7em
+  }
 }
 
 @media (min-width: 321px) {
@@ -506,6 +521,12 @@ h1, h2, h3, p {
   
   #hourly-forecast-info-div, #daily-forecast-info-div {
     grid-template-columns: 1fr;
+  }
+
+  #weather-icon {
+    right: 10px;
+    width: 8em;
+    top: -12.5px;
   }
 }
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import mapTemperatures from '../hooks/useMapTemperatures.tsx';
+import mapTemperatures from '../utils/mapTemperatures.tsx';
+import { HourlyWeatherProps } from '../types/componentTypes.ts';
 
-export default function HourlyTemperatures({ weatherObject, interval, extraHourlyInfo, setExtraHourlyInfo, units }) {
+const HourlyWeather: React.FC<HourlyWeatherProps> = ({ weatherObject, interval, extraHourlyInfo, setExtraHourlyInfo, units }) => {
 
     return (
         <>
@@ -12,3 +13,5 @@ export default function HourlyTemperatures({ weatherObject, interval, extraHourl
         </>
     )
 }
+
+export default HourlyWeather

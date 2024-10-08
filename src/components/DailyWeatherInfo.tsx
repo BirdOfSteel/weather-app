@@ -1,10 +1,10 @@
-import React from 'react';
 import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 import convertFromShortMetric from '../utils/convertFromShortMetric.tsx';
 import convertFromMetresPerSecond from '../utils/convertFromMetresPerSecond.tsx';
 import secondsToHoursAndMinutes from '../utils/secondsToHoursAndMinutes.tsx';
+import { DailyWeatherInfoProps } from '../types/componentTypes.ts';
 
-export default function DailyWeatherInfo({ extraDailyInfo, units }) {
+const DailyWeatherInfo: React.FC<DailyWeatherInfoProps> = ({ extraDailyInfo, units }) => {
     const data = extraDailyInfo;
 
     return (    
@@ -83,3 +83,5 @@ export default function DailyWeatherInfo({ extraDailyInfo, units }) {
         </div>
     )
 }
+
+export default DailyWeatherInfo

@@ -1,19 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import humidityIcon from '../assets/droplets-icon.png';
-import convertFromCelsius from '../utils/convertFromCelsius.tsx';
+import convertFromCelsius from './convertFromCelsius.tsx';
 
-export default function useMapTemperatures(weatherObject, interval, extraInfo, setExtraInfo, units) {
+import { CustomDailyWeatherData, CustomHourlyWeatherData, CustomWeatherDataPackage, unitsObject } from '../types/customDataObjects.ts';
+
+const mapTemperatures = (
+    weatherObject: CustomWeatherDataPackage, 
+    interval: 'hourly' | 'daily', 
+    extraInfo: CustomHourlyWeatherData | CustomDailyWeatherData | null, 
+    setExtraInfo: React.Dispatch<React.SetStateAction<CustomDailyWeatherData | CustomHourlyWeatherData | null>>, 
+    units: unitsObject) => {
     const [selectedHourlyElement, setSelectedHourlyElement] = React.useState<number | null>(null);
     const [selectedDailyElement, setSelectedDailyElement] = React.useState<number | null>(null);
 
     // runs on first render. sets selectedHourlyElement and selectedDailyElement to first hourly/daily array items..
-    useEffect(() => {
-        if (!extraInfo && interval === 'hourly') {
+    React.useEffect(() => {
+        if (!extraInfo && interval === 'hourly' && weatherObject.weatherData) {
             const firstElement = weatherObject.weatherData.hourly_forecast_array[0];
             setSelectedHourlyElement(0);
             setExtraInfo(firstElement);
-        } else if (!extraInfo && interval === 'daily') {
+        } else if (!extraInfo && interval === 'daily' && weatherObject.weatherData) {
             const firstElement = weatherObject.weatherData.daily_forecast_array[0];
             setSelectedDailyElement(0);
             setExtraInfo(firstElement);
@@ -23,11 +30,9 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
     // runs if given interval is 'hourly'. Handles creating hourly forecast elements.
     if (interval === 'hourly' && weatherObject.weatherData) { 
         const hourly_forecast_array = weatherObject.weatherData.hourly_forecast_array;
-        const hourlyForecastMapped = hourly_forecast_array.map((hourlyForecastObject, index: number) => {
+        const hourlyForecastMapped = hourly_forecast_array.map((hourlyForecastObject:any, index: number) => {
             const iconURL = `https://openweathermap.org/img/wn/${hourlyForecastObject.icon}@2x.png`;
             const isHourlyElementSelected = selectedHourlyElement === index;
-
-            const objectHour = hourlyForecastObject.timestamp.substring(0,2);
 
             return ( // hourly element:
                 <div 
@@ -61,7 +66,7 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
     if (interval === 'daily' && weatherObject.weatherData) { 
         const dailyForecastArray = weatherObject.weatherData.daily_forecast_array;
         
-        const dailyForecastMapped = dailyForecastArray.map((dailyForecastObject, index: number) => {
+        const dailyForecastMapped = dailyForecastArray.map((dailyForecastObject:any, index: number) => {
             const iconURL = `https://openweathermap.org/img/wn/${dailyForecastObject.icon}@2x.png`;
             const isDailyElementSelected = selectedDailyElement === index;
 
@@ -92,3 +97,5 @@ export default function useMapTemperatures(weatherObject, interval, extraInfo, s
         return dailyForecastMapped
     }
 }
+
+export default mapTemperatures

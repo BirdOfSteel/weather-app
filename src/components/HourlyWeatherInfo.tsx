@@ -1,11 +1,11 @@
-import React from 'react';
 import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 import convertFromLongMetric from '../utils/convertFromLongMetric.tsx';
 import convertFromShortMetric from '../utils/convertFromShortMetric.tsx';
 import convertFromMillibar from '../utils/convertFromMillibar.tsx';
 import changeCloudDistance from '../utils/changeCloudDistance.tsx';
+import { HourlyWeatherInfoProps } from '../types/componentTypes.ts';
 
-export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
+const HourlyWeatherInfo: React.FC<HourlyWeatherInfoProps> = ({ extraHourlyInfo, units }) => {
     const data = extraHourlyInfo;
     const cloudDistanceObject = changeCloudDistance(units.cloudDistance);
 
@@ -108,3 +108,5 @@ export default function HourlyWeatherInfo({ extraHourlyInfo, units }) {
         </div>
     )
 }
+
+export default HourlyWeatherInfo

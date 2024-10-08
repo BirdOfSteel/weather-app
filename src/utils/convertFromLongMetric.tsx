@@ -1,4 +1,6 @@
-export default function convertFromLongMetric(metricValue, units) {
+import { unitsObject } from "../types/customDataObjects";
+
+export default function convertFromLongMetric(metricValue: number, units: unitsObject) {
     const scale = units.longDistance;
 
     if (scale === 'km') {

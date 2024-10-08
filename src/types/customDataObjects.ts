@@ -1,3 +1,6 @@
+import { CustomOpenMeteoError } from "./openMeteoAPI";
+import { CustomOpenWeatherError } from "./openWeatherAPI";
+
 // custom weather object for each hour
 export interface CustomHourlyWeatherData {
     temperature: number;            // Current temperature in degrees Celsius
@@ -60,6 +63,13 @@ export interface CustomWeatherObject {
     wind_speed: number;                // Wind speed
 }
 
+// stores our custom data object, as well as isLoading and error state
+export type CustomWeatherDataPackage = {
+    weatherData: CustomWeatherObject | null;
+    isLoading: boolean;
+    error: CustomOpenWeatherError | CustomOpenMeteoError | null;
+}
+
 // stores colours for background gradient
 export type gradientObject = {
     A: string;
@@ -67,4 +77,13 @@ export type gradientObject = {
     C: string;
     D: string;
     E: string;
+}
+
+export type unitsObject = {
+    temperature: '°C' | '°F' | '°K';
+    longDistance: 'km' | 'm' | 'mi';
+    shortDistance: 'mm' | 'in';
+    cloudDistance: 'km' | 'm' | 'ft';
+    velocity: 'm/s' | 'km/h' | 'mph' | 'kn';
+    pressure: 'mb' | 'pa' | 'hPa' | 'mmHg' | 'inHg';
 }

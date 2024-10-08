@@ -13,25 +13,32 @@ import useFetchWeather from './hooks/useFetchWeather.tsx';
 
 import backgroundGradientSelector from './utils/backgroundGradientSelector.tsx';
 
+import { 
+  CustomDailyWeatherData, 
+  CustomHourlyWeatherData, 
+  CustomWeatherDataPackage,
+  unitsObject 
+} from './types/customDataObjects.ts';
+
 
 function App() {
   const { positionData } = useGetCoordinates();
 
-  const weatherData = useFetchWeather(positionData); 
+  const weatherData: CustomWeatherDataPackage = useFetchWeather(positionData); 
   
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);  
+  const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);  
 
-  const [extraHourlyInfo, setExtraHourlyInfo] = React.useState(null);
-  const [extraDailyInfo, setExtraDailyInfo] = React.useState(null);
+  const [extraHourlyInfo, setExtraHourlyInfo] = React.useState<CustomHourlyWeatherData | null>(null);
+  const [extraDailyInfo, setExtraDailyInfo] = React.useState<CustomDailyWeatherData | null>(null);
   
-  const [units, setUnits] = React.useState({ 
+  const [units, setUnits] = React.useState<unitsObject>({ 
     temperature: '°C', // C, F, K
     longDistance: 'km', // km, metres, miles
     shortDistance: 'mm', // mm, inch
     cloudDistance: 'km', // km, m, ft
     velocity: 'm/s', // m/s, km/h, mph, knots
     pressure: 'mb', // mb, pascal, hecopascal, mm mercury, inches mercury
-  }); 
+  });
 
   // calls backgroundGradientSelector utility. 
   React.useEffect(() => {
@@ -44,7 +51,7 @@ function App() {
   // returns loading spinner
   if (weatherData.isLoading) {
     return (
-      <div className="App">
+      <div className="App" style={{'width':'100vw'}}>
         <span className='loader'></span>
       </div>
     )
@@ -86,7 +93,7 @@ function App() {
         />
         
         { /* runs if extraHourlyInfo state is active */
-          extraHourlyInfo &&
+          extraHourlyInfo && 
           <HourlyWeatherInfo 
             extraHourlyInfo={extraHourlyInfo}
             units={units}

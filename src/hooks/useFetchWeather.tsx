@@ -9,13 +9,13 @@ import { OpenWeatherResponse, CustomOpenWeatherError } from '../types/openWeathe
 import { CustomHourlyWeatherData, CustomDailyWeatherData, CustomWeatherObject } from '../types/customDataObjects.ts';
 import { positionObject } from '../types/positionData.ts';
 
-const APIKEY = process.env.REACT_APP_API_KEY;
+const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 export default function useFetchCurrentWeather(userPosition: positionObject | null) {
     const [weatherData, setWeatherData] = React.useState<CustomWeatherObject | null>(null);
     const [isLoading, setIsLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<CustomOpenMeteoError | CustomOpenWeatherError | null>(null);
-
+    console.log(weatherData)
     React.useEffect(() => {
         if (!userPosition) { // does not run if there is no latitude/longitude.
             return;
@@ -29,7 +29,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
 
             try {
                 const PRESENT_WEATHER_URL = 
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${APIKEY}`;
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`;
                 
                 const forecastDays = 14; // used in open-meteo call to specify number of data points.
                 
@@ -140,7 +140,12 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                 }
 
                 setWeatherData(weatherObject);
-            } catch (err) {
+            } catch (err: unknown) {
+                if (isCustomErr(err)) {
+
+                } else {
+                    console.error(`Unknown error: ${err}`)
+                }
                 setError(err);
             } finally {
                 setIsLoading(false);

@@ -1,4 +1,6 @@
-export default function convertFromCelsius(celsius, units) {
+import { unitsObject } from "../types/customDataObjects";
+
+export default function convertFromCelsius(celsius: number, units: unitsObject) {
     const scale = units.temperature;
 
     if (scale === '°C') {
