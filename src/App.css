@@ -2,84 +2,28 @@ body {
   margin: 0;
 }
 
+
+/* Typography */ 
+h1, h2, h3, p {
+  margin: 0;
+}
+
+
+/* root div */
 #root {
   width: 100%;
 }
 
-/* App div */
 
-@property --myColor1 {
-  syntax: '<color>';
-  initial-value: rgb(56, 110, 190);
-  inherits: false;
-}
-
-@property --myColor2 {
-  syntax: '<color>';
-  initial-value: rgb(77, 128, 206);
-  inherits: false;
-}
-@property --myColor3 {
-  syntax: '<color>';
-  initial-value: rgb(103, 147, 215);
-  inherits: false;
-}
-@property --myColor4 {
-  syntax: '<color>';
-  initial-value: rgb(128, 167, 223);
-  inherits: false;
-}
-@property --myColor5 {
-  syntax: '<color>';
-  initial-value: rgb(154, 187, 231);
-  inherits: false;
-}
-
-.App {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  grid-template-columns: 1fr;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0 10%;
-
-  background: linear-gradient(to left bottom,
-    var(--myColor1), 
-    var(--myColor2),
-    var(--myColor3),
-    var(--myColor4),
-    var(--myColor5)
-  );
-
-  transition: 
-    --myColor1 3s ease, 
-    --myColor2 3s ease,
-    --myColor3 3s ease,
-    --myColor4 3s ease,
-    --myColor5 3s ease;
-  
-  position: relative;
-}
-
-/* Error elements */ 
-
-.error-text {
-  font-size: 1.5rem;
-  color: white;
-  text-shadow: 0px 0px 100px black;
-}
-
-/* Spinner loader -- https://cssloaders.github.io/ */
-
+/* loading styling */
+/* loader spinner by https://cssloaders.github.io/ */
 .loader {
   width: 96px;
   height: 96px;
   border: 3px solid #FFF;
   border-radius: 50%;
   display: inline-block;
-  position: relative;
+  position: relative; 
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
   margin: auto;
@@ -107,30 +51,78 @@ body {
   }
 } 
 
-/* Typography */ 
 
-h1, h2, h3, p {
-  margin: 0;
+/* error styling */ 
+.api-error-text {
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 0px 0px 100px black;
 }
 
-/* unsorted */
 
-#header-div, 
-#weather-summary-div,
-#daily-weather-div, 
-#footer-div {
-  box-sizing: border-box;
-  padding: 1em 0em;
+/* css properties */
+@property --myColor1 {
+  syntax: '<color>';
+  initial-value: rgb(56, 110, 190);
+  inherits: false;
 }
 
-#header-div {
+@property --myColor2 {
+  syntax: '<color>';
+  initial-value: rgb(77, 128, 206);
+  inherits: false;
+}
+
+@property --myColor3 {
+  syntax: '<color>';
+  initial-value: rgb(103, 147, 215);
+  inherits: false;
+}
+
+@property --myColor4 {
+  syntax: '<color>';
+  initial-value: rgb(128, 167, 223);
+  inherits: false;
+}
+
+@property --myColor5 {
+  syntax: '<color>';
+  initial-value: rgb(154, 187, 231);
+  inherits: false;
+}
+
+
+/* App component */
+.App {
   display: flex;
-  align-items: center;
-  background: lightblue;
+  min-height: 100vh;
   width: 100%;
-  height: 30px;
+  grid-template-columns: 1fr;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 10%;
+  position: relative;
+
+  background: linear-gradient(to left bottom,
+    var(--myColor1), 
+    var(--myColor2),
+    var(--myColor3),
+    var(--myColor4),
+    var(--myColor5)
+  );
+
+  transition: 
+    --myColor1 5s ease, 
+    --myColor2 5s ease,
+    --myColor3 5s ease,
+    --myColor4 5s ease,
+    --myColor5 5s ease;
+  
 }
 
+
+/* Menu component */
 #menu-div {
   background: rgba(240, 240, 240, 0.2);
   backdrop-filter: blur(50px);
@@ -203,6 +195,8 @@ h1, h2, h3, p {
     transition: all 0.4s ease-in-out;
   }
 
+
+/* WeatherSummary component */
 #weather-summary-div {
   display: flex;
   flex-direction: row;
@@ -211,11 +205,13 @@ h1, h2, h3, p {
   height: auto;
   box-sizing: border-box;
   color: #FFFFFF;
+  padding: 1em 0;
 }
 
   #current-weather-div {
     width: auto;
     margin: 1em 0 1em 0;
+    text-shadow: 0px 0px 75px black;
   }
 
     #weather-summary-row-one {
@@ -245,9 +241,6 @@ h1, h2, h3, p {
       display: flex;
       text-transform: capitalize;
     }
-    
-      /* #weather-description-text {
-      } */
 
     #weather-summary-row-four {
       display: flex;
@@ -279,14 +272,6 @@ h1, h2, h3, p {
       font-size: 0.9em;
       font-weight: normal;
     }
-
-    /* #wind-speed-heading, 
-    #gust-speed-heading, 
-    #wind-direction-heading,
-    #cloud-coverage-heading,
-    #relative-humidity-heading {
-    } */
-    
     
     #cloud-coverage,
     #relative-humidity,
@@ -296,6 +281,7 @@ h1, h2, h3, p {
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 3px;
     }
 
       #cloud-coverage-icon,
@@ -380,6 +366,7 @@ h1, h2, h3, p {
         }
 
 
+/* Forecasts div and components */
 #forecast-div {
   display: flex;
   flex-direction: column;
@@ -410,7 +397,6 @@ h1, h2, h3, p {
     margin-bottom: 1em;
   }
 
-  
   .weather-entry-div {
     display: flex;
     flex-direction: column;
@@ -457,7 +443,6 @@ h1, h2, h3, p {
     grid-template-columns: 1fr;
   }
 
-
   .forecast-info-div {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 16px;
@@ -498,12 +483,7 @@ h1, h2, h3, p {
       }
 
 
-#footer-div {
-  /* background: slategrey; */
-  height: 5%;
-}
-
-
+/* media queries */
 @media (max-width: 320px) {
   body {
     font-size: clamp(0.75rem, 3vw, 1rem);

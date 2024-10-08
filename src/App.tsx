@@ -40,7 +40,7 @@ function App() {
     pressure: 'mb', // mb, pascal, hecopascal, mm mercury, inches mercury
   });
 
-  // calls backgroundGradientSelector utility. 
+  // calls backgroundGradientSelector utility
   React.useEffect(() => {
     if (weatherData.weatherData) {
       const currentTimestamp = weatherData.weatherData.hourly_forecast_array[0].timestamp;
@@ -51,7 +51,7 @@ function App() {
   // returns loading spinner
   if (weatherData.isLoading) {
     return (
-      <div className="App" style={{'width':'100vw'}}>
+      <div className="App">
         <span className='loader'></span>
       </div>
     )
