@@ -7,9 +7,6 @@ import convertFromCelsius from '../utils/convertFromCelsius.tsx';
 import convertFromMetresPerSecond from '../utils/convertFromMetresPerSecond.tsx';
 import { WeatherSummaryProps } from '../types/componentTypes.ts';
 
-// import sunriseIcon from '../assets/sunrise-icon.png';
-// import sunsetIcon from '../assets/sunset-icon.png';
-
 const WeatherSummary: React.FC<WeatherSummaryProps> = ({ weatherObject, units }) => { 
     if (weatherObject.weatherData) {
         const weatherData = weatherObject.weatherData;

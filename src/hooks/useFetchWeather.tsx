@@ -8,6 +8,7 @@ import { OpenMeteoResponse, CustomOpenMeteoError } from '../types/openMeteoAPI.t
 import { OpenWeatherResponse, CustomOpenWeatherError } from '../types/openWeatherAPI.ts';
 import { CustomHourlyWeatherData, CustomDailyWeatherData, CustomWeatherObject } from '../types/customDataObjects.ts';
 import { positionObject } from '../types/positionData.ts';
+import { isOpenMeteoError, isOpenWeatherError } from '../types/typeGuards.ts';
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
@@ -141,12 +142,11 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
 
                 setWeatherData(weatherObject);
             } catch (err: unknown) {
-                if (isCustomErr(err)) {
-
+                if (isOpenMeteoError(err) || isOpenWeatherError(err)) { // checks if the error is custom, so it can be displayed.
+                    setError(err);
                 } else {
-                    console.error(`Unknown error: ${err}`)
+                    console.error(`Unknown error: ${err}`) // else, the error is unknown and is displayed to console.
                 }
-                setError(err);
             } finally {
                 setIsLoading(false);
             }

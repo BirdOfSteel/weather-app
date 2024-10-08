@@ -31,8 +31,7 @@ export type HourlyWeatherProps = {
 }
 
 export type DailyWeatherProps = {
-    weatherObject: CustomWeatherDataPackage ;
-    interval: 'daily';
+    weatherObject: CustomWeatherDataPackage;
     extraDailyInfo: CustomDailyWeatherData | null;
     setExtraDailyInfo: React.Dispatch<React.SetStateAction<CustomDailyWeatherData | null>>;
     units: unitsObject;

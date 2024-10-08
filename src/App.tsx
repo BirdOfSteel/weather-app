@@ -4,9 +4,9 @@ import './App.css';
 import WeatherSummary from './components/WeatherSummary.tsx';
 import Menu from './components/Menu.tsx';
 import HourlyWeather from './components/HourlyWeather.tsx';
-import HourlyWeatherInfo from './components/HourlyWeatherInfo.tsx';
+import HourlyWeatherForecast from './components/HourlyWeatherForecast.tsx';
 import DailyWeather from './components/DailyWeather.tsx';
-import DailyWeatherInfo from './components/DailyWeatherInfo.tsx';
+import DailyWeatherForecast from './components/DailyWeatherForecast.tsx';
 
 import useGetCoordinates from './hooks/useGetCoordinates.tsx';
 import useFetchWeather from './hooks/useFetchWeather.tsx';
@@ -88,29 +88,28 @@ function App() {
           weatherObject={weatherData} 
           interval='hourly' 
           extraHourlyInfo={extraHourlyInfo}
-          setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)} // passes up data for HourlyWeatherInfo to display
+          setExtraHourlyInfo={(data) => setExtraHourlyInfo(data)} // passes up data for HourlyWeatherForecast to display
           units={units}
         />
         
         { /* runs if extraHourlyInfo state is active */
           extraHourlyInfo && 
-          <HourlyWeatherInfo 
+          <HourlyWeatherForecast 
             extraHourlyInfo={extraHourlyInfo}
             units={units}
           />
         }
 
         <DailyWeather 
-          weatherObject={weatherData} 
-          interval='daily'
+          weatherObject={weatherData}
           extraDailyInfo={extraDailyInfo}
-          setExtraDailyInfo={(data) => setExtraDailyInfo(data)} // passes up data for DailyWeatherData to display
+          setExtraDailyInfo={(data) => setExtraDailyInfo(data)} // passes up data for DailyWeatherForecast to display
           units={units}
         />
 
         { /* runs if extraDailyInfo state is active */
           extraDailyInfo && 
-          <DailyWeatherInfo 
+          <DailyWeatherForecast 
             extraDailyInfo={extraDailyInfo}
             units={units}
           />

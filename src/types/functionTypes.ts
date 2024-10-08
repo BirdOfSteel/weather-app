@@ -5,10 +5,16 @@ import {
     unitsObject 
 } from "./customDataObjects";
 
-export type mapTemperaturesProps = {
+export type mapHourlyForecastProps = {
     weatherObject: CustomWeatherDataPackage;
-    interval: 'hourly' | 'daily';
-    extraInfo: CustomHourlyWeatherData | CustomDailyWeatherData | null;
-    setExtraInfo: React.Dispatch<React.SetStateAction<CustomHourlyWeatherData | CustomDailyWeatherData>>;
+    extraInfo: CustomHourlyWeatherData | null;
+    setExtraInfo: React.Dispatch<React.SetStateAction<CustomHourlyWeatherData>>;
+    units: unitsObject;
+}
+
+export type mapDailyForecastProps = {
+    weatherObject: CustomWeatherDataPackage;
+    extraDailyInfo: CustomDailyWeatherData | null;
+    setExtraDailyInfo: React.Dispatch<React.SetStateAction<CustomDailyWeatherData>>;
     units: unitsObject;
 }
