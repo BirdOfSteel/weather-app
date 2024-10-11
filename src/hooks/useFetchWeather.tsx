@@ -16,7 +16,7 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
     const [weatherData, setWeatherData] = React.useState<CustomWeatherObject | null>(null);
     const [isLoading, setIsLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<CustomOpenMeteoError | CustomOpenWeatherError | null>(null);
-    console.log(weatherData)
+
     React.useEffect(() => {
         if (!userPosition) { // does not run if there is no latitude/longitude.
             return;

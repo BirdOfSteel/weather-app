@@ -6,10 +6,14 @@ const HourlyWeather: React.FC<HourlyWeatherProps> = ({ weatherObject, extraHourl
 
     return (
         <>
-        <h1 id="hourly-header">Hourly:</h1>
-        <div id="hourly-forecast-div">
-            {mapHourlyTemperatures(weatherObject, extraHourlyInfo, setExtraHourlyInfo, units)}
-        </div>
+        <section className='forecast-section'>
+            <header>
+                <h2 id="hourly-forecast-header">Hourly forecast:</h2>
+            </header> 
+            <ul id="hourly-forecast-list">
+                {mapHourlyTemperatures(weatherObject, extraHourlyInfo, setExtraHourlyInfo, units)}
+            </ul>
+        </section>
         </>
     )
 }

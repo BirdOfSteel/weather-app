@@ -6,10 +6,12 @@ const DailyWeather: React.FC<DailyWeatherProps> = ({ weatherObject, extraDailyIn
     
     return (
         <>
-        <h1 id="daily-header">Daily:</h1>
-        <div id="daily-forecast-div">
+        <header>
+            <h2 id="daily-forecast-header">Daily forecast:</h2>
+        </header>
+        <ul id="daily-forecast-list">
             {mapDailyTemperatures(weatherObject, extraDailyInfo, setExtraDailyInfo, units)}
-        </div>
+        </ul>
         </>
     )
 }

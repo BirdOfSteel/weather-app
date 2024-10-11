@@ -2,7 +2,7 @@ import React from 'react';
 import leftArrow from '../assets/left-arrow.svg';
 import rightArrow from '../assets/right-arrow.svg';
 import { MenuButtonsProps } from '../types/componentTypes';
-
+// a11y
 const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
 
   function changeScale(e: React.MouseEvent<HTMLImageElement>) {
@@ -76,54 +76,54 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
 
   return (
     <>
-      <p id="temperature-scale-selector">
+      <li id="temperature-scale-selector">
         Temperature: 
         <span className="unit-selector-span">
           <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-          {units.temperature}
+            {units.temperature}
           <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
         </span>
-      </p>
-      <p id="long-distance-scale-selector">
+      </li>
+      <li id="long-distance-scale-selector">
         Long distance: 
         <span className="unit-selector-span">
           <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-          {units.longDistance}
+            {units.longDistance}
           <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
         </span>
-      </p>
-      <p id="short-distance-scale-selector">
+      </li>
+      <li id="short-distance-scale-selector">
         Short distance: 
         <span className="unit-selector-span">
           <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-          {units.shortDistance}
+            {units.shortDistance}
           <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
         </span>
-      </p>
-      <p id="cloud-distance-scale-selector">
+      </li>
+      <li id="cloud-distance-scale-selector">
         Cloud distance: 
         <span className="unit-selector-span">
           <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-          {units.cloudDistance}
+            {units.cloudDistance}
           <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
         </span>
-      </p>
-      <p id="velocity-scale-selector">
+      </li>
+      <li id="velocity-scale-selector">
         Velocity: 
         <span className="unit-selector-span">
           <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-          {units.velocity}
+            {units.velocity}
           <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
         </span>
-      </p>
-      <p id="pressure-scale-selector">
+      </li>
+      <li id="pressure-scale-selector">
         Pressure:
         <span className="unit-selector-span">
           <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-          {units.pressure}
+            {units.pressure}
           <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
         </span>
-      </p>
+      </li>
     </>
   );
 };

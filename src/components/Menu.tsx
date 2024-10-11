@@ -1,7 +1,7 @@
 import arrowUpLeft from '../assets/arrow-up-left.svg';
 import MenuButtons from './MenuButtons.tsx';
 import { MenuProps } from '../types/componentTypes.ts';
-
+// a11y
 const Menu: React.FC<MenuProps> = ({ isMenuOpen, setIsMenuOpen, units, setUnits}) => {
     const toggleMenuStyle = { // handles menu size based on isMenuOpen
         width: isMenuOpen ? '25%' : '0%',
@@ -33,14 +33,14 @@ const Menu: React.FC<MenuProps> = ({ isMenuOpen, setIsMenuOpen, units, setUnits}
     };
 
     return (
-        <div 
-            id="menu-div"
+        <section 
+            id="menu-section"
             style={toggleMenuStyle}>
                 
-            <div id="menu-list-div" style={fadeStyle}>
-                <h1 id="menu-list-div-heading">Units</h1>
+            <ul id="menu-list" style={fadeStyle}>
+                <h2 id="menu-list-heading">Units</h2>
                 <MenuButtons units={units} setUnits={setUnits} />
-            </div>
+            </ul>
 
             <img
                 src={arrowUpLeft}
@@ -49,7 +49,7 @@ const Menu: React.FC<MenuProps> = ({ isMenuOpen, setIsMenuOpen, units, setUnits}
                 id="menu-toggle-button"
                 onClick={() => setIsMenuOpen(prevState => !prevState)}
             />
-        </div>
+        </section>
     )
 }
 

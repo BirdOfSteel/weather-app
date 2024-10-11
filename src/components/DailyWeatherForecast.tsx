@@ -8,79 +8,79 @@ const DailyWeatherInfo: React.FC<DailyWeatherInfoProps> = ({ extraDailyInfo, uni
     const data = extraDailyInfo;
 
     return (    
-        <div id="daily-forecast-info-div" className='forecast-info-div'>
-            <div className="forecast-info-inner-div">
-                <h1>Temperature</h1>
-                <p>Minimum temperature: &nbsp;
+        <section id="daily-forecast-info-section" className='forecast-info-section'>
+            <section className="forecast-info-inner-section">
+                <h4>Temperature</h4>
+                <h5>Minimum temperature: &nbsp;
                     <span> {/* Remember to check temperature values are rounded */}
                         {convertFromCelsius(data.min_temp, units)}
                     </span>
-                </p>
-                <p>Maximum temperature: &nbsp;
+                </h5>
+                <h5>Maximum temperature: &nbsp;
                     <span>
                         {convertFromCelsius(data.max_temp, units)}
                     </span>
-                </p>
-                <p> Minimum 'feels like':&nbsp;
+                </h5>
+                <h5> Minimum 'feels like':&nbsp;
                     <span>
                         {convertFromCelsius(data.app_min_temp, units)}
                     </span>
-                </p>
-                <p> Maximum 'feels like':&nbsp;
+                </h5>
+                <h5> Maximum 'feels like':&nbsp;
                     <span>
                         {convertFromCelsius(data.app_max_temp, units)}
                     </span>
-                </p>
-            </div>
+                </h5>
+            </section>
 
-            <div className="forecast-info-inner-div">
-                <h1>Precipitation & Wind</h1>
-                <p>Probability: &nbsp;
+            <section className="forecast-info-inner-section">
+                <h4>Precipitation & Wind</h4>
+                <h5>Probability: &nbsp;
                     <span>
                         {data.pop}%
                     </span>
-                </p>
-                <p>Total precipitation: &nbsp;
+                </h5>
+                <h5>Total precipitation: &nbsp;
                     <span>
                         {convertFromShortMetric(data.pop, units)}
                     </span>
-                </p>
-                <p>Maximum wind speed: &nbsp;
+                </h5>
+                <h5>Maximum wind speed: &nbsp;
                     <span>
                         {convertFromMetresPerSecond(data.wind_speed, units)}
                     </span>
-                </p>
-                <p>Maximum gust speed: &nbsp;
+                </h5>
+                <h5>Maximum gust speed: &nbsp;
                     <span>
                         {convertFromMetresPerSecond(data.gust_speed, units)}
                     </span>
-                </p>
-            </div>
+                </h5>
+            </section>
 
-            <div className="forecast-info-inner-div">
-                <h1>Sunlight</h1>
-                <p>Sunrise: &nbsp;
+            <section className="forecast-info-inner-section">
+                <h4>Sunlight</h4>
+                <h5>Sunrise: &nbsp;
                     <span>
                         {data.sunrise}
                     </span>
-                </p>
-                <p>Sunset: &nbsp;
+                </h5>
+                <h5>Sunset: &nbsp;
                     <span>
                         {data.sunset}
                     </span>
-                </p>
-                <p>Sun duration: &nbsp;
+                </h5>
+                <h5>Sun duration: &nbsp;
                     <span>
                         {secondsToHoursAndMinutes(data.daylight_duration)}
                     </span>
-                </p>
-                <p>Maximum UV Index: &nbsp;
+                </h5>
+                <h5>Maximum UV Index: &nbsp;
                     <span>
                         {data.uv_index}
                     </span>
-                </p>
-            </div>
-        </div>
+                </h5>
+            </section>
+        </section>
     )
 }
 

@@ -29,7 +29,7 @@ const mapHourlyTemperatures = (
             const isHourlyElementSelected = selectedHourlyElement === index;
 
             return ( // hourly element:
-                <div 
+                <li 
                     className="weather-entry-div" 
                     key={index} 
                     onClick={() => {
@@ -49,7 +49,7 @@ const mapHourlyTemperatures = (
                         <p>{hourlyForecastObject.pop}%</p>
                     </div>
                     <p>{hourlyForecastObject.timestamp}</p>
-                </div>
+                </li>
             )
         })
 
