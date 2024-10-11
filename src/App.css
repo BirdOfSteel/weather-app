@@ -161,12 +161,13 @@ h1, h2, h3, h4, h5, p {
       font-size: 1.1rem;
     }
 
-    #menu-list > p {
+    #menu-list > li {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       user-select: none;
       padding-bottom: 0.25em;
+      text-shadow: 0 0 80px black;
     }
 
       .unit-selector-span {
@@ -174,17 +175,27 @@ h1, h2, h3, h4, h5, p {
         width: 50px;
         display: flex;
         justify-content: end;
+        text-shadow: 0 0 80px black;
       }
 
-      #menu-list > p:not(:first-child) {
+      #menu-list > li:not(:first-child) {
         margin-top: 10px;
       }
 
-      .left-scale-arrow, .right-scale-arrow {
-        width: 0.5em;
+      .previous-unit-arrow, .next-unit-arrow {
+        display: flex;
+        align-items: center;
+        width: 10px;
         margin: 0 10px;
         cursor: pointer;
+        padding: 0;
+        background: none;
       }
+        
+        .previous-unit-arrow > img, .next-unit-arrow > img {
+          display: flex;
+          width: 100px;
+        }
 
   #menu-toggle-button {
     border: none;
@@ -246,6 +257,7 @@ h1, h2, h3, h4, h5, p {
     #weather-summary-row-three {
       display: flex;
       text-transform: capitalize;
+      margin-top: 15px;
     }
 
       #weather-description-heading {

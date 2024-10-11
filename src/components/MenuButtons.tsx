@@ -5,8 +5,8 @@ import { MenuButtonsProps } from '../types/componentTypes';
 // a11y
 const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
 
-  function changeScale(e: React.MouseEvent<HTMLImageElement>) {
-    const arrowElement = e.target as HTMLImageElement; 
+  function changeScale(e: React.MouseEvent<HTMLElement>) {
+    const arrowElement = e.currentTarget as HTMLElement;
 
     const arrowDirection = arrowElement.className;
     const parentId = arrowElement.parentElement?.parentElement?.id;
@@ -58,12 +58,12 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
 
     const scaleIndex = scaleArray.indexOf(currentScale);
     let newScale: string;
-
-    if (arrowDirection === 'left-scale-arrow') {
+    
+    if (arrowDirection === 'previous-unit-arrow') {
       newScale = scaleIndex === 0
         ? scaleArray[scaleArray.length - 1]
         : scaleArray[scaleIndex - 1];
-    } else if (arrowDirection === 'right-scale-arrow') {
+    } else if (arrowDirection === 'next-unit-arrow') {
       newScale = scaleIndex === scaleArray.length - 1
         ? scaleArray[0]
         : scaleArray[scaleIndex + 1];
@@ -79,49 +79,210 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
       <li id="temperature-scale-selector">
         Temperature: 
         <span className="unit-selector-span">
-          <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-            {units.temperature}
-          <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
+          <button 
+            className="previous-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='temperature-unit-text' 
+            aria-label='Previous temperature unit'
+          >
+            <img 
+              alt='Left arrow' 
+              src={leftArrow} 
+              aria-hidden='true'
+            />
+          </button>
+
+            <p id="temperature-unit-text"> 
+              {units.temperature} 
+            </p>
+
+          <button 
+            className="next-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='temperature-unit-text' 
+            aria-label='Next temperature unit'
+          >
+            <img 
+              alt='Right arrow' 
+              src={rightArrow} 
+              aria-hidden='true' 
+            />
+          </button>
         </span>
       </li>
+
       <li id="long-distance-scale-selector">
         Long distance: 
         <span className="unit-selector-span">
-          <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-            {units.longDistance}
-          <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
+          <button 
+            className="previous-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='long-distance-unit-text' 
+            aria-label='Previous long-distance unit'
+          >
+            <img 
+              alt='Left arrow' 
+              src={leftArrow} 
+              aria-hidden='true'
+            />
+          </button>
+
+            <p id="long-distance-unit-text">
+              {units.longDistance}
+            </p>
+
+          <button 
+            className="next-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='long-distance-unit-text' 
+            aria-label='Next long-distance unit'
+          >
+            <img 
+              alt='Right arrow' 
+              src={rightArrow}
+              aria-hidden='true'
+            />
+          </button>
         </span>
       </li>
+
       <li id="short-distance-scale-selector">
         Short distance: 
         <span className="unit-selector-span">
-          <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-            {units.shortDistance}
-          <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
+          <button 
+            className="previous-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='short-distance-unit-text' 
+            aria-label='Previous short-distance unit'
+          >
+            <img 
+              alt='Left arrow' 
+              src={leftArrow} 
+              aria-hidden='true'
+            />
+          </button>
+
+            <p id="short-distance-unit-text">
+              {units.shortDistance}
+            </p>
+
+          <button 
+            className="next-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='short-distance-unit-text' 
+            aria-label='Next short-distance unit'
+          >
+            <img 
+              alt='Right arrow' 
+              src={rightArrow} 
+              aria-hidden='true'
+            />
+          </button>
         </span>
       </li>
+
       <li id="cloud-distance-scale-selector">
         Cloud distance: 
         <span className="unit-selector-span">
-          <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-            {units.cloudDistance}
-          <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
+          <button 
+            className="previous-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='cloud-distance-unit-text' 
+            aria-label='Previous cloud distance unit'
+          >
+            <img 
+              alt='Left arrow' 
+              src={leftArrow} 
+              aria-hidden='true'
+            />
+          </button>
+
+            <p id="cloud-distance-unit-text">
+              {units.cloudDistance}
+            </p>
+
+          <button 
+            className="next-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='cloud-distance-unit-text' 
+            aria-label='Next cloud distance unit'
+          >
+            <img 
+              alt='Right arrow' 
+              src={rightArrow} 
+              aria-hidden='true'
+            />
+          </button>
         </span>
       </li>
+
       <li id="velocity-scale-selector">
         Velocity: 
         <span className="unit-selector-span">
-          <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-            {units.velocity}
-          <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
+          <button 
+            className="previous-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='velocity-unit-text' 
+            aria-label='Previous velocity unit'
+          >
+            <img 
+              alt='Left arrow' 
+              src={leftArrow} 
+              aria-hidden='true'
+            />
+          </button>
+
+            <p id="velocity-unit-text">
+              {units.velocity}
+            </p>
+
+          <button 
+            className="next-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='velocity-unit-text' 
+            aria-label='Next velocity unit'
+          >
+            <img 
+              alt='Right arrow' 
+              src={rightArrow} 
+              aria-hidden='true'
+            />
+          </button>
         </span>
       </li>
+
       <li id="pressure-scale-selector">
         Pressure:
         <span className="unit-selector-span">
-          <img src={leftArrow} alt="Previous unit" className="left-scale-arrow" onClick={changeScale} />
-            {units.pressure}
-          <img src={rightArrow} alt="Next unit" className="right-scale-arrow" onClick={changeScale} />
+          <button 
+            className="previous-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='pressure-unit-text' 
+            aria-label='Previous pressure unit'
+          >
+            <img 
+              alt='Left arrow' 
+              src={leftArrow} 
+              aria-hidden='true'
+            />
+          </button>
+
+            <p id="pressure-unit-text">
+              {units.pressure}
+            </p>
+
+          <button 
+            className="next-unit-arrow" 
+            onClick={changeScale} 
+            aria-labelledby='pressure-unit-text' 
+            aria-label='Next pressure unit'
+          >
+            <img 
+              alt='Right arrow' 
+              src={rightArrow} 
+              aria-hidden='true'
+            />
+          </button>
         </span>
       </li>
     </>
