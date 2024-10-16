@@ -2,6 +2,7 @@ import React from 'react';
 
 import humidityIcon from '../assets/droplets-icon.png';
 import convertFromCelsius from './convertFromCelsius.tsx';
+import timestampToHour from './timestampToSpokenHour.tsx';
 
 import { CustomHourlyWeatherData, CustomWeatherDataPackage, unitsObject } from '../types/customDataObjects.ts';
 
@@ -27,25 +28,32 @@ const mapHourlyTemperatures = (
         const hourlyForecastMapped = hourly_forecast_array.map((hourlyForecastObject:any, index: number) => {
             const iconURL = `https://openweathermap.org/img/wn/${hourlyForecastObject.icon}@2x.png`;
             const isHourlyElementSelected = selectedHourlyElement === index;
+            const temperature = convertFromCelsius(hourlyForecastObject.temperature, units);
+        
+            // for aria-label
+            const spokenHour = timestampToHour(hourlyForecastObject.timestamp);
 
             return ( // hourly element:
                 <li 
-                    className="weather-entry-div" 
-                    key={index} 
                     onClick={() => {
                         setExtraHourlyInfo((prevInfo) => {
-                            return prevInfo === hourlyForecastObject ?
-                                null : hourlyForecastObject;
-                        })
+                        return prevInfo === hourlyForecastObject ?
+                            null : hourlyForecastObject;
+                        })   
 
-                        setSelectedHourlyElement(!isHourlyElementSelected ? index : null)
+                        setSelectedHourlyElement(!isHourlyElementSelected ? index : null);
                     }}
+                    className="weather-entry-li" 
+                    key={index} 
                     style={isHourlyElementSelected ? {'background': 'rgba(0,0,0,0.3)'} : {}}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`At ${spokenHour}, the weather will be ${hourlyForecastObject.weather_description}. The temperature will be ${temperature}, with ${hourlyForecastObject.pop} percent chance of precipitation.`}
                 >
-                    <p>{convertFromCelsius(hourlyForecastObject.temperature, units)}</p>
-                    <img className="weather-entry-icon" alt='Weather icon' src={iconURL}/>
+                    <p>{temperature}</p>
+                    <img className="weather-entry-icon" alt='' src={iconURL}/>
                     <div className="humidity-entry-div">
-                        <img className="humidity-icon" alt='Precipitation icon' src={humidityIcon} />
+                        <img className="humidity-icon" alt='' src={humidityIcon} />
                         <p>{hourlyForecastObject.pop}%</p>
                     </div>
                     <p>{hourlyForecastObject.timestamp}</p>

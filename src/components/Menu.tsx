@@ -16,15 +16,17 @@ const Menu: React.FC<MenuProps> = ({ isMenuOpen, setIsMenuOpen, units, setUnits}
             'min-width 1s ease-out, width 1s ease-in-out, min-height 0.7s ease-in-out, height 0.7s ease-in-out' 
     }
     
-    // handles 
-    const menuIconStyle = { // handles icon spacing and rotation
+    const menuButtonStyle = { // handles icon spacing and rotation
         transform: isMenuOpen ? 
             'rotate3d(0,0,1,360deg)' : 
             'rotate3d(0,0,-1,180deg)',
 
         margin: isMenuOpen ?
-            '0 2.5px 2.5px 0' :
-            '0 -2.5px -1.5px 0'
+            '0 -7.5px 0 0' :
+            '0 -2.5px -1.5px 0',
+
+        right: isMenuOpen ?
+            '7.5px' : '0'
     }
 
     const fadeStyle = { // handles text-fade on menu toggle
@@ -39,16 +41,25 @@ const Menu: React.FC<MenuProps> = ({ isMenuOpen, setIsMenuOpen, units, setUnits}
                 
             <ul id="menu-list" style={fadeStyle}>
                 <h2 id="menu-list-heading">Units</h2>
-                <MenuButtons units={units} setUnits={setUnits} />
+                <MenuButtons
+                    units={units}
+                    setUnits={setUnits} 
+                    isMenuOpen={isMenuOpen}
+                />
             </ul>
 
-            <img
-                src={arrowUpLeft}
-                style={menuIconStyle}
-                alt={isMenuOpen ? 'Menu opened icon' : 'Menu closed icon'}
-                id="menu-toggle-button"
+            <button
                 onClick={() => setIsMenuOpen(prevState => !prevState)}
-            />
+                id="menu-toggle-button"
+                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                style={menuButtonStyle}
+            >
+                <img
+                    src={arrowUpLeft}
+                    aria-hidden='true'
+                    alt=''
+                />
+            </button>
         </section>
     )
 }

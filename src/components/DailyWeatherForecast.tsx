@@ -11,74 +11,80 @@ const DailyWeatherInfo: React.FC<DailyWeatherInfoProps> = ({ extraDailyInfo, uni
         <section id="daily-forecast-info-section" className='forecast-info-section'>
             <section className="forecast-info-inner-section">
                 <h4>Temperature</h4>
-                <h5>Minimum temperature: &nbsp;
-                    <span> {/* Remember to check temperature values are rounded */}
-                        {convertFromCelsius(data.min_temp, units)}
-                    </span>
-                </h5>
-                <h5>Maximum temperature: &nbsp;
-                    <span>
-                        {convertFromCelsius(data.max_temp, units)}
-                    </span>
-                </h5>
-                <h5> Minimum 'feels like':&nbsp;
-                    <span>
-                        {convertFromCelsius(data.app_min_temp, units)}
-                    </span>
-                </h5>
-                <h5> Maximum 'feels like':&nbsp;
-                    <span>
-                        {convertFromCelsius(data.app_max_temp, units)}
-                    </span>
-                </h5>
+
+                <dl>
+                    <div>
+                        <dt>Minimum temperature:</dt>
+                        <dd>{convertFromCelsius(data.min_temp, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Maximum temperature:</dt>
+                        <dd>{convertFromCelsius(data.max_temp, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Minimum 'feels like':</dt>
+                        <dd>{convertFromCelsius(data.app_min_temp, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt> Maximum 'feels like':</dt>
+                        <dd>{convertFromCelsius(data.app_max_temp, units)}</dd>
+                    </div>
+                </dl>
             </section>
 
             <section className="forecast-info-inner-section">
                 <h4>Precipitation & Wind</h4>
-                <h5>Probability: &nbsp;
-                    <span>
-                        {data.pop}%
-                    </span>
-                </h5>
-                <h5>Total precipitation: &nbsp;
-                    <span>
-                        {convertFromShortMetric(data.pop, units)}
-                    </span>
-                </h5>
-                <h5>Maximum wind speed: &nbsp;
-                    <span>
-                        {convertFromMetresPerSecond(data.wind_speed, units)}
-                    </span>
-                </h5>
-                <h5>Maximum gust speed: &nbsp;
-                    <span>
-                        {convertFromMetresPerSecond(data.gust_speed, units)}
-                    </span>
-                </h5>
+                
+                <dl>
+                    <div>
+                        <dt>Probability:</dt>
+                        <dd>{data.pop}%</dd>
+                    </div>
+
+                    <div>
+                        <dt>Total precipitation:</dt>
+                        <dd>{convertFromShortMetric(data.pop, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Maximum wind speed:</dt>
+                        <dd>{convertFromMetresPerSecond(data.wind_speed, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Maximum gust speed:</dt>
+                        <dd>{convertFromMetresPerSecond(data.gust_speed, units)}</dd>
+                    </div>
+                </dl>
             </section>
 
             <section className="forecast-info-inner-section">
                 <h4>Sunlight</h4>
-                <h5>Sunrise: &nbsp;
-                    <span>
-                        {data.sunrise}
-                    </span>
-                </h5>
-                <h5>Sunset: &nbsp;
-                    <span>
-                        {data.sunset}
-                    </span>
-                </h5>
-                <h5>Sun duration: &nbsp;
-                    <span>
-                        {secondsToHoursAndMinutes(data.daylight_duration)}
-                    </span>
-                </h5>
-                <h5>Maximum UV Index: &nbsp;
-                    <span>
-                        {data.uv_index}
-                    </span>
-                </h5>
+
+                <dl>
+                    <div>
+                        <dt>Sunrise:</dt>
+                        <dd>{data.sunrise}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Sunset:</dt>
+                        <dd>{data.sunset}</dd>   
+                    </div>
+
+                    <div>
+                        <dt>Sun duration:</dt>
+                        <dd>{secondsToHoursAndMinutes(data.daylight_duration)}</dd>
+                    </div>
+                    
+                    <div>
+                        <dt>Maximum UV Index:</dt>
+                        <dd>{data.uv_index}</dd>
+                    </div>
+                </dl>
             </section>
         </section>
     )

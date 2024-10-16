@@ -29,8 +29,15 @@ const WeatherSummary: React.FC<WeatherSummaryProps> = ({ weatherObject, units })
                     </div>
 
                     <div id="weather-summary-row-two">
-                        <h2 id='current-temperature'>{currentTemperature}</h2>
-                        <img id="weather-icon" src={weatherIconURL}/>
+                        <h2 id='current-temperature'>
+                            {currentTemperature}
+                        </h2>
+                        <img 
+                            id="weather-icon" 
+                            aria-label="Current weather icon" 
+                            alt={`${weatherDescription} icon`} 
+                            src={weatherIconURL}
+                        />
                     </div>
 
                     <div id="weather-summary-row-three">
@@ -56,7 +63,9 @@ const WeatherSummary: React.FC<WeatherSummaryProps> = ({ weatherObject, units })
                         className="additional-weather-info-element">
                             <img 
                                 id="wind-speed-icon" 
-                                src={windIcon}/>
+                                alt="Wind speed icon"
+                                src={windIcon}
+                            />
                                     {convertFromMetresPerSecond(weatherData.wind_speed, units)}
                     </p>
 
@@ -70,6 +79,7 @@ const WeatherSummary: React.FC<WeatherSummaryProps> = ({ weatherObject, units })
                         className="additional-weather-info-element">
                             <img 
                                 id="gust-speed-icon" 
+                                alt="Gust speed icon"
                                 src={gustIcon} 
                             />
                                 {convertFromMetresPerSecond(weatherData.gust_speed, units)}
@@ -85,7 +95,9 @@ const WeatherSummary: React.FC<WeatherSummaryProps> = ({ weatherObject, units })
                         className="additional-weather-info-element">
                             <img 
                                 id="wind-direction-icon" 
-                                src={compassIcon}/>
+                                alt="Wind direction icon"
+                                src={compassIcon}
+                            />
                             {weatherData.wind_direction_degrees}°
                             ({weatherData.wind_direction_full})
                     </h2>
@@ -101,7 +113,9 @@ const WeatherSummary: React.FC<WeatherSummaryProps> = ({ weatherObject, units })
                             className="additional-weather-info-element">
                                 <img 
                                     id="cloud-coverage-icon" 
-                                    src={cloudyIcon}/>
+                                    alt="Cloud coverage icon"
+                                    src={cloudyIcon}
+                                />
                                         {weatherData.cloud_coverage}%
                         </p>
 
@@ -115,8 +129,10 @@ const WeatherSummary: React.FC<WeatherSummaryProps> = ({ weatherObject, units })
                             id="relative-humidity" 
                             className="additional-weather-info-element">
                                 <img 
-                                    id="relative-humidity-icon" 
-                                    src={humidityIcon}/>
+                                    id="relative-humidity-icon"
+                                    alt="Relative humidity icon" 
+                                    src={humidityIcon}
+                                />
                                     {weatherData.relative_humidity}%
                         </p>
                     </div>

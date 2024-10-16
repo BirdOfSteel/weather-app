@@ -2,20 +2,21 @@ import React from 'react';
 import leftArrow from '../assets/left-arrow.svg';
 import rightArrow from '../assets/right-arrow.svg';
 import { MenuButtonsProps } from '../types/componentTypes';
-// a11y
-const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
 
+const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits, isMenuOpen }) => {
+
+  // this function determines which type unit is to be changed
   function changeScale(e: React.MouseEvent<HTMLElement>) {
     const arrowElement = e.currentTarget as HTMLElement;
-
+    
     const arrowDirection = arrowElement.className;
     const parentId = arrowElement.parentElement?.parentElement?.id;
-
+    
     if (!parentId) {
       console.error('Could not determine parent ID for scale change.');
       return;
     }
-
+    
     let currentScale = '';
     let scaleArray: string[] = [];
     let unitsKey = '';
@@ -72,7 +73,7 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
     }
 
     setUnits({ ...units, [unitsKey]: newScale });
-  }
+  } 
 
   return (
     <>
@@ -84,6 +85,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='temperature-unit-text' 
             aria-label='Previous temperature unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Left arrow' 
@@ -101,6 +104,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='temperature-unit-text' 
             aria-label='Next temperature unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Right arrow' 
@@ -119,6 +124,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='long-distance-unit-text' 
             aria-label='Previous long-distance unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Left arrow' 
@@ -136,6 +143,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='long-distance-unit-text' 
             aria-label='Next long-distance unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Right arrow' 
@@ -154,6 +163,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='short-distance-unit-text' 
             aria-label='Previous short-distance unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Left arrow' 
@@ -171,6 +182,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='short-distance-unit-text' 
             aria-label='Next short-distance unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Right arrow' 
@@ -189,6 +202,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='cloud-distance-unit-text' 
             aria-label='Previous cloud distance unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Left arrow' 
@@ -206,6 +221,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='cloud-distance-unit-text' 
             aria-label='Next cloud distance unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Right arrow' 
@@ -224,6 +241,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='velocity-unit-text' 
             aria-label='Previous velocity unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Left arrow' 
@@ -241,6 +260,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='velocity-unit-text' 
             aria-label='Next velocity unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Right arrow' 
@@ -259,6 +280,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='pressure-unit-text' 
             aria-label='Previous pressure unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Left arrow' 
@@ -276,6 +299,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({ units, setUnits }) => {
             onClick={changeScale} 
             aria-labelledby='pressure-unit-text' 
             aria-label='Next pressure unit'
+            tabIndex={isMenuOpen ? 0 : -1}
+            aria-hidden="true"
           >
             <img 
               alt='Right arrow' 

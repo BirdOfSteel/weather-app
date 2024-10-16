@@ -53,6 +53,7 @@ function App() {
     return (
       <div className="App">
         <span className='loader'></span>
+        <h1 id='enable-location-heading'>You may need to allow this website access to your location</h1>
       </div>
     )
   }

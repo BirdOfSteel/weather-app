@@ -13,97 +13,106 @@ const HourlyWeatherInfo: React.FC<HourlyWeatherInfoProps> = ({ extraHourlyInfo, 
         <section id="hourly-forecast-info-section" className='forecast-info-section'>
             <section className="forecast-info-inner-section">
                 <h4>General</h4>
-                <h5>Temperature:
-                    <span>
-                        {convertFromCelsius(data.temperature, units)}
-                    </span>
-                </h5>
-                <h5>Feels like:
-                    <span>
-                        {convertFromCelsius(data.app_temp, units)}
-                    </span>
-                </h5>
-                <h5>UV index:
-                    <span>
-                        {data.uv_index}
-                    </span>
-                </h5>
-                <h5>Visbility:
-                    <span>
-                        {convertFromLongMetric(data.visibility, units)}
-                    </span>
-                </h5>
+
+                <dl>
+                    <div>
+                        <dt>Temperature:</dt>
+                        <dd>{convertFromCelsius(data.temperature, units)}</dd>
+                    </div>
+                    
+                    <div>
+                        <dt>Feels like:</dt>
+                        <dd>{convertFromCelsius(data.app_temp, units)}</dd>        
+                    </div>
+
+                    <div>
+                        <dt>UV index:</dt>
+                        <dd>{data.uv_index}</dd> 
+                    </div>
+
+                    <div>
+                        <dt>Visbility:</dt>
+                        <dd>{convertFromLongMetric(data.visibility, units)}</dd>
+                    </div>
+                </dl>
             </section>
 
             <section className="forecast-info-inner-section">
                 <h4>Precipitation</h4>
-                <h5>Probability:
-                    <span>
-                        {data.pop}%
-                    </span>
-                </h5>
-                <h5>Total rain:
-                    <span>
-                        {convertFromShortMetric(data.total_rain, units)}
-                    </span>
-                </h5>
-                <h5>Total snowfall:
-                    <span>
-                        {convertFromShortMetric(data.total_snowfall, units)}
-                    </span>
-                </h5>
-                <h5>Snow depth:
-                    <span>
-                        {convertFromShortMetric(data.snow_depth, units)}
-                    </span>
-                </h5>
+                
+                <dl>
+                    <div>
+                        <dt>Probability:</dt>
+                        <dd>{data.pop}%</dd>
+                    </div>
+
+                    <div>
+                        <dt>Total rain:</dt>
+                        <dd>{convertFromShortMetric(data.total_rain, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Total snowfall:</dt>
+                        <dd>{convertFromShortMetric(data.total_snowfall, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Snow depth:</dt>
+                        <dd>{convertFromShortMetric(data.snow_depth, units)}</dd>
+                    </div>
+                </dl>
             </section>
 
             <section className="forecast-info-inner-section">
                 <h4>Cloud coverage</h4>
-                <h5>Total:
-                    <span>
-                     {data.clouds}%
-                    </span>
-                </h5>
-                <h5>{cloudDistanceObject?.low} altitude:
-                    <span>
-                     {data.clouds_low}%
-                    </span>
-                </h5>
-                <h5>{cloudDistanceObject?.mid} altitude:
-                    <span>
-                        {data.clouds_mid}%
-                    </span>
-                </h5>
-                <h5>{cloudDistanceObject?.high} altitude:
-                    <span>
-                        {data.clouds_high}%
-                    </span>
-                </h5>
+
+                <dl>
+                    <div>
+                        <dt>Total:</dt>
+                        <dd>{data.clouds}%</dd>
+                    </div>
+
+                    <div>
+                        <dt>{cloudDistanceObject?.low} altitude:</dt>
+                        <dd>{data.clouds_low}%</dd>
+                    </div>
+
+                    <div>
+                        <dt>{cloudDistanceObject?.mid} altitude:</dt>
+                        <dd>{data.clouds_mid}%</dd>    
+                    </div>
+
+                    <div>
+                        <dt>{cloudDistanceObject?.high} altitude:</dt>
+                        <dd>{data.clouds_high}%</dd>    
+                    </div>
+                </dl>
             </section>
+            
             <section className="forecast-info-inner-section">
                 <h4>Air</h4>
-                <h5>Humidity: &nbsp;
-                    <span>
-                        {data.relative_humidity}%
-                    </span>
-                </h5>
-                <h5>Dew point: &nbsp;
-                    <span>
-                        {convertFromCelsius(data.dew_point, units)}
-                    </span>
-                </h5>
-                <h5>Pressure: &nbsp;
-                     <span>
-                        {convertFromMillibar(data.surface_pressure, units)}
-                    </span>
-                </h5>
-                <h5>Sea-level pressure: &nbsp;
-                    <span>
-                        {convertFromMillibar(data.msl_pressure, units)}
-                    </span>
-                </h5>
+
+                <dl>
+                    <div>
+                        <dt>Humidity:</dt>
+                        <dd>{data.relative_humidity}%</dd>
+                    </div>
+
+                    <div>
+                        <dt>Dew point:</dt>
+                        <dd>{convertFromCelsius(data.dew_point, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Pressure:</dt> 
+                        <dd>{convertFromMillibar(data.surface_pressure, units)}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Sea-level pressure:</dt>
+                        <dd>{convertFromMillibar(data.msl_pressure, units)}</dd>    
+                    </div>
+                </dl>
             </section>
         </section>
     )

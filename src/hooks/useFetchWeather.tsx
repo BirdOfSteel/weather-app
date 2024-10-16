@@ -2,6 +2,7 @@ import React from 'react';
 
 import convertBearingToDirection from '../utils/convertBearingToDirection.tsx';
 import openMeteoIconConverter from '../utils/openMeteoIconConverter.tsx';
+import openMeteoIconToDescription from '../utils/openMeteoIconToDescription.tsx';
 import parseDate from '../utils/parseDate.tsx';
 
 import { OpenMeteoResponse, CustomOpenMeteoError } from '../types/openMeteoAPI.ts';
@@ -95,9 +96,10 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                         msl_pressure: forecastWeatherData.hourly.pressure_msl[i],
                         date: parseDate(forecastWeatherData.hourly.time[i], 'daily'),
                         timestamp: parseDate(forecastWeatherData.hourly.time[i], 'hourly'),
-                        icon: openMeteoIconConverter(forecastWeatherData.hourly.weather_code[i], isDay)
+                        icon: openMeteoIconConverter(forecastWeatherData.hourly.weather_code[i], isDay),
+                        weather_description: openMeteoIconToDescription(forecastWeatherData.hourly.weather_code[i])
                     };
-
+                    
                     hourlyForecastArray.push(hourlyForecastObject);
                 }
 
@@ -116,9 +118,10 @@ export default function useFetchCurrentWeather(userPosition: positionObject | nu
                         daylight_duration: forecastWeatherData.daily.daylight_duration[i],
                         uv_index: Math.round(forecastWeatherData.daily.uv_index_max[i] * 10) / 10,
                         timestamp: parseDate(forecastWeatherData.daily.time[i], 'daily'),
-                        icon: openMeteoIconConverter(forecastWeatherData.daily.weather_code[i])
+                        icon: openMeteoIconConverter(forecastWeatherData.daily.weather_code[i]),
+                        weather_description: openMeteoIconToDescription(forecastWeatherData.daily.weather_code[i])
                     }
-
+                    
                     dailyForecastArray.push(dailyForecastObject);
                 }
 

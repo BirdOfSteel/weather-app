@@ -1,3 +1,4 @@
+// returns specified date info
 export default function parseDate(date: string, interval: string) {
     if (interval === 'hourly') {
         const hour = date.substring(11);

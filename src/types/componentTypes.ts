@@ -40,6 +40,7 @@ export type DailyWeatherProps = {
 export type MenuButtonsProps = {
     units: unitsObject;
     setUnits: React.Dispatch<React.SetStateAction<unitsObject>>;
+    isMenuOpen: boolean;
 }
 
 export type WeatherSummaryProps = {

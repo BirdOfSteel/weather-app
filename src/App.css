@@ -51,6 +51,11 @@ h1, h2, h3, h4, h5, p {
   }
 } 
 
+  #enable-location-heading {
+    position: absolute;
+    top: 65%;
+    font-size: 1rem;
+  }
 
 /* error styling */ 
 .api-error-text {
@@ -142,9 +147,17 @@ h1, h2, h3, h4, h5, p {
 
   #menu-toggle-button {
     position: absolute;
-    width: 1.5em;
     z-index: 1;
+    background: none;
+    padding: 0;
   }
+  
+    #menu-toggle-button > img {
+      position: absolute;
+      width: 2em;
+      top: 0;
+      left: 0;
+    }
 
 
   #menu-list {
@@ -279,7 +292,6 @@ h1, h2, h3, h4, h5, p {
 
       #min-max-temp-heading {
         font-weight: normal;
-        color: lightgrey;
       }
 
 
@@ -411,7 +423,7 @@ h1, h2, h3, h4, h5, p {
   }
 
     #daily-forecast-header, #hourly-forecast-header {
-      color: #FFFFFF;
+      color: #ffffff;
       font-size: 1rem;
     }
 
@@ -430,7 +442,7 @@ h1, h2, h3, h4, h5, p {
       margin-bottom: 1em;
     }
 
-  .weather-entry-div {
+  .weather-entry-li {
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
@@ -438,11 +450,12 @@ h1, h2, h3, h4, h5, p {
     min-width: min-content;
     width: 8%;
     height: 50%;
+    padding: 0.6em 1.1em;
     border-radius: 16px;
     background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    padding: 0.6em 0.75em;
     user-select: none;
+
   }
 
     .weather-entry-info-div {
@@ -462,7 +475,8 @@ h1, h2, h3, h4, h5, p {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        color: rgb(240, 240, 240);
+        color: #FFFFFF;
+        width: 6ch;
       }
         
         .humidity-icon {
@@ -499,23 +513,30 @@ h1, h2, h3, h4, h5, p {
         padding: 0 5px 7.5px 5px;
       }
 
-      .forecast-info-inner-section > h5 {
-        font-size: 0.95em;
-        padding: 0.25em 0.5em;
-        display: flex;
-        justify-content: space-between;
-        min-width: max-content;
-        text-shadow: 0px 0px 125px black;
-        font-weight: normal;
+      .forecast-info-inner-section > dl {
+        margin: 0;
       }
 
-        .forecast-info-inner-section > h5 > span {
-          min-width: max-content;
+        .forecast-info-inner-section > dl > div {
+          font-size: 0.95em;
+          padding: 0.25em 0.5em;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-shadow: 0px 0px 125px black;
+          font-weight: normal;
+          margin: 0;
         }
+        
+          .forecast-info-inner-section > dl > div:nth-child(even) {
+            background: rgba(0, 0, 0, 0.15);
+          }
 
-      .forecast-info-inner-section > h5:nth-child(even) {
-        background: rgba(0, 0, 0, 0.15);
-      }
+          .forecast-info-inner-section > dl > div > dt {
+            font-size: 0.95rem;
+            font-weight: normal;
+          }
+
 
 
 /* media queries */

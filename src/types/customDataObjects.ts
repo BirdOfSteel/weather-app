@@ -22,6 +22,7 @@ export interface CustomHourlyWeatherData {
     date: string;                   // Date in "DD/MM" format
     timestamp: string;              // Time in "HH:mm" format
     icon: string;                   // Weather icon code (e.g., "04d")
+    weather_description: string;    // Weather description converted from icon code
 }
 
 // custom weather object for each day
@@ -40,6 +41,7 @@ export interface CustomDailyWeatherData {
     total_precipitation: number;   // Total precipitation amount
     uv_index: number;              // UV index value
     wind_speed: number;            // Wind speed
+    weather_description: string;   // Weather description converted from icon code
 }
 
 // custom object that stores all our useful data, including the daily and hourly data above. 
