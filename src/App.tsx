@@ -52,7 +52,7 @@ function App() {
   if (weatherData.isLoading) {
     return (
       <div className="App">
-        <span className='loader'></span>
+        <span className='loader' aria-label="Loading weather data"></span>
         <h1 id='enable-location-heading'>You may need to allow this website access to your location</h1>
       </div>
     )
@@ -64,6 +64,7 @@ function App() {
       <div 
         className="App"
         style={{'display': 'flex', 'alignItems': 'start', 'paddingTop': '5em'}}
+        aria-live="assertive"
       >
         <h1 className='error-text'>{weatherData.error.api}</h1>
         <h2 className='error-text'>Error: {weatherData.error.error}</h2>
